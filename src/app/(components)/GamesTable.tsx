@@ -93,7 +93,7 @@ export default function GamesTable() {
           </div>
           <div className="grid gap-2">
             <div className="font-medium">Filtrar pelo gênero</div>
-            <div className="flex gap-2 items-center desktop:grid text-start e desktop:grid-flow-col desktop:grid-rows-2 mobile:grid mobile:grid-cols-2 tablet:grid tablet:grid-cols-3 truncate">
+            <div className="grid grid-rows-2 gap-2 items-center truncate text-start desktop:grid-rows-3 grid-flow-col mobile:grid-flow-row mobile:grid-cols-2 tablet:grid-cols-3 tablet:grid-flow-row  ">
 
               {uniqueGenres.map((genre) => {
                 const countOfGames = games
