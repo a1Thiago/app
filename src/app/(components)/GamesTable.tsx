@@ -1,7 +1,7 @@
 'use client'
 import fetchGames, { Game } from "../scripts/fetchGames"
 import { useEffect, useState } from "react"
-import RenderGameCards from "./GameCard/RenderGameCards"
+import RenderGameCards from "@/app/(components)/GameCard/RenderGameCards"
 import LoadingCircle from "./LoadingCircle"
 import Image from "next/image"
 import Button from "./Button"
