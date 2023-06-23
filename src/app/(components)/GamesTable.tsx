@@ -1,7 +1,10 @@
 'use client'
 import fetchGames, { Game } from "../scripts/fetchGames"
 import { useEffect, useState } from "react"
-import GameCard from "./GameCard/GameCard"
+import RenderGameCards from "./GameCard/RenderGameCards"
+import LoadingCircle from "./LoadingCircle"
+import Image from "next/image"
+import Button from "./Button"
 
 
 
@@ -10,6 +13,8 @@ export default function GamesTable() {
   const [games, setGames] = useState<Game[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
+
+  const [pageSize, setPageSize] = useState<number>(15)
 
   const [searchValue, setSearchValue] = useState<string>('')
 
@@ -25,6 +30,8 @@ export default function GamesTable() {
   const allGenres = games.map((game) => game.genre)
   const uniqueGenres = Array.from(new Set(allGenres))
 
+
+
   const handleGenreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target
 
@@ -37,13 +44,19 @@ export default function GamesTable() {
     })
   }
 
+  const loadMoreItems = () => {
+    setPageSize(oldValue => oldValue + 15)
+  }
+
   const filteredGamesBySearch = games.filter((game) => {
+
     const games = game.title.toLowerCase().includes(searchValue.toLowerCase())
+
     if (games) {
       return games
-    } else {
-      return game.short_description.toLowerCase().includes(searchValue.toLowerCase())
-    }
+    }// else { //by description
+    //   return game.short_description.toLowerCase().includes(searchValue.toLowerCase())
+    // }
   }
   )
 
@@ -55,59 +68,71 @@ export default function GamesTable() {
     }
   })
 
-  if (error) return <div>{error}</div>
+  if (error) return (
+    <div className="grid gap-8  place-items-center text-center p-4">
+      <h3 className="text-32 tablet:text-24 mobile:text-20 font-medium mt-32">{error}</h3>
+      <Image src={'/error.png'} alt="error image" width={100} height={100} />
+    </div>)
 
   return (
 
-    <section>
-      <div className="text-center">
-
-        <label htmlFor="search" className="sr-only">
-          Search
-        </label>
-        <input
-          placeholder="Search"
-          type="text"
-          id="search"
-          onChange={(e) => setSearchValue(e.target.value)}
-          className="px-4 py-1 border border-theme-secondary-dark rounded"
-        />
-
-        <div className="flex items-center  justify-center gap-2">
-          {uniqueGenres.map((genre) => (
-
-            <label key={genre} htmlFor={genre}>
-              <input
-                className="mx-1 rounded"
-                type="checkbox"
-                id={genre}
-                value={genre}
-                checked={selectedGenres.includes(genre.toLowerCase())}
-                onChange={handleGenreChange}
-              />
-              {genre}
+    <section className="py-4 grid gap-8">
+      {!isLoading && !error &&
+        (<div className="grid gap-4 justify-items-center text-center">
+          <div>
+            <label htmlFor="search" className="sr-only">
+              Search
             </label>
+            <input
+              placeholder="Procurar pelo título"
+              type="text"
+              id="search"
+              onChange={(e) => setSearchValue(e.target.value)}
+              className="px-4 py-1 border border-theme-secondary-dark rounded placeholder:text-center"
+            />
+          </div>
+          <div className="grid gap-2">
+            <div className="font-medium">Filtrar pelo gênero</div>
+            <div className="flex gap-2 items-center desktop:grid text-start e desktop:grid-flow-col desktop:grid-rows-2 mobile:grid mobile:grid-cols-2 tablet:grid tablet:grid-cols-3 truncate">
 
-          ))}
-        </div>
+              {uniqueGenres.map((genre) => {
+                const countOfGames = games
+                  .map((game) => game.genre.toLowerCase() === genre.toLowerCase())
+                  .filter((game) => game)
+                  .length
 
-      </div>
+                return (
+                  <div key={genre} >
+                    <label htmlFor={genre} className="mobile:text-14">
+                      <input
+                        className="mx-1 rounded cursor-pointer"
+                        type="checkbox"
+                        id={genre}
+                        value={genre}
+                        checked={selectedGenres.includes(genre.toLowerCase())}
+                        onChange={handleGenreChange}
+                      />
+                      {genre} ({countOfGames})
+                    </label>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
 
-      <div className="grid grid-cols-3">
+        </div>)}
+
+      <div className="grid grid-cols-3 mobile:grid-cols-1 tablet:grid-cols-1">
         {isLoading
           ? (
-            <div className="flex justify-center items-center h-screen col-span-full row-span-full">
-              <div className="w-12 h-12 border-t-4 border-theme-secondary-dark rounded-full animate-spin"></div>
-            </div>
-          )
-          : (
-            filteredGamesByGenre.slice(0, 9).map((game) => (
-              <span key={game.id}>
-                <GameCard game={game} />
-              </span>
-            ))
-          )}
+            <div className="col-span-full text-center">
+              <h3 className="text-32 tablet:text-24 mobile:text-20 font-medium">Carregando Jogos...</h3>
+              <LoadingCircle />
+            </div>)
+          : (<RenderGameCards games={filteredGamesByGenre.slice(0, pageSize)} />)
+        }
       </div>
+      {!isLoading && <Button label="Mostrar Mais" onClick={loadMoreItems} disabled={filteredGamesByGenre.length < pageSize} />}
     </section>
   )
 }

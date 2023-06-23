@@ -4,8 +4,8 @@ export default async function Home() {
 
   return (
 
-    <main className="">
+    <div className="">
       <GamesTable />
-    </main>
+    </div>
   )
 }

@@ -2,6 +2,7 @@ import { Game } from "@/app/scripts/fetchGames"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
+import Accordion from "./Accordion"
 
 interface GameCardProps {
   game: Game
@@ -13,23 +14,33 @@ export default function GameCard({ game }: GameCardProps) {
 
   return (
 
-    <div className="max-w-3xl">
+    <div className="bg-white p-4 flex gap-2 flex-col border border-theme-secondary-dark rounded shadow-sm shadow-theme-secondary tablet:grid grid-cols-2 tablet:gap-x-4">
 
-      <div className="p-4 grid desktop:grid-cols-[1fr,1fr] desktop:grid-rows-[.1fr,.9fr] gap-4">
+      <h3 title={game.title} className="text-24 font-medium text-black truncate">{game.title}</h3>
 
-        <h3 className="text-24 font-medium text-black  col-span-full">{game.title}</h3>
+      <Image
+        sizes="70vw"
+        width='0'
+        height='0'
+        src={game.thumbnail}
+        alt={game.title}
+        className="w-full h-auto tablet:w-full tablet:h-full self-center tablet:col-start-1 tablet:row-span-2"
+      />
 
-        <Image
-          sizes="(max-width: 767px) 100vw, 50vh,(min-width: 768px) 25vw,25vh"
-          width='0'
-          height='0'
-          src={game.thumbnail}
-          alt={game.title}
-          className="w-full h-auto self-center"
-        />
+      <p title={game.short_description} className="text-black h-36 mobile:h-32 tablet:h-auto text-ellipsis">{game.short_description}</p>
 
-        <div className="desktop:col-start-2 desktop:col-end-2">
-          <p className="text-black mb-2">{game.short_description}</p>
+      <div className="hidden tablet:grid col-start-2 tablet:row-span-2">
+        <p className="text-16 text-gray-600">Genre: {game.genre}</p>
+        <p className="text-16 text-gray-600">Platform: {game.platform}</p>
+        <p className="text-16 text-gray-600">Publisher: {game.publisher}</p>
+        <p className="text-16 text-gray-600">Developer: {game.developer}</p>
+        <p className="text-16 text-gray-600">
+          Release Date: {game.release_date}
+        </p>
+      </div>
+
+      <Accordion title={{ closed: 'Mostrar mais', opened: 'Mostrar menos' }}>
+        <div className="">
           <p className="text-16 text-gray-600">Genre: {game.genre}</p>
           <p className="text-16 text-gray-600">Platform: {game.platform}</p>
           <p className="text-16 text-gray-600">Publisher: {game.publisher}</p>
@@ -37,26 +48,28 @@ export default function GameCard({ game }: GameCardProps) {
           <p className="text-16 text-gray-600">
             Release Date: {game.release_date}
           </p>
-          <div className="mt-4">
-            <Link
-              href={game.game_url}
-              target="_blank"
-              className="inline-block bg-theme-secondary text-white px-4 py-2 rounded hover:opacity-90 transition-opacity"
-            >
-              Play Now
-            </Link>
-            <Link
-              href={game.freetogame_profile_url}
-              className="inline-block bg-theme-primary-dark text-white ml-2 px-4 py-2 rounded hover:opacity-90 transition-opacity"
-              target="_blank"
-            >
-              View Profile
-            </Link>
-          </div>
-
         </div>
+      </Accordion>
+
+      <div className="grid grid-cols-2">
+        <Link
+          href={game.game_url}
+          target="_blank"
+          className="text-center truncate inline-block bg-theme-secondary text-white px-4 py-2 rounded hover:opacity-90 transition-opacity "
+        >
+          Play Now
+        </Link>
+        <Link
+          href={game.freetogame_profile_url}
+          className="text-center truncate inline-block bg-theme-primary-dark text-white ml-2 px-4 py-2 rounded hover:opacity-90 transition-opacity  "
+          target="_blank"
+        >
+          View Profile
+        </Link>
       </div>
+
     </div>
+
   )
 }
 

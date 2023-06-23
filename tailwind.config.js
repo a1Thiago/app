@@ -52,10 +52,9 @@ module.exports = {
       },
     },
     screens: {
-      'xsmobile': { 'max': '320px' },
       'mobile': { 'max': '414px' },
-      'tablet': { 'max': '767px' },
-      'desktop': { 'min': '768px' },
+      'tablet': { 'min': '415px', 'max': '767px' },
+      'desktop': { 'min': '768px', 'max': '1280px' },
     },
   },
   plugins: [],

@@ -14,19 +14,20 @@ export interface Game {
 
 export default async function fetchGames(): Promise<Game[]> {
   try {
+
     const abortController = new AbortController()
+
     const { signal } = abortController
 
     const timeoutId = setTimeout(() => {
       abortController.abort()
-      throw new Error("O servidor demorou para responder, tente mais tarde.")
     }, 5000)
 
     const response = await fetch(
       "https://games-test-api-81e9fb0d564a.herokuapp.com/api/data/",
       {
         cache: "no-store",
-        headers: { "dev-email-address": "contato@a1th.dev" },
+        headers: { "dev-email-address": "a1th@a1th.dev" },
         signal,
       }
     )
@@ -62,13 +63,3 @@ export default async function fetchGames(): Promise<Game[]> {
 
   }
 }
-
-
-
-// const publishers = games.map((game: any) => game.publisher)
-//   const uniquePublishers = publishers.filter((publisher: any, index: any, self: any) => self.indexOf(publisher) === index)
-
-// const genres = games.map((game: any) => game.genre)
-// const uniqueGenres = genres.filter((genre: any, index: any, self: any) => self.indexOf(genre) === index)
-
-//   console.log(uniquePublishers)
