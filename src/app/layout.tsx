@@ -6,7 +6,7 @@ import isProduction from '@/utils/environment'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const URL = 'https://a1th.dev'
+const URL = 'https://app-masters-a1th.vercel.app/'
 const TITLE = 'a1Th App-Masters'
 const DESCRIPTION = 'Projeto de Estágio Frontend React'
 
