@@ -34,6 +34,7 @@ export default async function fetchGames(): Promise<Game[]> {
     clearTimeout(timeoutId)
 
     if (!response.ok) {
+
       const errors = [500, 502, 503, 504, 507, 508, 509]
 
       if (errors.includes(response.status)) {
@@ -64,7 +65,10 @@ export default async function fetchGames(): Promise<Game[]> {
 
 
 
-// const publishers = games.map((game: any) => game.publisher) // Extract all publishers
-//   const uniquePublishers = publishers.filter((publisher: any, index: any, self: any) => self.indexOf(publisher) === index) // Remove duplicates
+// const publishers = games.map((game: any) => game.publisher)
+//   const uniquePublishers = publishers.filter((publisher: any, index: any, self: any) => self.indexOf(publisher) === index)
+
+// const genres = games.map((game: any) => game.genre)
+// const uniqueGenres = genres.filter((genre: any, index: any, self: any) => self.indexOf(genre) === index)
 
 //   console.log(uniquePublishers)
