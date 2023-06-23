@@ -76,7 +76,7 @@ export default function GamesTable() {
 
   return (
 
-    <section className="py-4 grid gap-8">
+    <section className={`py-4 grid gap-8 ${isLoading && 'cursor-wait'}`}>
       {!isLoading && !error &&
         (<div className="grid gap-4 justify-items-center text-center">
           <div>
@@ -88,7 +88,7 @@ export default function GamesTable() {
               type="text"
               id="search"
               onChange={(e) => setSearchValue(e.target.value)}
-              className="px-4 py-1 border border-theme-secondary-dark rounded placeholder:text-center"
+              className="px-4 py-1 border border-theme-secondary-dark rounded placeholder:text-center w-96 tablet:w-72 mobile:w-auto"
             />
           </div>
           <div className="grid gap-2">
