@@ -31,7 +31,7 @@ export const metadata = {
     title: TITLE,
     description: DESCRIPTION,
     url: URL,
-    siteName: 'Steam-Market-Compare',
+    siteName: TITLE,
     images: [
       {
         url: '/og.png',
