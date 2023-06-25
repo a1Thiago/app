@@ -2,7 +2,7 @@ import { Game } from "@/app/scripts/fetchGames"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
-import Accordion from "./Accordion"
+import Accordion from "../Accordion"
 
 interface GameCardProps {
   game: Game
