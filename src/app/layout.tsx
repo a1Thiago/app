@@ -70,7 +70,7 @@ export default function RootLayout({
           {children}
         </main>
         <footer className='mt-auto bg-theme-secondary-dark text-white text-center py-2 font-semibold'>
-          <Link href={'https://github.com/a1Thiago/app-masters'} target='_blank' >
+          <Link href={'https://github.com/a1Thiago/app'} target='_blank' >
             GitHub
           </Link>
         </footer>
