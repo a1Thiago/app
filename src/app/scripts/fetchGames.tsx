@@ -24,10 +24,10 @@ export default async function fetchGames(): Promise<Game[]> {
     }, 5000)
 
     const response = await fetch(
-      "https://games-test-api-81e9fb0d564a.herokuapp.com/api/data/",
+      'https://games-test-api-81e9fb0d564a.herokuapp.com/api/data/',
       {
-        cache: "no-store",
-        headers: { "dev-email-address": "a1th@a1th.dev" },
+        cache: 'no-store',
+        headers: { 'dev-email-address': 'a1th@a1th.dev' },
         signal,
       }
     )
@@ -55,7 +55,7 @@ export default async function fetchGames(): Promise<Game[]> {
 
   } catch (error: any) {
 
-    if (error.name === "AbortError") {
+    if (error.name === 'AbortError') {
       throw new Error('O servidor demorou para responder, tente mais tarde.')
     } else {
       throw new Error(error.message)
