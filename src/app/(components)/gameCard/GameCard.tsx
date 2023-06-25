@@ -40,32 +40,25 @@ export default function GameCard({ game }: GameCardProps) {
         className='w-full h-auto tablet:w-full tablet:h-full self-center tablet:col-start-1 tablet:row-span-2 rounded'
       />
 
-      <p
-        title={game.short_description}
-        className='text-black h-36 mobile:h-32 tablet:h-auto text-ellipsis'
-      >
+      <p title={game.short_description} className='h-40 tablet:h-32 mobile:h-30 overflow-y-hidden text-ellipsis'>
         {game.short_description}
       </p>
 
       <div className='hidden tablet:grid col-start-2 tablet:row-span-2'>
-        <p className='text-16 '>Genre: {game.genre}</p>
-        <p className='text-16 '>Platform: {game.platform}</p>
-        <p className='text-16 '>Publisher: {game.publisher}</p>
-        <p className='text-16 '>Developer: {game.developer}</p>
-        <p className='text-16 '>
-          Release Date: {game.release_date}
-        </p>
+        <p ><span className='font-medium'>Genre</span>: {game.genre}</p>
+        <p ><span className='font-medium'>Platform</span>: {game.platform}</p>
+        <p ><span className='font-medium'>Publisher</span>: {game.publisher}</p>
+        <p ><span className='font-medium'>Developer</span>: {game.developer}</p>
+        <p ><span className='font-medium'>Release Date</span>: {game.release_date}</p>
       </div>
 
       <Accordion title={{ closed: 'Mostrar mais', opened: 'Mostrar menos' }}>
-        <div className=''>
-          <p className='text-16 '>Genre: {game.genre}</p>
-          <p className='text-16 '>Platform: {game.platform}</p>
-          <p className='text-16 '>Publisher: {game.publisher}</p>
-          <p className='text-16 '>Developer: {game.developer}</p>
-          <p className='text-16 '>
-            Release Date: {game.release_date}
-          </p>
+        <div>
+          <p ><span className='font-medium'>Genre</span>: {game.genre}</p>
+          <p ><span className='font-medium'>Platform</span>: {game.platform}</p>
+          <p ><span className='font-medium'>Publisher</span>: {game.publisher}</p>
+          <p ><span className='font-medium'>Developer</span>: {game.developer}</p>
+          <p ><span className='font-medium'>Release Date</span>: {game.release_date}</p>
         </div>
       </Accordion>
 
