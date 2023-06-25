@@ -31,12 +31,12 @@ export default function GameCard({ game }: GameCardProps) {
       </h3>
 
       <Image
-        sizes='70vw'
+        sizes='100vw'
         width='0'
         height='0'
         src={game.thumbnail}
         alt={game.title}
-        className='w-full h-auto tablet:w-full tablet:h-full self-center tablet:col-start-1 tablet:row-span-2'
+        className='w-full h-auto tablet:w-full tablet:h-full self-center tablet:col-start-1 tablet:row-span-2 rounded'
       />
 
       <p
