@@ -30,7 +30,6 @@ export default function GamesTable() {
       .finally(() => setIsLoading(false))
   }, [])
 
-
   const handleGenreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 
     const { value, checked } = event.target
@@ -79,6 +78,7 @@ export default function GamesTable() {
 
           <SearchInput
             onChange={(e) => setSearchValue(e.target.value)}
+            games={games}
           />
 
           <GenresFilter
