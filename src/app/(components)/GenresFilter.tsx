@@ -24,8 +24,8 @@ export default function GenresFilter({ games, selectedGenres, ...props }: Genres
               .length
 
             return (
-              <div key={genre} >
-                <label htmlFor={genre} className='mobile:text-14'>
+              <div key={genre} className='group'>
+                <label htmlFor={genre} className='mobile:text-14 group-hover:cursor-pointer'>
                   <input
                     className='mx-1 rounded cursor-pointer'
                     type='checkbox'
