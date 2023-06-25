@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react'
 import RenderGameCards from './gameCard/RenderGameCards'
 import LoadingCircle from './LoadingCircle'
 import Button from './Button'
-
 import GenresFilter from './GenresFilter'
 import ErrorMessage from './ErrorMessage'
 import SearchInput from './SearchInput'
+import isProduction from '@/utils/environment'
+import gamesMock from '@/utils/gamesMock'
 
 
 
@@ -24,11 +25,21 @@ export default function GamesTable() {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([])
 
   useEffect(() => {
-    fetchGames()
-      .then((games: Game[]) => setGames(games))
-      .catch(error => setError(error.message))
-      .finally(() => setIsLoading(false))
+    if (isProduction) {
+
+      fetchGames()
+        .then((games: Game[]) => setGames(games))
+        .catch(error => setError(error.message))
+        .finally(() => setIsLoading(false))
+
+    } else {
+
+      setGames(gamesMock)
+      setIsLoading(false)
+
+    }
   }, [])
+
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 
