@@ -29,6 +29,7 @@ export default function GenresFilter({ games, selectedGenres, ...props }: Genres
                 <input
                   className='mx-1 rounded cursor-pointer'
                   type='checkbox'
+                  id={genre}
                   value={genre}
                   checked={selectedGenres.includes(genre.toLowerCase())}
                   {...props}
