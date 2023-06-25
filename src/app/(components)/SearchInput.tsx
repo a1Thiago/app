@@ -11,7 +11,7 @@ export default function SearchInput({ games, ...props }: SearchInputProps) {
   const gameTitles = games.map(game => game.title)
 
   return (
-    <div>
+    <>
       <label htmlFor="search" className="sr-only">
         Search
       </label>
@@ -32,6 +32,6 @@ export default function SearchInput({ games, ...props }: SearchInputProps) {
         })}
       </datalist>
 
-    </div>
+    </>
   )
 }

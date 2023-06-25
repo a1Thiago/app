@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Accordion from '../Accordion'
+import Button from '../Button'
 
 interface GameCardProps {
   game: Game
@@ -47,41 +48,33 @@ export default function GameCard({ game }: GameCardProps) {
       </p>
 
       <div className='hidden tablet:grid col-start-2 tablet:row-span-2'>
-        <p className='text-16 text-gray-600'>Genre: {game.genre}</p>
-        <p className='text-16 text-gray-600'>Platform: {game.platform}</p>
-        <p className='text-16 text-gray-600'>Publisher: {game.publisher}</p>
-        <p className='text-16 text-gray-600'>Developer: {game.developer}</p>
-        <p className='text-16 text-gray-600'>
+        <p className='text-16 '>Genre: {game.genre}</p>
+        <p className='text-16 '>Platform: {game.platform}</p>
+        <p className='text-16 '>Publisher: {game.publisher}</p>
+        <p className='text-16 '>Developer: {game.developer}</p>
+        <p className='text-16 '>
           Release Date: {game.release_date}
         </p>
       </div>
 
       <Accordion title={{ closed: 'Mostrar mais', opened: 'Mostrar menos' }}>
         <div className=''>
-          <p className='text-16 text-gray-600'>Genre: {game.genre}</p>
-          <p className='text-16 text-gray-600'>Platform: {game.platform}</p>
-          <p className='text-16 text-gray-600'>Publisher: {game.publisher}</p>
-          <p className='text-16 text-gray-600'>Developer: {game.developer}</p>
-          <p className='text-16 text-gray-600'>
+          <p className='text-16 '>Genre: {game.genre}</p>
+          <p className='text-16 '>Platform: {game.platform}</p>
+          <p className='text-16 '>Publisher: {game.publisher}</p>
+          <p className='text-16 '>Developer: {game.developer}</p>
+          <p className='text-16 '>
             Release Date: {game.release_date}
           </p>
         </div>
       </Accordion>
 
-      <div className='grid grid-cols-2'>
-        <Link
-          href={game.game_url}
-          target='_blank'
-          className='text-center truncate inline-block bg-theme-secondary text-white px-4 py-2 rounded hover:opacity-90 transition-opacity'
-        >
-          Play Now
+      <div className='grid grid-cols-2 gap-2 tablet:text-14 mobile:text-14'>
+        <Link href={game.game_url} target='_blank'>
+          <Button label='Play Now' colorStyle='secondary' />
         </Link>
-        <Link
-          href={game.freetogame_profile_url}
-          className='text-center truncate inline-block bg-theme-primary-dark text-white ml-2 px-4 py-2 rounded hover:opacity-90 transition-opacity'
-          target='_blank'
-        >
-          View Profile
+        <Link href={game.freetogame_profile_url} target='_blank'>
+          <Button label='View Profile' colorStyle='primary' />
         </Link>
       </div>
     </div>

@@ -110,7 +110,13 @@ export default function GamesTable() {
           : (<RenderGameCards games={filteredGamesByGenre.slice(0, pageSize)} />)
         }
       </div>
-      {filteredGamesByGenre.length > 0 && <Button label='Mostrar Mais' onClick={loadMoreItems} disabled={filteredGamesByGenre.length < pageSize} />}
+
+      {filteredGamesByGenre.length > 0 && (
+        <div className='mx-2'>
+          <Button label='Mostrar Mais' onClick={loadMoreItems} disabled={filteredGamesByGenre.length < pageSize} />
+        </div>
+      )}
+
     </section >
   )
 }
