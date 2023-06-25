@@ -27,7 +27,7 @@ export default function GenresFilter({ games, selectedGenres, ...props }: Genres
               <div key={genre} className='group'>
                 <label htmlFor={genre} className='mobile:text-14 group-hover:cursor-pointer'>
                   <input
-                    className='mx-1 rounded cursor-pointer'
+                    className='mx-1 rounded w-4 h-4 focus:ring-2 focus:ring-theme-secondary text-theme-primary'
                     type='checkbox'
                     id={genre}
                     value={genre}
