@@ -3,8 +3,10 @@ import fetchGames, { Game } from "../scripts/fetchGames"
 import { useEffect, useState } from "react"
 import RenderGameCards from "./gameCard/RenderGameCards"
 import LoadingCircle from "./LoadingCircle"
-import Image from "next/image"
 import Button from "./Button"
+import SearchInput from "./searchInput"
+import GenresFilter from "./GenresFilter"
+import ErrorMessage from "./ErrorMessage"
 
 
 
@@ -27,12 +29,9 @@ export default function GamesTable() {
       .finally(() => setIsLoading(false))
   }, [])
 
-  const allGenres = games.map((game) => game.genre)
-  const uniqueGenres = Array.from(new Set(allGenres))
-
-
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
     const { value, checked } = event.target
 
     setSelectedGenres((prevSelectedGenres) => {
@@ -68,57 +67,24 @@ export default function GamesTable() {
     }
   })
 
-  if (error) return (
-    <div className="grid gap-8  place-items-center text-center p-4">
-      <h3 className="text-32 tablet:text-24 mobile:text-20 font-medium mt-32">{error}</h3>
-      <Image src={'/error.png'} alt="error image" width={100} height={100} />
-    </div>)
+  if (error) return <ErrorMessage error={error} />
 
   return (
 
     <section className={`py-4 grid gap-8 ${isLoading && 'cursor-wait'}`}>
+
       {!isLoading && !error &&
         (<div className="grid gap-4 justify-items-center text-center">
-          <div>
-            <label htmlFor="search" className="sr-only">
-              Search
-            </label>
-            <input
-              placeholder="Procurar pelo título"
-              type="text"
-              id="search"
-              onChange={(e) => setSearchValue(e.target.value)}
-              className="px-4 py-1 border border-theme-secondary-dark rounded placeholder:text-center w-96 tablet:w-72 mobile:w-auto"
-            />
-          </div>
-          <div className="grid gap-2">
-            <div className="font-medium">Filtrar pelo gênero</div>
-            <div className="grid grid-rows-2 gap-2 items-center truncate text-start desktop:grid-rows-3 grid-flow-col mobile:grid-flow-row mobile:grid-cols-2 tablet:grid-cols-3 tablet:grid-flow-row  ">
 
-              {uniqueGenres.map((genre) => {
-                const countOfGames = games
-                  .map((game) => game.genre.toLowerCase() === genre.toLowerCase())
-                  .filter((game) => game)
-                  .length
+          <SearchInput
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
 
-                return (
-                  <div key={genre} >
-                    <label htmlFor={genre} className="mobile:text-14">
-                      <input
-                        className="mx-1 rounded cursor-pointer"
-                        type="checkbox"
-                        id={genre}
-                        value={genre}
-                        checked={selectedGenres.includes(genre.toLowerCase())}
-                        onChange={handleGenreChange}
-                      />
-                      {genre} ({countOfGames})
-                    </label>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
+          <GenresFilter
+            games={games}
+            selectedGenres={selectedGenres}
+            onChange={handleGenreChange}
+          />
 
         </div>)}
 
@@ -126,7 +92,7 @@ export default function GamesTable() {
         {isLoading
           ? (
             <div className="col-span-full text-center">
-              <h3 className="text-32 tablet:text-24 mobile:text-20 font-medium">Carregando Jogos...</h3>
+              <h3 className="mt-32 text-32 tablet:text-24 mobile:text-20 font-medium">Carregando Jogos...</h3>
               <LoadingCircle />
             </div>)
           : (<RenderGameCards games={filteredGamesByGenre.slice(0, pageSize)} />)
@@ -136,3 +102,4 @@ export default function GamesTable() {
     </section>
   )
 }
+
