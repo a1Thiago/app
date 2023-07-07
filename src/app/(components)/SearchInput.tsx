@@ -1,4 +1,4 @@
-import { Game } from '../scripts/fetchGames'
+import { Game } from '../../scripts/fetchGames'
 
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {

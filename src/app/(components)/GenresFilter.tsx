@@ -1,4 +1,4 @@
-import { Game } from '../scripts/fetchGames'
+import { Game } from '../../scripts/fetchGames'
 
 interface GenresFilterProps extends React.InputHTMLAttributes<HTMLInputElement> {
   games: Game[]

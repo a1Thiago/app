@@ -1,5 +1,5 @@
 'use client'
-import fetchGames, { Game } from '../scripts/fetchGames'
+import fetchGames, { Game } from '../../scripts/fetchGames'
 import { useEffect, useState } from 'react'
 import RenderGameCards from './gameCard/RenderGameCards'
 import LoadingCircle from './LoadingCircle'
