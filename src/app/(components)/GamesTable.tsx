@@ -26,7 +26,6 @@ export default function GamesTable() {
 
   useEffect(() => {
     if (isProduction) {
-
       fetchGames()
         .then((games: Game[]) => setGames(games))
         .catch(error => setError(error.message))

@@ -1,10 +1,10 @@
-import GamesTable from "./(components)/GamesTable"
+import GamesTable from './(components)/GamesTable'
 
 export default async function Home() {
 
   return (
 
-    <div className="">
+    <div className=''>
       <GamesTable />
     </div>
   )
