@@ -7,8 +7,8 @@ import Button from './Button'
 import GenresFilter from './GenresFilter'
 import ErrorMessage from './ErrorMessage'
 import SearchInput from './SearchInput'
-import isProduction from '@/utils/environment'
-import gamesMock from '@/utils/gamesMock'
+import isProduction from '@/lib/environment'
+import gamesMock from '@/lib/gamesMock'
 
 
 

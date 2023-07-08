@@ -2,17 +2,19 @@ import Image from 'next/image'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
-import isProduction from '@/utils/environment'
+import isProduction from '@/lib/environment'
+import { Metadata } from 'next'
+import FirebaseContextProvider from '@/contexts/FirebaseContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const URL = 'https://app-masters-a1th.vercel.app/'
+const appUrl = new URL('https://app-masters-a1th.vercel.app/')
 const TITLE = 'a1Th App-Masters'
 const DESCRIPTION = 'Projeto de Estágio Frontend React'
 
-export const metadata = {
+export const metadata: Metadata = {
 
-  metadataBase: URL,
+  metadataBase: appUrl,
   title: TITLE,
   description: DESCRIPTION,
   ...(isProduction ? { manifest: '/manifest.json' } : {}),
@@ -21,7 +23,7 @@ export const metadata = {
     capable: true,
     statusBarStyle: 'default',
     title: TITLE,
-    startUpImage: ['/og.png'],
+    startupImage: ['/og.png']
   },
   formatDetection: {
     telephone: false,
@@ -30,7 +32,7 @@ export const metadata = {
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: URL,
+    url: appUrl,
     siteName: TITLE,
     images: [
       {
@@ -67,7 +69,9 @@ export default function RootLayout({
           </div>
         </header>
         <main className='max-w-[1440px] mx-auto'>
-          {children}
+          <FirebaseContextProvider >
+            {children}
+          </FirebaseContextProvider>
         </main>
         <footer className='mt-auto bg-theme-secondary-dark text-white text-center py-2 font-semibold'>
           <Link href={'https://github.com/a1Thiago/app'} target='_blank' >
