@@ -2,7 +2,6 @@
 import { SignInResult, useFirebaseContext } from '@/contexts/FirebaseContext'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useRef, useState } from 'react'
-// import { revalidatePath } from 'next/cache'
 
 export default function Page() {
 
@@ -18,12 +17,7 @@ export default function Page() {
 
   const handleForm = async (
     event: FormEvent<HTMLFormElement>
-    // event: FormEvent
-    // event: FormData
   ) => {
-    // 'use server'
-    // const email = event.get('email')?.toString() || ''
-    // const password = event.get('password')?.toString() || ''
 
     event.preventDefault()
 
@@ -36,8 +30,6 @@ export default function Page() {
       setError(error.code)
       return console.error(error)
     }
-    // revalidatePath('/login')
-    // return router.push('/')
   }
 
   return (
@@ -46,7 +38,6 @@ export default function Page() {
         <h1 className='mt-60 mb-30'>Login</h1>
         {error && (<div className='text-red-500'>{error}</div>)}
         <form
-          // action={handleForm}
           onSubmit={handleForm}
           className='form'>
           <label htmlFor='email'>
