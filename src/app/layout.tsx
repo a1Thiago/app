@@ -1,10 +1,10 @@
-import Image from 'next/image'
 import './globals.css'
 import { Inter } from 'next/font/google'
-import Link from 'next/link'
 import isProduction from '@/lib/environment'
 import { Metadata } from 'next'
 import FirebaseContextProvider from '@/contexts/FirebaseContext'
+import LayoutHeader from './(components)/LayoutHeader'
+import LayoutFooter from './(components)/LayoutFooter'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -62,22 +62,13 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${inter.className} flex flex-col min-h-screen bg-[#f3f4f6]`}>
-        <header className='px-4 py-2 bg-theme-primary'>
-          <div className='max-w-[1440px] mx-auto'>
-            <Image src={'/logo2.svg'} alt='a1Th logo' width={100} height='0' className='-my-8' />
-            {/* TODO FIX THE LOGOS FILES */}
-          </div>
-        </header>
-        <main className='max-w-[1440px] mx-auto'>
-          <FirebaseContextProvider >
+        <FirebaseContextProvider >
+          <LayoutHeader />
+          <main className='max-w-[1440px] mx-auto'>
             {children}
-          </FirebaseContextProvider>
-        </main>
-        <footer className='mt-auto bg-theme-secondary-dark text-white text-center py-2 font-semibold'>
-          <Link href={'https://github.com/a1Thiago/app'} target='_blank' >
-            GitHub
-          </Link>
-        </footer>
+          </main>
+          <LayoutFooter />
+        </FirebaseContextProvider>
       </body>
     </html>
   )

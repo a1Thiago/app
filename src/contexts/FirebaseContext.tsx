@@ -1,6 +1,6 @@
 'use client'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, User, UserCredential } from 'firebase/auth'
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, User, UserCredential } from 'firebase/auth'
 import { auth } from '@/lib/firebase.config'
 import localStorageUtil from '@/lib/localStorage'
 
@@ -19,7 +19,7 @@ interface FirebaseContextProps {
   user: User | null
   signIn: (email: string, password: string) => Promise<SignInResult>
   signUp: (email: string, password: string) => Promise<SignUpResult>
-  signOut: () => void
+  logOut: () => void
 }
 
 export const FirebaseContext = createContext<FirebaseContextProps>(
@@ -27,7 +27,7 @@ export const FirebaseContext = createContext<FirebaseContextProps>(
     user: null,
     signIn: () => Promise.resolve({ result: null, error: null }),
     signUp: () => Promise.resolve({ result: null, error: null }),
-    signOut: () => { },
+    logOut: () => { },
   })
 
 export const useFirebaseContext = (): FirebaseContextProps => useContext(FirebaseContext)
@@ -91,15 +91,18 @@ export default function FirebaseContextProvider({ children }: FirebaseContextPro
     return { result, error }
   }
 
-  const signOut = async () => {
+  const logOut = async () => {
+
+    console.log(user)
     if (user) {
+      await signOut(auth)
       localStorageUtil.deleteItem('user')
       setUser(null)
     }
   }
 
   return (
-    <FirebaseContext.Provider value={{ user, signIn, signUp, signOut }}>
+    <FirebaseContext.Provider value={{ user, signIn, signUp, logOut }}>
       {loading ? <div>Loading...</div> : (children)}
     </FirebaseContext.Provider>
   )
