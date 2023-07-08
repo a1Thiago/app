@@ -1,12 +1,12 @@
 'use client'
 
-import { useFirebaseContext } from '@/contexts/FirebaseContext'
+import { useFirebaseAuthContext } from '@/contexts/FirebaseAuthContext'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
 function Page() {
 
-  const { user } = useFirebaseContext()
+  const { user } = useFirebaseAuthContext()
 
   const router = useRouter()
 

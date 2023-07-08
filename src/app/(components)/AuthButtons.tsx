@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Button from './Button'
-import { useFirebaseContext } from '@/contexts/FirebaseContext'
+import { useFirebaseAuthContext } from '@/contexts/FirebaseAuthContext'
 import { useRouter } from 'next/navigation'
 
 
@@ -9,7 +9,7 @@ export default function AuthButtons() {
 
   const router = useRouter()
 
-  const { user, logOut } = useFirebaseContext()
+  const { user, logOut } = useFirebaseAuthContext()
 
   return (
     <div>
@@ -19,8 +19,8 @@ export default function AuthButtons() {
         )
         : (
           <>
-            <Button label='Entrar' onClick={() => router.push('/signin')} />
-            <Button label='Registrar' onClick={() => router.push('/auth')} />
+            <Button label='Entrar' onClick={() => router.push('/auth/entrar')} />
+            <Button label='Registrar' onClick={() => router.push('/auth/registrar')} />
           </>
         )
       }

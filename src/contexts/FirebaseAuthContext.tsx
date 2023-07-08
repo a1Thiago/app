@@ -4,7 +4,6 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import { auth } from '@/lib/firebase.config'
 import localStorageUtil from '@/lib/localStorage'
 
-
 export interface SignInResult {
   result: UserCredential | null
   error: any
@@ -15,14 +14,18 @@ export interface SignUpResult {
   error: any
 }
 
-interface FirebaseContextProps {
+interface FirebaseAuthContextProviderProps {
+  children: React.ReactNode
+}
+
+interface FirebaseAuthContextProps {
   user: User | null
   signIn: (email: string, password: string) => Promise<SignInResult>
   signUp: (email: string, password: string) => Promise<SignUpResult>
   logOut: () => void
 }
 
-export const FirebaseContext = createContext<FirebaseContextProps>(
+export const FirebaseAuthContext = createContext<FirebaseAuthContextProps>(
   {
     user: null,
     signIn: () => Promise.resolve({ result: null, error: null }),
@@ -30,13 +33,9 @@ export const FirebaseContext = createContext<FirebaseContextProps>(
     logOut: () => { },
   })
 
-export const useFirebaseContext = (): FirebaseContextProps => useContext(FirebaseContext)
+export const useFirebaseAuthContext = (): FirebaseAuthContextProps => useContext(FirebaseAuthContext)
 
-interface FirebaseContextProviderProps {
-  children: React.ReactNode
-}
-
-export default function FirebaseContextProvider({ children }: FirebaseContextProviderProps) {
+export default function FirebaseAuthContextProvider({ children }: FirebaseAuthContextProviderProps) {
 
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
@@ -92,8 +91,6 @@ export default function FirebaseContextProvider({ children }: FirebaseContextPro
   }
 
   const logOut = async () => {
-
-    console.log(user)
     if (user) {
       await signOut(auth)
       localStorageUtil.deleteItem('user')
@@ -102,9 +99,9 @@ export default function FirebaseContextProvider({ children }: FirebaseContextPro
   }
 
   return (
-    <FirebaseContext.Provider value={{ user, signIn, signUp, logOut }}>
+    <FirebaseAuthContext.Provider value={{ user, signIn, signUp, logOut }}>
       {loading ? <div>Loading...</div> : (children)}
-    </FirebaseContext.Provider>
+    </FirebaseAuthContext.Provider>
   )
 }
 
