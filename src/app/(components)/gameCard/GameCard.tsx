@@ -18,7 +18,7 @@ interface GameCardProps {
 export default function GameCard({ game }: GameCardProps) {
 
   const { user, } = useFirebaseAuthContext()
-  const { userData } = useFirebaseDataContext()
+  const { userData, setDataOnDatabase, removeItemFromDatabaseCollection } = useFirebaseDataContext()
 
   const [rendering, setRendering] = useState(true)
 
@@ -30,14 +30,18 @@ export default function GameCard({ game }: GameCardProps) {
 
   const handleClick = () => {
 
-    // setDataOnDatabase('users', user?.uid!, { favorites: arrayUnion(game.id) })
-    //   .then((response) => {
-    //     console.log('set', response)
-    //     // console.log('Data successfully set in Firestore:', response.result)
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error setting data in Firestore:', error)
-    //   })
+    if (checkIsLiked) {
+      removeItemFromDatabaseCollection('users', user?.uid!, 'favorites', game.id)
+    } else {
+      setDataOnDatabase('users', user?.uid!, { favorites: arrayUnion(game.id) })
+        .then((response) => {
+          console.log('set', response)
+          // console.log('Data successfully set in Firestore:', response.result)
+        })
+        .catch((error) => {
+          console.error('Error setting data in Firestore:', error)
+        })
+    }
   }
 
   const checkIsLiked = user && userData?.favorites?.includes(game.id) || false
