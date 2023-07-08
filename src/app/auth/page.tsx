@@ -1,5 +1,5 @@
 'use client'
-import { FormEvent, useRef, useState } from 'react'
+import { FormEvent, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { SignUpResult, useFirebaseContext } from '@/contexts/FirebaseContext'
 
@@ -7,14 +7,19 @@ export default function Page() {
 
   const { user, signUp } = useFirebaseContext()
 
+  const router = useRouter()
+
+  useEffect(() => {
+    if (user) {
+      router.push('/')
+    }
+  }, [user, router])
+
   const [error, setError] = useState<string | null>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
-  const handleForm = async (
-    event: FormEvent<HTMLFormElement>
-
-  ) => {
+  const handleForm = async (event: FormEvent<HTMLFormElement>) => {
 
     event.preventDefault()
 
@@ -28,6 +33,8 @@ export default function Page() {
       return console.error(error)
     }
   }
+
+  if (user) return (<div>Already logged in</div>)
 
   return (
     <div className='wrapper'>

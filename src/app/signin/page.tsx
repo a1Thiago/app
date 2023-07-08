@@ -1,10 +1,9 @@
 'use client'
 import { SignInResult, useFirebaseContext } from '@/contexts/FirebaseContext'
 import { useRouter } from 'next/navigation'
-import { FormEvent, useRef, useState } from 'react'
+import { FormEvent, useEffect, useRef, useState } from 'react'
 
 export default function Page() {
-
 
   const { user, signIn } = useFirebaseContext()
 
@@ -15,9 +14,14 @@ export default function Page() {
 
   const router = useRouter()
 
-  const handleForm = async (
-    event: FormEvent<HTMLFormElement>
-  ) => {
+  useEffect(() => {
+    if (user) {
+      router.push('/')
+    }
+  }, [user, router])
+
+
+  const handleForm = async (event: FormEvent<HTMLFormElement>) => {
 
     event.preventDefault()
 
@@ -31,6 +35,8 @@ export default function Page() {
       return console.error(error)
     }
   }
+
+  if (user) return (<div>Already logged in</div>)
 
   return (
     <div className='wrapper'>
