@@ -1,6 +1,6 @@
 import { Game } from '../../scripts/fetchGames'
 
-interface GenresFilterProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface GenresFilterProps extends React.HTMLProps<HTMLDivElement> {
   games: Game[]
   selectedGenres: string[]
 }
@@ -9,6 +9,7 @@ export default function GenresFilter({ games, selectedGenres, ...props }: Genres
 
   const allGenres = games.map((game) => game.genre)
   const uniqueGenres = Array.from(new Set(allGenres))
+  const checked = (genre: string) => selectedGenres.includes(genre.toLowerCase())
 
   return (
     <>
@@ -24,17 +25,19 @@ export default function GenresFilter({ games, selectedGenres, ...props }: Genres
               .length
 
             return (
-              <div key={genre} className='group'>
-                <label htmlFor={genre} className='mobile:text-14 group-hover:cursor-pointer'>
+              <div
+                {...props}
+                key={genre}
+                className={`grid group ${checked(genre) ? 'bg-theme-secondary-dark text-white' : 'bg-theme-primary'} rounded-lg font-semibold cursor-pointer grid `}>
+                <label htmlFor={genre} className='text-14 mobile:text-12 group-hover:cursor-pointer grid grid-flow-col items-center justify-center py-1 px-2'>
                   <input
-                    className='mx-1 rounded w-4 h-4 focus:ring-2 focus:ring-theme-secondary text-theme-primary'
+                    className='h-0 w-0'
                     type='checkbox'
                     id={genre}
                     value={genre}
-                    checked={selectedGenres.includes(genre.toLowerCase())}
-                    {...props}
+                    checked={checked(genre)}
                   />
-                  {genre} ({countOfGames})
+                  {genre} (<span className='font-normal'>{countOfGames}</span>)
                 </label>
               </div>
             )
