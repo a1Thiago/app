@@ -1,4 +1,4 @@
-import { Game } from '../../scripts/fetchGames'
+import { Game } from '@/scripts/fetchGames'
 
 interface GenresFilterProps extends React.HTMLProps<HTMLDivElement> {
   games: Game[]
@@ -8,8 +8,9 @@ interface GenresFilterProps extends React.HTMLProps<HTMLDivElement> {
 export default function GenresFilter({ games, selectedGenres, ...props }: GenresFilterProps) {
 
   const allGenres = games.map((game) => game.genre)
-  const uniqueGenres = Array.from(new Set(allGenres))
+  const uniqueGenres = Array.from(new Set(allGenres.concat('Favoritos')))
   const checked = (genre: string) => selectedGenres.includes(genre.toLowerCase())
+  const favorites = games.filter(game => game.isFavorite)
 
   return (
     <>
@@ -19,23 +20,23 @@ export default function GenresFilter({ games, selectedGenres, ...props }: Genres
 
           {uniqueGenres.map((genre) => {
 
-            const countOfGames = games
-              .map((game) => game.genre.toLowerCase() === genre.toLowerCase())
-              .filter((game) => game)
-              .length
+            const countOfGames =
+              genre === 'Favoritos'
+                ? favorites.length
+                : games.filter((game) => game?.genre?.toLowerCase() === genre.toLowerCase()).length
 
             return (
               <div
                 {...props}
                 key={genre}
-                className={`grid group ${checked(genre) ? 'bg-theme-secondary-dark text-white' : 'bg-theme-primary'} rounded-lg font-semibold cursor-pointer grid `}>
+                className={`grid group transition-all duration-400 ${checked(genre) ? 'bg-theme-secondary-dark text-white' : 'bg-theme-primary'} rounded-lg font-semibold cursor-pointer`}>
                 <label htmlFor={genre} className='text-14 mobile:text-12 group-hover:cursor-pointer grid grid-flow-col items-center justify-center py-1 px-2'>
                   <input
                     className='h-0 w-0'
                     type='checkbox'
                     id={genre}
                     value={genre}
-                    checked={checked(genre)}
+                  // checked={checked(genre)}
                   />
                   {genre} (<span className='font-normal'>{countOfGames}</span>)
                 </label>

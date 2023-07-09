@@ -9,10 +9,13 @@ import ErrorMessage from './ErrorMessage'
 import SearchInput from './SearchInput'
 import isProduction from '@/lib/environment'
 import gamesMock from '@/lib/gamesMock'
+import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 
 
 
 export default function GamesTable() {
+
+  const { userData } = useFirebaseDataContext()
 
   const [games, setGames] = useState<Game[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -46,6 +49,7 @@ export default function GamesTable() {
 
     setSelectedGenres((prevSelectedGenres) => {
       if (checked) {
+
         return [...prevSelectedGenres, value.toLowerCase()]
       } else {
         return prevSelectedGenres.filter((genre) => genre !== value.toLowerCase())
@@ -56,6 +60,16 @@ export default function GamesTable() {
   const loadMoreItems = () => {
     setPageSize(oldValue => oldValue + 15)
   }
+
+  const handleFavorites = () => {
+    games.map(game => {
+      if (userData?.favorites.includes(game.id)) {
+        game.isFavorite = true
+      }
+    })
+  }
+
+  handleFavorites()
 
   const filteredGamesBySearch = games.filter((game) => {
 
@@ -73,7 +87,8 @@ export default function GamesTable() {
     if (selectedGenres.length < 1) {
       return game
     } else {
-      return selectedGenres.includes(game.genre.toLowerCase())
+
+      return selectedGenres.includes(game.genre.toLowerCase()) || selectedGenres.includes('favoritos') && game.isFavorite
     }
   })
 

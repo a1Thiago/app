@@ -10,6 +10,7 @@ export interface Game {
   developer: string
   release_date: string
   freetogame_profile_url: string
+  isFavorite?: boolean | null
 }
 
 export default async function fetchGames(): Promise<Game[]> {

@@ -4,24 +4,29 @@ import { DocumentSnapshot, arrayRemove, doc, getDoc, setDoc } from 'firebase/fir
 import { useFirebaseAuthContext } from './FirebaseAuthContext'
 import { db } from '@/lib/firebase.config'
 
+type Rating = {
+  gameId: { value: number }
+}
+
 type UserData = {
   favorites: Array<number>
+  ratings: Rating[]
 }
 
 interface FirebaseDataContextProps {
   userData: UserData | null
   setUserData: (data: UserData | null) => void
-  setDataOnDatabase: (collectionName: string, documentId: string, data: any) => Promise<setDataOnDatabaseResult>
-  getDataFromDatabase: (collectionName: string, documentId: string) => Promise<getDataFromDatabaseResult>
-  removeItemFromDatabaseCollection: (collectionName: string, documentId: string, field: string, item: any) => Promise<setDataOnDatabaseResult>
+  setDataOnDatabase: (collectionName: string, data: any) => Promise<setDataOnDatabaseResult>
+  getDataFromDatabase: (collectionName: string) => Promise<getDataFromDatabaseResult>
+  removeItemFromDatabaseCollection: (collectionName: string, field: string, item: any) => Promise<setDataOnDatabaseResult>
 }
 
 interface FirebaseDataContextProviderProps {
   children: React.ReactNode
 }
 interface setDataOnDatabaseResult {
-  result: void | null;
-  error: any;
+  result: void | null
+  error: any
 }
 
 interface getDataFromDatabaseResult {
@@ -47,9 +52,10 @@ export default function FirebaseDataContextProvider({ children }: FirebaseDataCo
 
   useEffect(() => {
     const checkUserData = async () => {
-      const response = await getDataFromDatabase('users', user?.uid!)
+      const response = await getDataFromDatabase('users')
       const favorites = response.result?.get('favorites')
-      setUserData({ favorites })
+      const ratings = response.result?.get('ratings')
+      setUserData({ favorites, ratings })
     }
 
     if (user) {
@@ -58,19 +64,23 @@ export default function FirebaseDataContextProvider({ children }: FirebaseDataCo
     setLoading(false)
   }, [user])
 
-  async function setDataOnDatabase(collectionName: string, documentId: string, data: any): Promise<setDataOnDatabaseResult> {
+  async function setDataOnDatabase(collectionName: string, data: any): Promise<setDataOnDatabaseResult> {
+
+    if (!user) throw new Error()
+
     let result: void | undefined
     let error: any = null
 
     try {
-      result = await setDoc(doc(db, collectionName, documentId), data, {
+      result = await setDoc(doc(db, collectionName, user?.uid!), data, {
         merge: true,
       })
 
       if (result !== null) {
-        const response = await getDataFromDatabase(collectionName, documentId)
+        const response = await getDataFromDatabase(collectionName)
         const favorites = response.result?.get('favorites')
-        setUserData({ favorites })
+        const ratings = response.result?.get('ratings')
+        setUserData({ favorites, ratings })
       }
     } catch (e) {
       error = e
@@ -79,8 +89,11 @@ export default function FirebaseDataContextProvider({ children }: FirebaseDataCo
     return { result, error }
   }
 
-  async function getDataFromDatabase(collectionName: string, documentId: string): Promise<getDataFromDatabaseResult> {
-    const documentRef = doc(db, collectionName, documentId)
+  async function getDataFromDatabase(collectionName: string): Promise<getDataFromDatabaseResult> {
+
+    if (!user) throw new Error()
+
+    const documentRef = doc(db, collectionName, user?.uid!)
     let result: DocumentSnapshot | null = null
     let error: any = null
 
@@ -95,23 +108,26 @@ export default function FirebaseDataContextProvider({ children }: FirebaseDataCo
 
   async function removeItemFromDatabaseCollection(
     collectionName: string,
-    documentId: string,
     field: string,
     item: any
   ): Promise<setDataOnDatabaseResult> {
+
+    if (!user) throw new Error()
+
     let result: void | undefined
     let error: any = null
 
     try {
-      const documentRef = doc(db, collectionName, documentId)
+      const documentRef = doc(db, collectionName, user.uid)
       const fieldValue = arrayRemove(item)
       const data = { [field]: fieldValue }
       result = await setDoc(documentRef, data, { merge: true })
 
       if (result !== null) {
-        const response = await getDataFromDatabase(collectionName, documentId)
+        const response = await getDataFromDatabase(collectionName)
         const favorites = response.result?.get('favorites')
-        setUserData({ favorites })
+        const ratings = response.result?.get('ratings')
+        setUserData({ favorites, ratings })
       }
     } catch (e) {
       error = e
@@ -121,10 +137,25 @@ export default function FirebaseDataContextProvider({ children }: FirebaseDataCo
   }
 
   return (
-    <FirebaseDataContext.Provider
-      value={{ userData, setUserData, setDataOnDatabase, getDataFromDatabase, removeItemFromDatabaseCollection }}
-    >
+    <FirebaseDataContext.Provider value={{ userData, setUserData, setDataOnDatabase, getDataFromDatabase, removeItemFromDatabaseCollection }} >
       {loading ? <div>Loading...</div> : children}
     </FirebaseDataContext.Provider>
   )
 }
+
+
+// const getDataFromDatabase = useCallback(async (collectionName: string): Promise<getDataFromDatabaseResult> => {
+//   if (!user) throw new Error()
+
+//   const documentRef = doc(db, collectionName, user?.uid!)
+//   let result: DocumentSnapshot | null = null
+//   let error: any = null
+
+//   try {
+//     result = await getDoc(documentRef)
+//   } catch (e) {
+//     error = e
+//   }
+
+//   return { result, error }
+// }, [user])
