@@ -32,7 +32,11 @@ export default function Stars({ gameID }: StarsProps) {
     <div className="flex gap-1 group relative">
 
       {Array.from({ length: 5 }).map((_, index) => {
-        const filled = index < rating || index <= hoveredIndex!
+
+        const filled = hoveredIndex !== -1
+          ? index <= hoveredIndex!
+          : index < rating
+
         return (
           <Star
             key={index}
@@ -57,9 +61,7 @@ export default function Stars({ gameID }: StarsProps) {
 }
 
 function Star({ filled, ...props }: StarProps) {
-
   const fillClass = filled ? 'fill-amber-400' : 'fill-amber-400/40'
-
   return (
     <button {...props}>
       <svg className="h-6 w-6 shrink-0 cursor-pointer" viewBox="0 0 256 256">
