@@ -29,36 +29,41 @@ export default function GameCard({ game }: GameCardProps) {
 
   if (!game) return <></>
 
-  const handleClick = () => {
+  // const handleClick = () => {
 
-    if (checkIsFavorite) {
-      removeItemFromDatabaseCollection('users', 'favorites', game.id)
-    } else {
-      setDataOnDatabase('users', { favorites: arrayUnion(game.id) })
-        .then((response) => {
-          console.log('set', response)
-          // console.log('Data successfully set in Firestore:', response.result)
-        })
-        .catch((error) => {
-          console.error('Error setting data in Firestore:', error)
-        })
-    }
-  }
+  //   if (checkIsFavorite) {
+  //     removeItemFromDatabaseCollection('users', 'favorites', game.id)
+  //   } else {
+  //     setDataOnDatabase('users', { favorites: arrayUnion(game.id) })
+  //       .then((response) => {
+  //         console.log('set', response)
+  //         // console.log('Data successfully set in Firestore:', response.result)
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error setting data in Firestore:', error)
+  //       })
+  //   }
+  // }
 
   const handleStarClick = (rating: number) => {
     console.log('Selected rating:', rating)
     // Perform any other actions with the rating value
   }
 
-  const checkIsFavorite = user && userData?.favorites?.includes(game.id) || false
+  // const checkIsFavorite = user && userData?.favorites?.includes(game.id) || false
 
   return (
     <div
       className={`bg-white p-4 flex gap-2 flex-col border border-theme-secondary-dark rounded shadow-sm shadow-theme-secondary tablet:grid grid-cols-2 tablet:gap-x-4
       transition-opacity duration-500  ${rendering ? 'opacity-0' : 'opacity-100'} relative`}
     >
-      <span onClick={handleClick} className='absolute right-2 top-2 z-10 '>
-        <Heart isFavorite={checkIsFavorite} />
+      <span
+        // onClick={handleClick} 
+        className='absolute right-2 top-2 z-10 '>
+        <Heart
+          gameID={game.id}
+        // isFavorite={checkIsFavorite}
+        />
       </span>
 
       <h3

@@ -45,6 +45,7 @@ export const FirebaseDataContext = createContext<FirebaseDataContextProps>({
 export const useFirebaseDataContext = (): FirebaseDataContextProps => useContext(FirebaseDataContext)
 
 export default function FirebaseDataContextProvider({ children }: FirebaseDataContextProviderProps) {
+
   const { user } = useFirebaseAuthContext()
 
   const [userData, setUserData] = useState<UserData | null>(null)

@@ -11,6 +11,7 @@ const firebaseConfig = {
   // messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   // appId: process.env.FIREBASE_APP_ID,
   // measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+  //💀
   apiKey: 'AIzaSyBTyUN8PPMtD6LHVZkzhvHDDJI3XlmoRzM',
   authDomain: 'app-masters-c40c6.firebaseapp.com',
   projectId: 'app-masters-c40c6',

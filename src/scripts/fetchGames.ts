@@ -14,6 +14,7 @@ export interface Game {
 }
 
 export default async function fetchGames(): Promise<Game[]> {
+
   try {
 
     const abortController = new AbortController()

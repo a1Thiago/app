@@ -1,4 +1,6 @@
+import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 import { Game } from '@/scripts/fetchGames'
+import { useEffect, useState } from 'react'
 
 interface GenresFilterProps extends React.HTMLProps<HTMLDivElement> {
   games: Game[]
@@ -7,10 +9,12 @@ interface GenresFilterProps extends React.HTMLProps<HTMLDivElement> {
 
 export default function GenresFilter({ games, selectedGenres, ...props }: GenresFilterProps) {
 
+  const { userData } = useFirebaseDataContext()
+
   const allGenres = games.map((game) => game.genre)
   const uniqueGenres = Array.from(new Set(allGenres.concat('Favoritos')))
   const checked = (genre: string) => selectedGenres.includes(genre.toLowerCase())
-  const favorites = games.filter(game => game.isFavorite)
+  const favorites = games.filter(game => userData?.favorites.includes(game.id))
 
   return (
     <>

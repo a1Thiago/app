@@ -1,14 +1,39 @@
+import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
+import { arrayUnion } from 'firebase/firestore'
+
 interface HeartProps {
-  isFavorite: boolean
+  gameID: number
 }
 
-export default function Heart({ isFavorite }: HeartProps) {
+export default function Heart({ gameID }: HeartProps) {
 
-  const favorite = isFavorite ? 'text-red-500' : 'text-red-500/90'
+  const { userData, removeItemFromDatabaseCollection, setDataOnDatabase } = useFirebaseDataContext()
+
+  const isFavorite = userData?.favorites?.includes(gameID) || false
+
+  const handleClick = () => {
+
+    if (isFavorite) {
+      removeItemFromDatabaseCollection('users', 'favorites', gameID)
+        .catch((error) => {
+          console.error('Error removing data in Firestore:', error)
+        })
+    } else {
+      setDataOnDatabase('users', { favorites: arrayUnion(gameID) })
+        .catch((error) => {
+          console.error('Error setting data in Firestore:', error)
+        })
+    }
+  }
+
+  const favorite = isFavorite ? 'text-red-500' : 'text-red-500/70'
 
   return (
-    <button className={`transition-colors duration-500  hover:animate-pulse ${favorite}`}>
-
+    <button
+      type='button'
+      className={`transition-colors duration-500  hover:animate-pulse ${favorite}`}
+      onClick={handleClick}
+    >
       <svg className="w-6 h-auto"
         fill='currentColor'
         stroke='currentColor'

@@ -11,8 +11,6 @@ import isProduction from '@/lib/environment'
 import gamesMock from '@/lib/gamesMock'
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 
-
-
 export default function GamesTable() {
 
   const { userData } = useFirebaseDataContext()
@@ -61,16 +59,6 @@ export default function GamesTable() {
     setPageSize(oldValue => oldValue + 15)
   }
 
-  const handleFavorites = () => {
-    games.map(game => {
-      if (userData?.favorites.includes(game.id)) {
-        game.isFavorite = true
-      }
-    })
-  }
-
-  handleFavorites()
-
   const filteredGamesBySearch = games.filter((game) => {
 
     const games = game.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -88,7 +76,7 @@ export default function GamesTable() {
       return game
     } else {
 
-      return selectedGenres.includes(game.genre.toLowerCase()) || selectedGenres.includes('favoritos') && game.isFavorite
+      return selectedGenres.includes(game.genre.toLowerCase()) || selectedGenres.includes('favoritos') && userData?.favorites.includes(game.id) // game.isFavorite
     }
   })
 
