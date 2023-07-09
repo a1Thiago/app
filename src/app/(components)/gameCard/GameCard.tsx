@@ -10,6 +10,7 @@ import Heart from './Heart'
 import { useFirebaseAuthContext } from '@/contexts/FirebaseAuthContext'
 import { arrayUnion } from 'firebase/firestore'
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
+import Stars from './Stars'
 
 interface GameCardProps {
   game: Game
@@ -30,10 +31,10 @@ export default function GameCard({ game }: GameCardProps) {
 
   const handleClick = () => {
 
-    if (checkIsLiked) {
-      removeItemFromDatabaseCollection('users', user?.uid!, 'favorites', game.id)
+    if (checkIsFavorite) {
+      removeItemFromDatabaseCollection('users', 'favorites', game.id)
     } else {
-      setDataOnDatabase('users', user?.uid!, { favorites: arrayUnion(game.id) })
+      setDataOnDatabase('users', { favorites: arrayUnion(game.id) })
         .then((response) => {
           console.log('set', response)
           // console.log('Data successfully set in Firestore:', response.result)
@@ -44,18 +45,20 @@ export default function GameCard({ game }: GameCardProps) {
     }
   }
 
-  const checkIsLiked = user && userData?.favorites?.includes(game.id) || false
+  const handleStarClick = (rating: number) => {
+    console.log('Selected rating:', rating)
+    // Perform any other actions with the rating value
+  }
+
+  const checkIsFavorite = user && userData?.favorites?.includes(game.id) || false
 
   return (
     <div
-      onClick={handleClick}
-
       className={`bg-white p-4 flex gap-2 flex-col border border-theme-secondary-dark rounded shadow-sm shadow-theme-secondary tablet:grid grid-cols-2 tablet:gap-x-4
       transition-opacity duration-500  ${rendering ? 'opacity-0' : 'opacity-100'} relative`}
     >
-
-      <span className='absolute right-2 top-2 z-10 '>
-        <Heart isLiked={checkIsLiked} />
+      <span onClick={handleClick} className='absolute right-2 top-2 z-10 '>
+        <Heart isFavorite={checkIsFavorite} />
       </span>
 
       <h3
@@ -64,8 +67,6 @@ export default function GameCard({ game }: GameCardProps) {
       >
         {game.title}
       </h3>
-
-
 
       <Image
         sizes='100vw'
@@ -97,7 +98,7 @@ export default function GameCard({ game }: GameCardProps) {
           <p ><span className='font-medium'>Release Date</span>: {game.release_date}</p>
         </div>
       </Accordion>
-
+      <Stars gameID={game.id} />
       <div className='grid grid-cols-2 gap-2 tablet:text-14 mobile:text-14'>
         <Link href={game.game_url} target='_blank'>
           <Button label='Play Now' colorStyle='secondary' />

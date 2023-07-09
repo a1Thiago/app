@@ -26,6 +26,9 @@ module.exports = {
       black: '#000000',
       grey: '#CCCCCC',
       transparent: 'transparent',
+      amber: {
+        400: '#fbbf24'
+      },
       sky: {
         500: '#0ea5e9'
       },
