@@ -11,6 +11,7 @@ export default function LayoutHeader() {
         </Link>
         {/* TODO FIX THE LOGOS FILES */}
       </div>
+
       <AuthButtons />
     </header>
   )

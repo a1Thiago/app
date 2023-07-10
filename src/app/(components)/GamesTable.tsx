@@ -76,7 +76,7 @@ export default function GamesTable() {
       return game
     } else {
 
-      return selectedGenres.includes(game.genre.toLowerCase()) || selectedGenres.includes('favoritos') && userData?.favorites.includes(game.id) // game.isFavorite
+      return selectedGenres.includes(game.genre.toLowerCase()) || selectedGenres.includes('favoritos') && userData?.favorites?.includes(game.id) // game.isFavorite
     }
   })
 

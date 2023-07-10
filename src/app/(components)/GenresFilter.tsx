@@ -14,7 +14,7 @@ export default function GenresFilter({ games, selectedGenres, ...props }: Genres
   const allGenres = games.map((game) => game.genre)
   const uniqueGenres = Array.from(new Set(allGenres.concat('Favoritos')))
   const checked = (genre: string) => selectedGenres.includes(genre.toLowerCase())
-  const favorites = games.filter(game => userData?.favorites.includes(game.id))
+  const favorites = games.filter(game => userData?.favorites?.includes(game.id))
 
   return (
     <>
@@ -26,7 +26,7 @@ export default function GenresFilter({ games, selectedGenres, ...props }: Genres
 
             const countOfGames =
               genre === 'Favoritos'
-                ? favorites.length
+                ? favorites?.length
                 : games.filter((game) => game?.genre?.toLowerCase() === genre.toLowerCase()).length
 
             return (

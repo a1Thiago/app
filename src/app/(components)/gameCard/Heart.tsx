@@ -13,6 +13,10 @@ export default function Heart({ gameID }: HeartProps) {
 
   const handleClick = () => {
 
+    console.log(userData)
+
+    if (!userData) return
+
     if (isFavorite) {
       removeItemFromDatabaseCollection('users', 'favorites', gameID)
         .catch((error) => {

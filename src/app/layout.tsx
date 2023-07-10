@@ -1,10 +1,11 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
-import isProduction from '@/lib/environment'
 import { Metadata } from 'next'
-import FirebaseAuthContextProvider from '@/contexts/FirebaseAuthContext'
+import { Inter } from 'next/font/google'
+import NextTopLoader from 'nextjs-toploader';
+import isProduction from '@/lib/environment'
 import LayoutHeader from './(components)/LayoutHeader'
 import LayoutFooter from './(components)/LayoutFooter'
+import FirebaseAuthContextProvider from '@/contexts/FirebaseAuthContext'
 import FirebaseDataContextProvider from '@/contexts/FirebaseDataContext'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -62,7 +63,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={`${inter.className} flex flex-col min-h-screen bg-[#f3f4f6]`}>
+      <body className={`${inter.className} flex flex-col min-h-screen `}>
+        <NextTopLoader color='var(--secondary-dark)' />
         <FirebaseAuthContextProvider >
           <FirebaseDataContextProvider >
             <LayoutHeader />

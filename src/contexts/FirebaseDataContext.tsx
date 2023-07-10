@@ -52,6 +52,9 @@ export default function FirebaseDataContextProvider({ children }: FirebaseDataCo
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+
+    if (!user) return setUserData(null)
+
     const checkUserData = async () => {
       const response = await getDataFromDatabase('users')
       const favorites = response.result?.get('favorites')
@@ -67,7 +70,7 @@ export default function FirebaseDataContextProvider({ children }: FirebaseDataCo
 
   async function setDataOnDatabase(collectionName: string, data: any): Promise<setDataOnDatabaseResult> {
 
-    if (!user) throw new Error()
+    if (!user) return { result: null, error: null }
 
     let result: void | undefined
     let error: any = null
@@ -92,7 +95,7 @@ export default function FirebaseDataContextProvider({ children }: FirebaseDataCo
 
   async function getDataFromDatabase(collectionName: string): Promise<getDataFromDatabaseResult> {
 
-    if (!user) throw new Error()
+    if (!user) return { result: null, error: null }
 
     const documentRef = doc(db, collectionName, user?.uid!)
     let result: DocumentSnapshot | null = null
@@ -113,7 +116,7 @@ export default function FirebaseDataContextProvider({ children }: FirebaseDataCo
     item: any
   ): Promise<setDataOnDatabaseResult> {
 
-    if (!user) throw new Error()
+    if (!user) return { result: null, error: null }
 
     let result: void | undefined
     let error: any = null
@@ -139,7 +142,9 @@ export default function FirebaseDataContextProvider({ children }: FirebaseDataCo
 
   return (
     <FirebaseDataContext.Provider value={{ userData, setUserData, setDataOnDatabase, getDataFromDatabase, removeItemFromDatabaseCollection }} >
-      {loading ? <div>Loading...</div> : children}
+      {
+        // loading ? <div>Loading...</div> : 
+        children}
     </FirebaseDataContext.Provider>
   )
 }

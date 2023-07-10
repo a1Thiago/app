@@ -3,6 +3,9 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, User, UserCredential } from 'firebase/auth'
 import { auth } from '@/lib/firebase.config'
 import localStorageUtil from '@/lib/localStorage'
+import { useRouter } from "next/navigation";
+import LoadingCircle from '@/app/(components)/LoadingCircle'
+
 
 export interface SignInResult {
   result: UserCredential | null
@@ -20,6 +23,7 @@ interface FirebaseAuthContextProviderProps {
 
 interface FirebaseAuthContextProps {
   user: User | null
+  loading: boolean
   signIn: (email: string, password: string) => Promise<SignInResult>
   signUp: (email: string, password: string) => Promise<SignUpResult>
   logOut: () => void
@@ -28,6 +32,7 @@ interface FirebaseAuthContextProps {
 export const FirebaseAuthContext = createContext<FirebaseAuthContextProps>(
   {
     user: null,
+    loading: true,
     signIn: () => Promise.resolve({ result: null, error: null }),
     signUp: () => Promise.resolve({ result: null, error: null }),
     logOut: () => { },
@@ -39,6 +44,8 @@ export default function FirebaseAuthContextProvider({ children }: FirebaseAuthCo
 
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+
+  const router = useRouter()
 
   useEffect(() => {
 
@@ -95,12 +102,15 @@ export default function FirebaseAuthContextProvider({ children }: FirebaseAuthCo
       await signOut(auth)
       localStorageUtil.deleteItem('user')
       setUser(null)
+      router.push('/')
     }
   }
 
   return (
-    <FirebaseAuthContext.Provider value={{ user, signIn, signUp, logOut }}>
-      {loading ? <div>Loading...</div> : (children)}
+    <FirebaseAuthContext.Provider value={{ user, loading, signIn, signUp, logOut }}>
+      {
+        // loading ? <div><LoadingCircle /></div> :
+        children}
     </FirebaseAuthContext.Provider>
   )
 }

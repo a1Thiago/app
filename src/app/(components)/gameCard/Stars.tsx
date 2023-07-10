@@ -14,11 +14,17 @@ export default function Stars({ gameID }: StarsProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(-1)
 
   const handleStarClick = async (index: number) => {
+
+    if (!userData) return
+
     const newRating = index + 1
     setDataOnDatabase('users', { ratings: { [gameID]: newRating } })
   }
 
   const handleDelete = () => {
+
+    if (!userData) return
+
     setHoveredIndex(-1)
     handleStarClick(-1)
   }

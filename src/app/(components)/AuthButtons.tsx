@@ -9,7 +9,10 @@ export default function AuthButtons() {
 
   const router = useRouter()
 
-  const { user, logOut } = useFirebaseAuthContext()
+  const { user, loading, logOut } = useFirebaseAuthContext()
+
+
+  if (loading) return <div className='animate-pulse'><Button label='faz' /></div>
 
   return (
     <div>
