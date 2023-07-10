@@ -64,7 +64,7 @@ export default function RootLayout({
   authModal: React.ReactNode
 }) {
   return (
-    <html lang='en'>
+    <html lang='pt'>
       <body className={`${inter.className} flex flex-col min-h-screen `}>
         <NextTopLoader color='var(--secondary-dark)' />
         <FirebaseAuthContextProvider >

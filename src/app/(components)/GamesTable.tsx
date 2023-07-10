@@ -16,6 +16,7 @@ export default function GamesTable() {
   const { userData } = useFirebaseDataContext()
 
   const [games, setGames] = useState<Game[]>([])
+
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -62,7 +63,6 @@ export default function GamesTable() {
   const filteredGamesBySearch = games.filter((game) => {
 
     const games = game.title.toLowerCase().includes(searchValue.toLowerCase())
-
     if (games) {
       return games
     }// else { //by description
