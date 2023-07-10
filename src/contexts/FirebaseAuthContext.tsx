@@ -3,24 +3,18 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, User, UserCredential } from 'firebase/auth'
 import { auth } from '@/lib/firebase.config'
 import localStorageUtil from '@/lib/localStorage'
-import { useRouter } from "next/navigation";
-import LoadingCircle from '@/app/(components)/LoadingCircle'
-
-
+import { useRouter } from 'next/navigation'
 export interface SignInResult {
   result: UserCredential | null
   error: any
 }
-
 export interface SignUpResult {
   result: UserCredential | null
   error: any
 }
-
 interface FirebaseAuthContextProviderProps {
   children: React.ReactNode
 }
-
 interface FirebaseAuthContextProps {
   user: User | null
   loading: boolean

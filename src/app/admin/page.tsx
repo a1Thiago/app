@@ -6,13 +6,13 @@ import { useEffect } from 'react'
 
 function Page() {
 
-  const { user } = useFirebaseAuthContext()
+  const { user, loading } = useFirebaseAuthContext()
 
   const router = useRouter()
 
   useEffect(() => {
-    if (user == null) router.push('/')
-  }, [user, router])
+    if (user == null && !loading) router.push('/')
+  }, [user, router, loading])
 
   return (<h1>Only logged in users can view this page</h1>)
 }

@@ -1,7 +1,7 @@
 import './globals.css'
 import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import NextTopLoader from 'nextjs-toploader';
+import NextTopLoader from 'nextjs-toploader'
 import isProduction from '@/lib/environment'
 import LayoutHeader from './(components)/LayoutHeader'
 import LayoutFooter from './(components)/LayoutFooter'
@@ -58,8 +58,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  authModal
 }: {
   children: React.ReactNode
+  authModal: React.ReactNode
 }) {
   return (
     <html lang='en'>
@@ -69,6 +71,7 @@ export default function RootLayout({
           <FirebaseDataContextProvider >
             <LayoutHeader />
             <main className='max-w-[1440px] mx-auto'>
+              {authModal}
               {children}
             </main>
             <LayoutFooter />
