@@ -12,7 +12,10 @@ export default function GenresFilter({ games, selectedGenres, ...props }: Genres
   const { userData } = useFirebaseDataContext()
 
   const allGenres = games.map((game) => game.genre)
-  const uniqueGenres = Array.from(new Set(allGenres.concat('Favoritos')))
+  const uniqueGenres = Array.from(new Set(allGenres))
+  if (userData) {
+    uniqueGenres.push('Favoritos')
+  }
   const checked = (genre: string) => selectedGenres.includes(genre.toLowerCase())
   const favorites = games.filter(game => userData?.favorites?.includes(game.id))
 
@@ -34,8 +37,11 @@ export default function GenresFilter({ games, selectedGenres, ...props }: Genres
               <div
                 {...props}
                 key={genre}
-                className={`grid group transition-all duration-400 rounded-lg font-semibold cursor-pointer
-                ${checked(genre) ? 'bg-theme-secondary-dark text-white' : 'bg-theme-primary'} hover:shadow-md`}>
+                className={`grid group transition-all duration-400 rounded-lg font-semibold cursor-pointer 
+                ${checked(genre) ? 'bg-theme-secondary-dark text-white' : 'bg-theme-primary'} hover:shadow-md
+                ${genre == 'Favoritos' && 'bg-red-500/50'} 
+                ${checked(genre) && genre == 'Favoritos' && 'bg-red-500/70'}
+                `}>
                 <label htmlFor={genre} className='text-14 mobile:text-12 group-hover:cursor-pointer grid grid-flow-col items-center justify-center py-1 px-2'>
                   <input
                     className='h-0 w-0'
