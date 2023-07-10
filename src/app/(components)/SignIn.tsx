@@ -44,7 +44,7 @@ export default function SignIn() {
   if (user) return <></>
 
   return (
-    <div className=' px-4 py-6 bg-white w-full h-full'>
+    <div className=' px-4 py-6 bg-white w-full'>
       <h2 className='my-4 text-center font-semibold text-24'>Entrar</h2>
       {error && (<div className='text-red-500'>{error}</div>)}
       <form className='grid gap-4' onSubmit={handleForm}>

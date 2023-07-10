@@ -29,7 +29,7 @@ export default function SignInModal() {
     <>
       {isOpen && (
         <div className='backdrop-blur-sm fixed z-50 inset-0 flex items-center justify-center '>
-          <div className={`bg-white w-[600px] flex items-center justify-center mx-auto rounded shadow-lg relative desktop:p-12 tablet:p-6 mobile:p-0
+          <div className={`bg-white w-[500px] h-4/5 desktop:h-2/4 flex items-center justify-center mx-auto rounded shadow-lg relative desktop:p-12 tablet:p-6 mobile:p-0
         transition-all duration-500 ${rendering ? 'opacity-0 left-32' : 'opacity-100 left-0'}`
           }>
             <SignUp />
