@@ -89,8 +89,8 @@ export default function GamesTable() {
     <section className={`py-4 grid gap-8 ${isLoading && 'cursor-wait'}`}>
 
       {!isLoading && !error &&
-        (<div className='grid gap-4 justify-items-center text-center'>
 
+        (<div className='flex flex-col gap-4 items-center justify-self-center text-center max-w-4xl'>
           <SearchInput
             onChange={(e) => setSearchValue(e.target.value)}
             games={games}

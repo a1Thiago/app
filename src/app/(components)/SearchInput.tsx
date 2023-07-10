@@ -10,19 +10,25 @@ export default function SearchInput({ games, ...props }: SearchInputProps) {
 
   const gameTitles = games.map(game => game.title)
 
+
+
+
   return (
-    <>
-      <label htmlFor="search" className="sr-only">
-        Search
+    <div className='grid w-full gap-2'>
+      <label htmlFor="search" className="font-medium">
+        Procurar pelo título
       </label>
-      <input
-        placeholder="Procurar pelo título"
-        type="text"
-        id="search"
-        list='gameTitlesList'
-        className="px-4 py-1 border border-theme-secondary-dark rounded placeholder:text-center w-96 tablet:w-72 mobile:w-auto"
-        {...props}
-      />
+      < div className=" flex gap-2 text-14 items-center rounded px-2 h-10 bg-theme-primary/50 focus-within:ring-2 ring-theme-primary-dark focus-within:text-black text-black/80" >
+        <input
+          placeholder="Procurar pelo título"
+          type="text"
+          id="search"
+          list='gameTitlesList'
+          className="bg-transparent outline-none flex-1 placeholder:text-black/50 text-center"
+          {...props}
+        />
+      </div >
+
 
       <datalist id="gameTitlesList">
         {gameTitles.map((option) => {
@@ -32,6 +38,6 @@ export default function SearchInput({ games, ...props }: SearchInputProps) {
         })}
       </datalist>
 
-    </>
+    </div >
   )
 }
