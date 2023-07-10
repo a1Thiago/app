@@ -12,7 +12,7 @@ export default function InputWithLabel({ label, icon, inputRef, ...props }: Inpu
       <label className="mb-2 text-16 font-medium" htmlFor={label}>
         {label}
       </label>
-      <div className="flex gap-2 items-center rounded px-2 h-10 bg-theme-primary/50 focus-within:ring-2 ring-theme-primary-dark focus-within:text-black text-black/80">
+      <div className="flex gap-2 ring-theme-primary-dark  ring-1 items-center rounded px-2 h-10 bg-theme-primary/50 focus-within:ring-2  focus-within:text-black text-black/80">
         {icon === 'userName' && <IdentificationBadge />}
         {icon === 'password' && <Lock />}
         {icon === 'email' && <Envelope />}
