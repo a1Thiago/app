@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'pulse-slow': 'pulse 3s linear infinite', // Example of a slow pulse animation
+        'pulse-slow': 'pulse 3s linear infinite',
       },
     }
     ,
@@ -42,16 +42,16 @@ module.exports = {
         500: '#00ff00',
       },
       theme: {
+        light: 'var(--light)',
+        dark: 'var(--dark)',
         primary: {
-          DEFAULT: '#9CC9FF',
-          dark: '#7CA0CC',
+          DEFAULT: 'var(--primary)',
+          dark: 'var(--primary-dark)',
         },
         secondary: {
-          DEFAULT: '#4F9EFF',
-          dark: '#284F80',
+          DEFAULT: 'var(--secondary)',
+          dark: 'var(--secondary-dark)',
         },
-
-        dark: '#1A1918',
       },
     },
     screens: {
