@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+.root,
+#root,
+#docs-root {
   --light: #f3f4f6;
   --dark: #1A1918;
   --primary: #9CC9FF;

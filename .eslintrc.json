@@ -1,9 +1,5 @@
 {
   "extends": "next/core-web-vitals",
-  "plugins": [
-    "import",
-    "@typescript-eslint"
-  ],
   "rules": {
     "semi": [
       "warn",
@@ -12,9 +8,6 @@
     "quotes": [
       "warn",
       "single"
-    ],
-    "no-unused-vars": "warn",
-    "no-unused-expressions": "warn",
-    "no-unused-imports": "warn"
+    ]
   }
 }
