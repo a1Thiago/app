@@ -46,12 +46,15 @@ export default function GamesTable() {
 
     const { value, checked } = event.target
 
+    const selected = value.toLowerCase()
+
     setSelectedGenres((prevSelectedGenres) => {
       if (checked) {
-
-        return [...prevSelectedGenres, value.toLowerCase()]
+        return selected === 'favoritos'
+          ? [selected]
+          : [...prevSelectedGenres, selected]
       } else {
-        return prevSelectedGenres.filter((genre) => genre !== value.toLowerCase())
+        return prevSelectedGenres.filter(genre => genre !== selected)
       }
     })
   }
@@ -75,7 +78,6 @@ export default function GamesTable() {
     if (selectedGenres.length < 1) {
       return game
     } else {
-
       return selectedGenres.includes(game.genre.toLowerCase()) || selectedGenres.includes('favoritos') && userData?.favorites?.includes(game.id) // game.isFavorite
     }
   })
