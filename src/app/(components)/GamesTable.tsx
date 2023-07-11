@@ -1,22 +1,19 @@
 'use client'
-import fetchGames, { Game } from '../../scripts/fetchGames'
-import { useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import RenderGameCards from './gameCard/RenderGameCards'
 import LoadingCircle from './LoadingCircle'
 import Button from './Button'
 import GenresFilter from './GenresFilter'
 import ErrorMessage from './ErrorMessage'
 import SearchInput from './SearchInput'
-import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 import { useGameStore } from '@/contexts/gameStore'
+import { Game } from '@/scripts/fetchGames'
 
 export default function GamesTable() {
 
-  const { userData } = useFirebaseDataContext()
+  const { modifiedGames, isLoading, error } = useGameStore()
 
-  const { games, isLoading, error } = useGameStore()
-
-  console.log(games)
+  const [sortOrderOfRatings, setSortOrderOfRatings] = useState<'asc' | 'desc'>('asc')
 
   const [pageSize, setPageSize] = useState<number>(15)
 
@@ -41,28 +38,18 @@ export default function GamesTable() {
     })
   }
 
+  const handleSortOrderOfRatings = () => {
+    setSortOrderOfRatings(oldValue => oldValue === 'asc' ? 'desc' : 'asc')
+  }
+
   const loadMoreItems = () => {
     setPageSize(oldValue => oldValue + 15)
   }
 
-  const filteredGamesBySearch = games.filter((game) => {
-
-    const games = game.title.toLowerCase().includes(searchValue.toLowerCase())
-    if (games) {
-      return games
-    }// else { //by description
-    //   return game.short_description.toLowerCase().includes(searchValue.toLowerCase())
-    // }
-  }
-  )
-
-  const filteredGamesByGenre = filteredGamesBySearch?.filter((game) => {
-    if (selectedGenres.length < 1) {
-      return game
-    } else {
-      return selectedGenres.includes(game.genre.toLowerCase()) || selectedGenres.includes('favoritos') && userData?.favorites?.includes(game.id) // game.isFavorite
-    }
-  })
+  const gamesToShow =
+    sortByRating(sortOrderOfRatings,
+      filterGamesByGenre(selectedGenres,
+        filterGamesBySearchValue(modifiedGames, searchValue)))//😳
 
   if (error) return <ErrorMessage error={error} />
 
@@ -76,6 +63,7 @@ export default function GamesTable() {
           <SearchInput onChange={(e) => setSearchValue(e.target.value)} />
           <GenresFilter selectedGenres={selectedGenres} onChange={handleGenreChange} />
         </div>)}
+      <button onClick={handleSortOrderOfRatings}>Toggle Sort Order</button>
 
       <div className='grid grid-cols-3 mobile:grid-cols-1 tablet:grid-cols-1'>
         {isLoading
@@ -84,13 +72,13 @@ export default function GamesTable() {
               <h3 className='mt-32 text-32 tablet:text-24 mobile:text-20 font-medium'>Carregando Jogos...</h3>
               <LoadingCircle />
             </div>)
-          : (<RenderGameCards games={filteredGamesByGenre.slice(0, pageSize)} />)
+          : (<RenderGameCards games={gamesToShow.slice(0, pageSize)} />)
         }
       </div>
 
-      {filteredGamesByGenre.length > 0 && (
+      {gamesToShow.length > 0 && (
         <div className='mx-2'>
-          <Button label='Mostrar Mais' onClick={loadMoreItems} disabled={filteredGamesByGenre.length < pageSize} />
+          <Button label='Mostrar Mais' onClick={loadMoreItems} disabled={gamesToShow.length < pageSize} />
         </div>
       )}
 
@@ -98,3 +86,52 @@ export default function GamesTable() {
   )
 }
 
+
+const filterGamesByGenre = (selectedGenres: Array<string>, games: Game[]) => {
+  return games?.filter((game) => {
+    if (selectedGenres.length < 1) {
+      return true
+    } else {
+      return selectedGenres.includes(game.genre.toLowerCase()) || (selectedGenres.includes('favoritos') && game.isFavorite)
+    }
+  })
+}
+
+const filterGamesBySearchValue = (games: Game[], searchValue: string) => {
+  return games.filter((game) => {
+
+    const titleMatch = game.title.toLowerCase().includes(searchValue.toLowerCase())
+    // const descriptionMatch = game.short_description.toLowerCase().includes(searchValue.toLowerCase())
+    return titleMatch //|| descriptionMatch
+  })
+}
+
+const sortByRating = (sortOrder: 'asc' | 'desc', games: Game[]): Game[] => {
+
+  console.log(sortOrder)
+
+  return games.sort((a, b) => {
+    if (!games || !a || !b) return -1
+
+    const aDiff = Number(a?.rating)
+    const bDiff = Number(b?.rating)
+
+    if (isNaN(aDiff) && isNaN(bDiff)) {
+      return 0
+    }
+
+    if (isNaN(aDiff)) {
+      return 1
+    }
+
+    if (isNaN(bDiff)) {
+      return -1
+    }
+
+    if (sortOrder === 'asc') {
+      return aDiff - bDiff
+    } else {
+      return bDiff - aDiff
+    }
+  })
+}
