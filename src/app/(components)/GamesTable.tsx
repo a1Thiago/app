@@ -9,6 +9,8 @@ import SearchInput from './SearchInput'
 import { useGameStore } from '@/contexts/gameStore'
 import { Game } from '@/scripts/fetchGames'
 import CheckBoxButtonComponent from './CheckBoxButtonComponent'
+import EmptyTableMsg from './EmptyTableMsg'
+import Image from 'next/image'
 
 export default function GamesTable() {
 
@@ -23,8 +25,6 @@ export default function GamesTable() {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([])
 
   const ratedGames = modifiedGames?.filter(game => game?.rating)
-
-  console.log(ratedGames)
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -70,7 +70,7 @@ export default function GamesTable() {
 
           <CheckBoxButtonComponent className={`bg-theme-primary w-full transition-all duration-700 
            ${ratedGames.length === 0 && 'translate-y-28 opacity-50 scale-y-0 skew-y-12 -m-8 mobile:-m-4'}`} item='sortOrder'>
-            <span onClick={handleSortOrderOfRatings}>Ordenar por estrelas: {sortOrderOfRatings === 'desc' ? 'Da menor para maior' : 'Da maior para menor'}</span>
+            <span className='flex w-full justify-center scale-x-105' onClick={handleSortOrderOfRatings}>Ordenar por estrelas: {sortOrderOfRatings === 'desc' ? 'Da menor para maior' : 'Da maior para menor'}</span>
           </CheckBoxButtonComponent>
 
         </div>)}
@@ -78,11 +78,19 @@ export default function GamesTable() {
       <div className='grid grid-cols-3 mobile:grid-cols-1 tablet:grid-cols-1'>
         {isLoading
           ? (
-            <div className='col-span-full text-center'>
-              <h3 className='mt-32 text-32 tablet:text-24 mobile:text-20 font-medium'>Carregando Jogos...</h3>
+            <EmptyTableMsg message='Carregando Jogos...'>
               <LoadingCircle />
-            </div>)
-          : (<RenderGameCards games={gamesToShow.slice(0, pageSize)} />)
+            </EmptyTableMsg>
+          )
+          : gamesToShow.length > 0
+            ? (<RenderGameCards games={gamesToShow.slice(0, pageSize)} />)
+            : (
+              <EmptyTableMsg message='Não tem nada aqui.'>
+                <span className='grid justify-center w-full'>
+                  <Image className='animate-bounce-slow' src={'/empty.png'} height={200} width={200} alt='Não encontramos nada que satisfaça seus filtros' />
+                </span>
+              </EmptyTableMsg>
+            )
         }
       </div>
 

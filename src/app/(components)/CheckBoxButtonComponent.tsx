@@ -11,10 +11,10 @@ export default function CheckBoxButtonComponent({ item, children, className, ...
       tabIndex={0}
       {...props}
       className={`group transition-all duration-500 rounded-lg font-semibold cursor-pointer hover:shadow-md '} ${className}`}>
-      <label htmlFor={item} className='flex text-14 mobile:text-12 group-hover:cursor-pointer items-center justify-center py-1 px-2'>
+      <label htmlFor={item} className='group flex text-14 mobile:text-12 group-hover:cursor-pointer items-center justify-center py-1 px-2'>
         <input
           tabIndex={-1}
-          className='h-0 w-0'
+          className='h-0 w-0 group'
           type='checkbox'
           id={item}
           value={item}

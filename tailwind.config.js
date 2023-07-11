@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       animation: {
         'pulse-slow': 'pulse 3s linear infinite', // Example of a slow pulse animation
+        'bounce-slow': 'bounce 2s linear infinite', // Example of a slow pulse animation
       },
     }
     ,
