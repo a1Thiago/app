@@ -70,7 +70,6 @@ export default function GamesStoreProvider() {
         rating: rating || null,
       }
     })
-    console.log(updatedGames)
     setModifiedGames(updatedGames)
   }, [userData, games, setModifiedGames])
 

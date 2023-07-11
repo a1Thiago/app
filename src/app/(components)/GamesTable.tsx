@@ -108,8 +108,6 @@ const filterGamesBySearchValue = (games: Game[], searchValue: string) => {
 
 const sortByRating = (sortOrder: 'asc' | 'desc', games: Game[]): Game[] => {
 
-  console.log(sortOrder)
-
   return games.sort((a, b) => {
     if (!games || !a || !b) return -1
 

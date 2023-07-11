@@ -17,8 +17,6 @@ export default function Heart({ gameID }: HeartProps) {
 
   const handleClick = () => {
 
-    console.log(userData)
-
     if (!userData) return router.push('/auth/registrar')
 
     if (isFavorite) {
