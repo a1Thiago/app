@@ -45,18 +45,22 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
   return (
     <div className='grid gap-4 tablet:gap-2 w-full'>
       <h3 className='text-24 tablet:text-20 mobile:text-16'>{title}</h3>
-      <div className='flex flex-col'>
-        <Carousel emulateTouch autoPlay>
-          {screenshots.map(screen => {
-            return (
-              <Image
-                key={screen.id}
-                src={screen.image} alt={title + ' Image'} className="w-full h-full" height={400} width={600}
-                sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 50vw" />
-            )
-          })}
-        </Carousel>
-      </div>
+
+      {screenshots?.length > 0 &&
+        (<div className='flex flex-col'>
+          <Carousel emulateTouch autoPlay showThumbs={false}>
+            {screenshots.map(screen => {
+              return (
+                <Image
+                  key={screen.id}
+                  src={screen.image} alt={title + ' Image'} className="w-full h-full" height={400} width={600}
+                  sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 50vw" />
+              )
+            })}
+          </Carousel>
+        </div>)
+      }
+
       <p className='mobile:text-14'>{description}</p>
 
       <p>{graphics}</p>
