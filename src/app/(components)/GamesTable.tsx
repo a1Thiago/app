@@ -8,6 +8,7 @@ import ErrorMessage from './ErrorMessage'
 import SearchInput from './SearchInput'
 import { useGameStore } from '@/contexts/gameStore'
 import { Game } from '@/scripts/fetchGames'
+import CheckBoxButtonComponent from './CheckBoxButtonComponent'
 
 export default function GamesTable() {
 
@@ -20,6 +21,10 @@ export default function GamesTable() {
   const [searchValue, setSearchValue] = useState<string>('')
 
   const [selectedGenres, setSelectedGenres] = useState<string[]>([])
+
+  const ratedGames = modifiedGames?.filter(game => game?.rating)
+
+  console.log(ratedGames)
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -55,14 +60,19 @@ export default function GamesTable() {
 
   return (
 
-    <section className={`py-4 grid gap-8 ${isLoading && 'cursor-wait'}`}>
+    <section className={`py-4 grid gap-4 ${isLoading && 'cursor-wait'}`}>
 
       {!isLoading && !error &&
 
-        (<div className='flex flex-col gap-4 items-center justify-self-center text-center max-w-4xl'>
+        (<div className='flex flex-col mobile:gap-4 gap-8 items-center justify-self-center text-center max-w-4xl'>
           <SearchInput onChange={(e) => setSearchValue(e.target.value)} />
           <GenresFilter selectedGenres={selectedGenres} onChange={handleGenreChange} />
-          <button onClick={handleSortOrderOfRatings}>Toggle Sort Order</button>
+
+          <CheckBoxButtonComponent className={`bg-theme-primary w-full transition-all duration-700 
+           ${ratedGames.length === 0 && 'translate-y-28 opacity-50 scale-y-0 skew-y-12 -m-8 mobile:-m-4'}`} item='sortOrder'>
+            <span onClick={handleSortOrderOfRatings}>Ordenar por estrelas: {sortOrderOfRatings === 'desc' ? 'Da menor para maior' : 'Da maior para menor'}</span>
+          </CheckBoxButtonComponent>
+
         </div>)}
 
       <div className='grid grid-cols-3 mobile:grid-cols-1 tablet:grid-cols-1'>
