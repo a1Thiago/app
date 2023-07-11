@@ -59,10 +59,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  authModal
+  authModal,
+  gamePageModal
 }: {
   children: React.ReactNode
   authModal: React.ReactNode
+  gamePageModal: React.ReactNode
 }) {
   return (
     <html lang='pt'>
@@ -74,6 +76,7 @@ export default function RootLayout({
             <GamesStoreProvider />
             <main className='max-w-[1440px] mx-auto'>
               {authModal}
+              {gamePageModal}
               {children}
             </main>
             <LayoutFooter />
