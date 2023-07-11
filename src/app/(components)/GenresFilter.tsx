@@ -1,28 +1,24 @@
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 import { useGameStore } from '@/contexts/gameStore'
-import { Game } from '@/scripts/fetchGames'
-import { useEffect, useState } from 'react'
+import CheckBoxButtonComponent from './CheckBoxButtonComponent'
 
 interface GenresFilterProps extends React.HTMLProps<HTMLDivElement> {
-  // games: Game[]
   selectedGenres: string[]
 }
 
-export default function GenresFilter({
-  // games,
-  selectedGenres, ...props }: GenresFilterProps) {
-
-  const { userData } = useFirebaseDataContext()
+export default function GenresFilter({ selectedGenres, ...props }: GenresFilterProps) {
 
   const { modifiedGames } = useGameStore()
 
   const allGenres = modifiedGames.map((game) => game.genre)
   const uniqueGenres = Array.from(new Set(allGenres))
-  if (userData) {
+  const favorites = modifiedGames?.filter(game => game?.isFavorite)
+
+  if (favorites) {
     uniqueGenres.push('Favoritos')
   }
-  const checked = (genre: string) => selectedGenres.includes(genre.toLowerCase())
-  const favorites = modifiedGames.filter(game => userData?.favorites?.includes(game.id))
+
+  const checked = (genre: string) => selectedGenres.includes(genre?.toLowerCase())
 
   return (
     <>
@@ -39,28 +35,19 @@ export default function GenresFilter({
                 : modifiedGames.filter((game) => game?.genre?.toLowerCase() === genre.toLowerCase()).length
 
             return (
-              <div
-                {...props}
-                key={genre}
-                className={`grid group transition-all duration-400 rounded-lg font-semibold cursor-pointer 
-                ${checked(genre) ? 'bg-theme-secondary-dark text-white' : 'bg-theme-primary'} hover:shadow-md
-                ${genre == 'Favoritos' && 'bg-red-500/50'} 
-                //fix ${checked(genre) && genre == 'Favoritos' && 'bg-red-500/70'}
-                `}>
-                <label htmlFor={genre} className='text-14 mobile:text-12 group-hover:cursor-pointer grid grid-flow-col items-center justify-center py-1 px-2'>
-                  <input
-                    className='h-0 w-0'
-                    type='checkbox'
-                    id={genre}
-                    value={genre}
-                  // checked={checked(genre)}
-                  />
+
+              <div key={genre} {...props} className='grid group'>
+                <CheckBoxButtonComponent
+                  item={genre}
+                  className={`
+                            ${checked(genre) ? 'bg-theme-secondary-dark text-white' : 'bg-theme-primary'}
+                            ${genre === 'Favoritos' && 'bg-red-500/50'}
+                            // fix ${checked(genre) && genre === 'Favoritos' && 'bg-red-500/70'}`}>
                   {genre} (<span className='font-normal'>{countOfGames}</span>)
-                </label>
+                </CheckBoxButtonComponent>
               </div>
             )
           })}
-
         </div>
       </div>
     </>
