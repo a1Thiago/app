@@ -1,6 +1,7 @@
 'use client'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import CloseButton from './CloseButton'
 
 interface AuthModalProps {
   url: string
@@ -26,7 +27,6 @@ export default function AuthModal({ url, children }: AuthModalProps) {
   }, [path, url])
 
   const toggleModal = () => {
-
     router.back()
   }
 
@@ -38,28 +38,14 @@ export default function AuthModal({ url, children }: AuthModalProps) {
         transition-all duration-500 ${rendering ? 'opacity-0 left-32' : 'opacity-100 left-0'}`
           }>
             {children}
-            <button
-              onClick={toggleModal}
-              type='button'
-              className="absolute top-2 right-2 text-black"
-            >
-              <svg
-                className="w-6 h-6"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
+            {<CloseButton className='text-black bg-white' onClick={toggleModal} />}
           </div>
         </div>
       )}
     </>
   )
 }
+
+
+
+

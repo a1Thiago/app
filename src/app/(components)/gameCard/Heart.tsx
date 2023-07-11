@@ -17,8 +17,8 @@ export default function Heart({ gameID }: HeartProps) {
 
   const handleClick = () => {
 
-    if (!userData) return router.push('/auth/registrar')
-
+    // if (!userData) return router.push('/auth/registrar')
+    if (!userData) return
     if (isFavorite) {
       removeItemFromDatabaseCollection('users', 'favorites', gameID)
         .catch((error) => {
@@ -36,15 +36,12 @@ export default function Heart({ gameID }: HeartProps) {
 
   return (
     <>
-
       <button
         type='button'
-        className='group relative'
+        className='group h-6 w-6'
         onClick={handleClick}
       >
-        {!userData && <AuthMessage />}
-
-        <svg className={`w-6 h-auto transition-colors duration-500  hover:animate-pulse ${favorite}`}
+        <svg className={`w-6 h-6 transition-colors duration-500  hover:animate-pulse ${favorite}`}
           fill='currentColor'
           stroke='currentColor'
           xmlns="http://www.w3.org/2000/svg"
