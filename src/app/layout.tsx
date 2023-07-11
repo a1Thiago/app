@@ -7,6 +7,7 @@ import LayoutHeader from './(components)/LayoutHeader'
 import LayoutFooter from './(components)/LayoutFooter'
 import FirebaseAuthContextProvider from '@/contexts/FirebaseAuthContext'
 import FirebaseDataContextProvider from '@/contexts/FirebaseDataContext'
+import GamesStoreProvider from '@/contexts/gameStore'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -70,6 +71,7 @@ export default function RootLayout({
         <FirebaseAuthContextProvider >
           <FirebaseDataContextProvider >
             <LayoutHeader />
+            <GamesStoreProvider />
             <main className='max-w-[1440px] mx-auto'>
               {authModal}
               {children}

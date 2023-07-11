@@ -1,15 +1,20 @@
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
+import { useGameStore } from '@/contexts/gameStore'
 import { Game } from '@/scripts/fetchGames'
 import { useEffect, useState } from 'react'
 
 interface GenresFilterProps extends React.HTMLProps<HTMLDivElement> {
-  games: Game[]
+  // games: Game[]
   selectedGenres: string[]
 }
 
-export default function GenresFilter({ games, selectedGenres, ...props }: GenresFilterProps) {
+export default function GenresFilter({
+  // games,
+  selectedGenres, ...props }: GenresFilterProps) {
 
   const { userData } = useFirebaseDataContext()
+
+  const { inc, games } = useGameStore()
 
   const allGenres = games.map((game) => game.genre)
   const uniqueGenres = Array.from(new Set(allGenres))
@@ -21,6 +26,7 @@ export default function GenresFilter({ games, selectedGenres, ...props }: Genres
 
   return (
     <>
+      <button onClick={inc}>INC</button>
       <div className='grid gap-2'>
         <div className='font-medium'>Filtrar pelo gênero</div>
         <div className='grid grid-rows-2 gap-2 items-center truncate text-start desktop:grid-rows-3 
@@ -40,7 +46,7 @@ export default function GenresFilter({ games, selectedGenres, ...props }: Genres
                 className={`grid group transition-all duration-400 rounded-lg font-semibold cursor-pointer 
                 ${checked(genre) ? 'bg-theme-secondary-dark text-white' : 'bg-theme-primary'} hover:shadow-md
                 ${genre == 'Favoritos' && 'bg-red-500/50'} 
-                ${checked(genre) && genre == 'Favoritos' && 'bg-red-500/70'}
+                //fix ${checked(genre) && genre == 'Favoritos' && 'bg-red-500/70'}
                 `}>
                 <label htmlFor={genre} className='text-14 mobile:text-12 group-hover:cursor-pointer grid grid-flow-col items-center justify-center py-1 px-2'>
                   <input

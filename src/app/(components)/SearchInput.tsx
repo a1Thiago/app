@@ -1,19 +1,24 @@
+import { useGameStore } from '@/contexts/gameStore'
 import { Game } from '../../scripts/fetchGames'
 import InputWithLabel from './InputWithLabel'
 
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  games: Game[]
+  // games: Game[]
 }
 
 
-export default function SearchInput({ games, ...props }: SearchInputProps) {
+export default function SearchInput({
+  // games,
+  ...props }: SearchInputProps) {
+
+  const { count, games } = useGameStore()
 
   const gameTitles = games.map(game => game.title)
 
   return (
     <div className='grid w-full gap-2'>
-
+      <div className='text-center'>{count}</div>
       <InputWithLabel
         label='Procurar pelo título'
         placeholder="Procurar pelo título"

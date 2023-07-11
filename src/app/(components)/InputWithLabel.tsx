@@ -1,3 +1,4 @@
+import { useGameStore } from '@/contexts/gameStore'
 import { Envelope, Lock, IdentificationBadge } from '@phosphor-icons/react'
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -7,6 +8,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export default function InputWithLabel({ label, icon, inputRef, ...props }: InputProps) {
+
   return (
     <div className="flex flex-col">
       <label className="mb-2 text-16 font-medium" htmlFor={label}>

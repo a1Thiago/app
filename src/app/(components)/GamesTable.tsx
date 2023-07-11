@@ -7,40 +7,22 @@ import Button from './Button'
 import GenresFilter from './GenresFilter'
 import ErrorMessage from './ErrorMessage'
 import SearchInput from './SearchInput'
-import isProduction from '@/lib/environment'
-import gamesMock from '@/lib/gamesMock'
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
+import { useGameStore } from '@/contexts/gameStore'
 
 export default function GamesTable() {
 
   const { userData } = useFirebaseDataContext()
 
-  const [games, setGames] = useState<Game[]>([])
+  const { games, isLoading, error } = useGameStore()
 
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
+  console.log(games)
 
   const [pageSize, setPageSize] = useState<number>(15)
 
   const [searchValue, setSearchValue] = useState<string>('')
 
   const [selectedGenres, setSelectedGenres] = useState<string[]>([])
-
-  useEffect(() => {
-    if (isProduction) {
-      fetchGames()
-        .then((games: Game[]) => setGames(games))
-        .catch(error => setError(error.message))
-        .finally(() => setIsLoading(false))
-
-    } else {
-
-      setGames(gamesMock)
-      setIsLoading(false)
-
-    }
-  }, [])
-
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -91,17 +73,8 @@ export default function GamesTable() {
       {!isLoading && !error &&
 
         (<div className='flex flex-col gap-4 items-center justify-self-center text-center max-w-4xl'>
-          <SearchInput
-            onChange={(e) => setSearchValue(e.target.value)}
-            games={games}
-          />
-
-          <GenresFilter
-            games={games}
-            selectedGenres={selectedGenres}
-            onChange={handleGenreChange}
-          />
-
+          <SearchInput onChange={(e) => setSearchValue(e.target.value)} />
+          <GenresFilter selectedGenres={selectedGenres} onChange={handleGenreChange} />
         </div>)}
 
       <div className='grid grid-cols-3 mobile:grid-cols-1 tablet:grid-cols-1'>
