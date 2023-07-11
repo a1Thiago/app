@@ -29,7 +29,6 @@ export default function GameCard({ game }: GameCardProps) {
     <div
       className={`bg-white p-4 flex gap-2 flex-col border border-theme-secondary-dark rounded shadow-sm shadow-theme-secondary tablet:grid grid-cols-2 tablet:gap-x-4
       transition-opacity duration-500  ${rendering ? 'opacity-0' : 'opacity-100'} relative`}
-
       onClick={() => router.push(`/game/${game.id}`)}
     >
       <span className='absolute right-2 top-2 z-10 '>
@@ -44,7 +43,7 @@ export default function GameCard({ game }: GameCardProps) {
       </h3>
 
       <Image
-        sizes='100vw'
+        sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 50vw"
         width='0'
         height='0'
         src={game.thumbnail}
