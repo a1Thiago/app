@@ -7,3 +7,16 @@ export default function LoadingCircle() {
     </div>
   )
 }
+
+interface SmallLoadingCircle {
+  className: string
+}
+
+export function SmallLoadingCircle({ className }: SmallLoadingCircle) {
+
+  return (
+    <div className="flex justify-center items-center  col-span-full row-span-full">
+      <div className={`${className} border-t-4 border-theme-secondary-dark rounded-full animate-spin`}></div>
+    </div>
+  )
+}

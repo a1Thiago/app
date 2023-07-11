@@ -5,11 +5,12 @@ import { FormEvent, useEffect, useRef, useState } from 'react'
 import InputWithLabel from './InputWithLabel'
 import Button from './Button'
 import Link from 'next/link'
+import { SmallLoadingCircle } from './LoadingCircle'
 
 export default function SignIn() {
 
   const { user, signIn } = useFirebaseAuthContext()
-
+  const [isLoading, setIsLoading] = useState<boolean | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   const emailRef = useRef<HTMLInputElement>(null)
@@ -25,9 +26,9 @@ export default function SignIn() {
 
 
   const handleForm = async (event: FormEvent<HTMLFormElement>) => {
-
+    setError(null)
     event.preventDefault()
-
+    setIsLoading(true)
     const email = emailRef.current?.value || ''
     const password = passwordRef.current?.value || ''
 
@@ -37,7 +38,7 @@ export default function SignIn() {
       setError(error.code)
       return console.error(error)
     }
-
+    setIsLoading(false)
     router.push('/')
   }
 
@@ -46,17 +47,25 @@ export default function SignIn() {
   return (
     <div className=' px-4 py-6 bg-white w-full'>
       <h2 className='my-4 text-center font-semibold text-24'>Entrar</h2>
-      {error && (<div className='text-red-500'>{error}</div>)}
-      <form className='grid gap-4' onSubmit={handleForm}>
 
-        <InputWithLabel icon='email' label='E-mail' required type='email' name='email' id='email' placeholder='example@mail.com' inputRef={emailRef} />
+      <form onSubmit={handleForm}>
+        <fieldset className='grid gap-4 group' disabled={isLoading! && !error}>
+          {error
+            ? (<div className='text-red-500'>{error}</div>)
+            : (<span className='opacity-0 group-disabled:opacity-100 '>
+              <SmallLoadingCircle className='h-10 w-10 border-theme-secondary-dark' />
+            </span>)
+          }
+          <InputWithLabel icon='email' label='E-mail' autoComplete='email' required type='email' name='email' id='email' placeholder='example@mail.com' inputRef={emailRef} />
 
-        <InputWithLabel icon='password' label='Senha' required type='password' name='password' id='password' placeholder='********' inputRef={passwordRef} />
-        <span className='my-6'>
-          <Button type='submit' label='Entrar' colorStyle='secondary' />
-        </span>
-        <Link href='/auth/registrar'><p className='text-center underline font-medium mobile:text-14'>Ainda não tem uma conta? Clique aqui para registrar-se.</p></Link>
-
+          <InputWithLabel icon='password' label='Senha' autoComplete='password' required type='password' name='password' id='password' placeholder='********' inputRef={passwordRef} />
+          <span className='my-6 inline-flex items-center justify-center'>
+            <Button type='submit' colorStyle='secondary' >
+              <span className='group-disabled:opacity-0'>Entrar</span>
+            </Button >
+          </span>
+          <Link href='/auth/registrar'><p className='text-center underline font-medium mobile:text-14'>Ainda não tem uma conta? Clique aqui para registrar-se.</p></Link>
+        </fieldset>
       </form>
 
     </div>
