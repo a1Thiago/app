@@ -1,3 +1,4 @@
+'use server'
 export interface Game {
   id: number
   title: string
@@ -11,6 +12,7 @@ export interface Game {
   release_date: string
   freetogame_profile_url: string
   isFavorite?: boolean | null
+  rating?: number | null
 }
 
 export default async function fetchGames(): Promise<Game[]> {
