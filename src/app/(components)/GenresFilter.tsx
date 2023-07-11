@@ -22,7 +22,7 @@ export default function GenresFilter({ selectedGenres, ...props }: GenresFilterP
 
   return (
     <>
-      <div className='grid gap-2'>
+      <div className='grid gap-2 w-full'>
         <div className='font-medium'>Filtrar pelo gênero</div>
         <div className='grid grid-rows-2 gap-2 items-center truncate text-start desktop:grid-rows-3 
         grid-flow-col mobile:grid-flow-row mobile:grid-cols-2 tablet:grid-cols-3 tablet:grid-flow-row  '>
