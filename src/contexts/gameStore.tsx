@@ -60,9 +60,9 @@ export default function GamesStoreProvider() {
 
       const { id } = game
 
-      const isFavorite = userData.favorites.includes(id)
+      const isFavorite = userData?.favorites?.includes(id)
 
-      const rating = Number(userData.ratings[id])
+      const rating = Number(userData?.ratings?.[id])
 
       return {
         ...game,
