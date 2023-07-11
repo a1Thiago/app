@@ -12,7 +12,7 @@ export default function Button({ label, colorStyle = 'primary', ...props }: Butt
     <button {...props}
       className={`disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer text-center truncate inline-block w-full
     ${buttonStyle} 
-    text-white font-semibold p-2 rounded hover:opacity-90 transition-opacity`} >
+    text-white font-semibold p-2 rounded hover:opacity-90 transition-opacity mobile:text-12 tablet:text-14`} >
       {label}
     </button>
   )
