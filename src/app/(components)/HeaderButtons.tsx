@@ -13,8 +13,8 @@ export default function HeaderButtons() {
 
   if (loading) return (
     <div className='grid grid-cols-2 gap-2 tablet:text-14 mobile:text-14 animate-pulse'>
-      <Button colorStyle='secondary' label=' ' />
-      <Button label=' ' />
+      <Button colorStyle='secondary' > </Button >
+      <Button > </Button >
     </div>
   )
 
@@ -23,14 +23,16 @@ export default function HeaderButtons() {
       {user
         ? (
           <div className='grid grid-cols-2 gap-2 tablet:text-14 mobile:text-14'>
-            <Button label='Meus jogos' colorStyle='secondary' onClick={() => router.push('/meus-jogos')} />
-            <Button label='Sair' onClick={logOut} />
+            <Button colorStyle='secondary' onClick={() => router.push('/meus-jogos')} >
+              <span>Meus jogos</span>
+            </Button>
+            <Button onClick={logOut} ><span>Sair</span></Button >
           </div>
         )
         : (
           <div className='grid grid-cols-2 gap-2 tablet:text-14 mobile:text-14'>
-            <Button label='Registrar' colorStyle='secondary' onClick={() => router.push('/auth/registrar')} />
-            <Button label='Entrar' onClick={() => router.push('/auth/entrar')} />
+            <Button colorStyle='secondary' onClick={() => router.push('/auth/registrar')} ><span>Registrar</span></Button >
+            <Button onClick={() => router.push('/auth/entrar')} ><span>Entrar</span></Button >
           </div>
         )
       }

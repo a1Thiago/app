@@ -7,8 +7,6 @@ import Accordion from '../Accordion'
 import Button from '../Button'
 import Heart from './Heart'
 import Stars from './Stars'
-import { useRouter } from 'next/navigation'
-
 interface GameCardProps {
   game: Game
 }
@@ -16,8 +14,6 @@ interface GameCardProps {
 export default function GameCard({ game }: GameCardProps) {
 
   const [rendering, setRendering] = useState(true)
-
-  const router = useRouter()
 
   useEffect(() => {
     setRendering(false)
@@ -29,7 +25,6 @@ export default function GameCard({ game }: GameCardProps) {
     <div
       className={`bg-white p-4 flex gap-2 flex-col border border-theme-secondary-dark rounded shadow-sm shadow-theme-secondary tablet:grid grid-cols-2 tablet:gap-x-4
       transition-opacity duration-500  ${rendering ? 'opacity-0' : 'opacity-100'} relative`}
-      onClick={() => router.push(`/game/${game.id}`)}
     >
       <span className='absolute right-2 top-2 z-10 '>
         <Heart gameID={game.id} />
@@ -74,13 +69,15 @@ export default function GameCard({ game }: GameCardProps) {
       </Accordion>
       <Stars gameID={game.id} />
       <div className='grid grid-cols-2 gap-2 tablet:text-14 mobile:text-14'>
-        <Link href={game.game_url} target='_blank'>
-          <Button label='Play Now' colorStyle='secondary' />
+
+        <Link href={`/game/${game.id}`} >
+          <Button colorStyle='secondary'><span>Ver mais</span></Button >
         </Link>
-        <Link href={game.freetogame_profile_url} target='_blank'>
-          <Button label='View Profile' colorStyle='primary' />
+
+        <Link href={game.game_url} target='_blank'>
+          <Button colorStyle='primary' ><span>Jogar agora</span></Button >
         </Link>
       </div>
-    </div>
+    </div >
   )
 }

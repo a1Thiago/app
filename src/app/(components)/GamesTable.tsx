@@ -96,7 +96,9 @@ export default function GamesTable() {
 
       {gamesToShow.length > 0 && (
         <div className='mx-2'>
-          <Button label='Mostrar Mais' onClick={loadMoreItems} disabled={gamesToShow.length < pageSize} />
+          <Button onClick={loadMoreItems} disabled={gamesToShow.length < pageSize} >
+            <span>Mostrar Mais</span>
+          </Button>
         </div>
       )}
 
