@@ -10,11 +10,13 @@ export default function GenresFilter({ selectedGenres, ...props }: GenresFilterP
 
   const { modifiedGames } = useGameStore()
 
+  const { userData } = useFirebaseDataContext()
+
   const allGenres = modifiedGames.map((game) => game.genre)
   const uniqueGenres = Array.from(new Set(allGenres))
   const favorites = modifiedGames?.filter(game => game?.isFavorite)
 
-  if (favorites) {
+  if (userData) {
     uniqueGenres.push('Favoritos')
   }
 
