@@ -102,9 +102,7 @@ export default function FirebaseAuthContextProvider({ children }: FirebaseAuthCo
 
   return (
     <FirebaseAuthContext.Provider value={{ user, loading, signIn, signUp, logOut }}>
-      {
-        // loading ? <div><LoadingCircle /></div> :
-        children}
+      {children}
     </FirebaseAuthContext.Provider>
   )
 }
