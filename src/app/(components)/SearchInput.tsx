@@ -12,13 +12,12 @@ export default function SearchInput({
   // games,
   ...props }: SearchInputProps) {
 
-  const { count, games } = useGameStore()
+  const { modifiedGames } = useGameStore()
 
-  const gameTitles = games.map(game => game.title)
+  const gameTitles = modifiedGames.map(game => game.title)
 
   return (
     <div className='grid w-full gap-2'>
-      <div className='text-center'>{count}</div>
       <InputWithLabel
         label='Procurar pelo título'
         placeholder="Procurar pelo título"

@@ -7,12 +7,10 @@ import { create } from 'zustand'
 import { useFirebaseDataContext } from './FirebaseDataContext'
 
 type Store = {
-  count: number
   games: Game[]
   modifiedGames: Game[]
   isLoading: boolean
   error: string | null
-  inc: () => void
   setGames: (games: Game[]) => void,
   setModifiedGames: (games: Game[]) => void
   setIsLoading: () => void,
@@ -24,9 +22,6 @@ export const useGameStore = create<Store>()((set) => ({
   modifiedGames: [],
   isLoading: true,
   error: null,
-  count: 1,
-
-  inc: () => set((state) => ({ count: state.count + 1 })),
   setGames: (games) => set((state) => ({ games: [...games] })),
   setModifiedGames: (games) => set((state) => ({ modifiedGames: [...games] })),
   setIsLoading: () => set((state) => ({ isLoading: false })),
@@ -58,8 +53,8 @@ export default function GamesStoreProvider() {
 
   useEffect(() => {
 
-    if (!userData) return
-    if (!games) return
+    if (games.length < 1) return
+    if (!userData) return setModifiedGames(games)
 
     const updatedGames: Game[] = games.map((game: Game) => {
 

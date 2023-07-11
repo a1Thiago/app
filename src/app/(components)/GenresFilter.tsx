@@ -14,19 +14,18 @@ export default function GenresFilter({
 
   const { userData } = useFirebaseDataContext()
 
-  const { inc, games } = useGameStore()
+  const { modifiedGames } = useGameStore()
 
-  const allGenres = games.map((game) => game.genre)
+  const allGenres = modifiedGames.map((game) => game.genre)
   const uniqueGenres = Array.from(new Set(allGenres))
   if (userData) {
     uniqueGenres.push('Favoritos')
   }
   const checked = (genre: string) => selectedGenres.includes(genre.toLowerCase())
-  const favorites = games.filter(game => userData?.favorites?.includes(game.id))
+  const favorites = modifiedGames.filter(game => userData?.favorites?.includes(game.id))
 
   return (
     <>
-      <button onClick={inc}>INC</button>
       <div className='grid gap-2'>
         <div className='font-medium'>Filtrar pelo gênero</div>
         <div className='grid grid-rows-2 gap-2 items-center truncate text-start desktop:grid-rows-3 
@@ -37,7 +36,7 @@ export default function GenresFilter({
             const countOfGames =
               genre === 'Favoritos'
                 ? favorites?.length
-                : games.filter((game) => game?.genre?.toLowerCase() === genre.toLowerCase()).length
+                : modifiedGames.filter((game) => game?.genre?.toLowerCase() === genre.toLowerCase()).length
 
             return (
               <div
