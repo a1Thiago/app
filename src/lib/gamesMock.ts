@@ -1,40 +1,5 @@
 const gamesMock = [
-  {
-    'id': 521,
-    'title': 'Diablo Immortal',
-    'thumbnail': 'https://www.freetogame.com/g/521/thumbnail.jpg',
-    'status': 'Live',
-    'short_description': 'Built for mobile and also released on PC, Diablo Immortal fills in the gaps between Diablo II and III in an MMOARPG environment.',
-    'description': 'The demon fighting doesn’t have to stop when you walk away from the computer thanks to Blizzard Entertainment’s Diablo Immortal. Built for mobile and also released on PC, the game fills in the gaps between Diablo II and III in an MMOARPG environment.\r\n\r\nDiablo Immortal picks up following the presumed death of the Archangel Tyrael, during which time mankind must deal with the fallout. One of the many problems are the fragments of the shattered Worldstone spread across the land, waiting for Diablo’s underlings to collect them in an attempt to bring about his return.\r\n\r\nPlayers can choose from one of six classes in Diablo Immortal. These are the classic Barbarian, the Crusader, the Demon Hunter, the Monk, the Necromancer, and the Wizard. All six classes features their own unique skills and abilities.\r\n\r\nThe game also introduces six new bosses, ranging from The Skeleton King to the Glacial Colossus. Each offers players a unique challenge, and all are found in places filled with danger. So, players will want to be well prepared before taking them on.\r\n',
-    'game_url': 'https://www.freetogame.com/open/diablo-immortal',
-    'genre': 'MMOARPG',
-    'platform': 'Windows',
-    'publisher': 'Blizzard Entertainment',
-    'developer': 'Blizzard Entertainment',
-    'release_date': '2022-06-02',
-    'freetogame_profile_url': 'https://www.freetogame.com/diablo-immortal',
-    'minimum_system_requirements': {
-      'os': 'Windows 7 / Windows 8 / Windows 10 / Windows 11 (64-bit)',
-      'processor': 'Intel Core i3 or AMD FX-8100',
-      'memory': '4 GB RAM',
-      'graphics': 'NVIDIA GeForce GTX 460, ATI Radeon HD 6850 or Intel HD Graphics 530',
-      'storage': '?'
-    },
-    'screenshots': [
-      {
-        'id': 1277,
-        'image': 'https://www.freetogame.com/g/521/diablo-immortal-1.jpg'
-      },
-      {
-        'id': 1278,
-        'image': 'https://www.freetogame.com/g/521/diablo-immortal-2.jpg'
-      },
-      {
-        'id': 1279,
-        'image': 'https://www.freetogame.com/g/521/diablo-immortal-3.jpg'
-      }
-    ]
-  },
+
   {
     'id': 540,
     'title': 'Overwatch 2',
