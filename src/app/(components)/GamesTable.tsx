@@ -1,5 +1,5 @@
 'use client'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import RenderGameCards from './gameCard/RenderGameCards'
 import LoadingCircle from './LoadingCircle'
 import Button from './Button'
@@ -13,7 +13,7 @@ export default function GamesTable() {
 
   const { modifiedGames, isLoading, error } = useGameStore()
 
-  const [sortOrderOfRatings, setSortOrderOfRatings] = useState<'asc' | 'desc'>('asc')
+  const [sortOrderOfRatings, setSortOrderOfRatings] = useState<'asc' | 'desc'>('desc')
 
   const [pageSize, setPageSize] = useState<number>(15)
 
@@ -62,8 +62,8 @@ export default function GamesTable() {
         (<div className='flex flex-col gap-4 items-center justify-self-center text-center max-w-4xl'>
           <SearchInput onChange={(e) => setSearchValue(e.target.value)} />
           <GenresFilter selectedGenres={selectedGenres} onChange={handleGenreChange} />
+          <button onClick={handleSortOrderOfRatings}>Toggle Sort Order</button>
         </div>)}
-      <button onClick={handleSortOrderOfRatings}>Toggle Sort Order</button>
 
       <div className='grid grid-cols-3 mobile:grid-cols-1 tablet:grid-cols-1'>
         {isLoading
