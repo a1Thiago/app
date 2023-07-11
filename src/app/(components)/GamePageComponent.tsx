@@ -37,27 +37,33 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
     publisher, developer, release_date, freetogame_profile_url, minimum_system_requirements, screenshots,
   } = gameData
 
+  const { graphics, memory, os, processor, storage } = minimum_system_requirements
 
   if (isLoading) return (<div>loading...</div>)
   if (error) return (<div>error...</div>)
 
   return (
-    <div>{title}
+    <div className='grid gap-4 tablet:gap-2 w-full'>
+      <h3 className='text-24 tablet:text-20 mobile:text-16'>{title}</h3>
       <div className='flex flex-col'>
         <Carousel emulateTouch autoPlay>
           {screenshots.map(screen => {
             return (
-              // <div className='relative w-96 h-96' key={screen.id}>
               <Image
                 key={screen.id}
-                // fill 
                 src={screen.image} alt={title + ' Image'} className="w-full h-full" height={400} width={600}
                 sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 50vw" />
-              // </div>
             )
           })}
         </Carousel>
       </div>
+      <p className='mobile:text-14'>{description}</p>
+
+      <p>{graphics}</p>
+      <p>{memory}</p>
+      <p>{os}</p>
+      <p>{processor}</p>
+      <p>{storage}</p>
     </div>
   )
 }
