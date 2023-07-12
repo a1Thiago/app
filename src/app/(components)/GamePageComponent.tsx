@@ -42,9 +42,11 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
   }, [id])
 
   if (isLoading) return (
-    <EmptyTableMsg message='Carregando Informacoes'>
-      <LoadingCircle />
-    </EmptyTableMsg>
+    <div className='w-[80vw] h-[70vh] mx-12 smdesktop:mx-10 tablet:mx-8 mobile:mx-4'>
+      <EmptyTableMsg message='Carregando Informacoes'>
+        <LoadingCircle />
+      </EmptyTableMsg>
+    </div>
   )
 
   if (error) return <ErrorMessage error={error} />
