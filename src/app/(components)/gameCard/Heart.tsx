@@ -1,7 +1,5 @@
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 import { arrayUnion } from 'firebase/firestore'
-import { useRouter } from 'next/navigation'
-import AuthMessage from '@/app/(components)/gameCard/AuthMessage'
 
 interface HeartProps {
   gameID: number
@@ -9,15 +7,12 @@ interface HeartProps {
 
 export default function Heart({ gameID }: HeartProps) {
 
-  const router = useRouter()
-
   const { userData, removeItemFromDatabaseCollection, setDataOnDatabase } = useFirebaseDataContext()
 
   const isFavorite = userData?.favorites?.includes(gameID) || false
 
   const handleClick = () => {
 
-    // if (!userData) return router.push('/auth/registrar')
     if (!userData) return
     if (isFavorite) {
       removeItemFromDatabaseCollection('users', 'favorites', gameID)

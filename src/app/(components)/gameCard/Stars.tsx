@@ -1,8 +1,5 @@
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 import { useState } from 'react'
-import AuthMessage from '@/app/(components)/gameCard/AuthMessage'
-import { useRouter } from 'next/navigation'
-
 interface StarProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   filled: boolean
 }
@@ -16,11 +13,7 @@ export default function Stars({ gameID }: StarsProps) {
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(-1)
 
-  const router = useRouter()
-
   const handleStarClick = async (index: number) => {
-
-    // if (!userData) return router.push('/auth/registrar')
 
     if (!userData) return
 
@@ -42,7 +35,6 @@ export default function Stars({ gameID }: StarsProps) {
   return (
 
     <div className="flex gap-1 group relative w-full">
-      {/* {!userData && <AuthMessage />} */}
       {Array.from({ length: 5 }).map((_, index) => {
 
         const filled = hoveredIndex !== -1
@@ -72,7 +64,7 @@ export default function Stars({ gameID }: StarsProps) {
 }
 
 function Star({ filled, ...props }: StarProps) {
-  const fillClass = filled ? 'fill-amber-400' : 'fill-amber-400/50'
+  const fillClass = filled ? 'fill-amber-400' : 'fill-amber-400/60'
   return (
     <button className='group' {...props}>
       <svg className="h-7 w-7 shrink-0 cursor-pointer" viewBox="0 0 256 256">

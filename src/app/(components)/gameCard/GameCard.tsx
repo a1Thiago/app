@@ -54,7 +54,7 @@ export default function GameCard({ game }: GameCardProps) {
           height='0'
           src={game.thumbnail}
           alt={game.title}
-          className='w-full h-auto tablet:w-full tablet:h-full self-center tablet:col-start-1 tablet:row-span-2 rounded-t-lg'
+          className='w-full h-auto  self-center  rounded-t-lg'
         />
         <h3
 
@@ -67,29 +67,30 @@ absolute bottom-0 z-10 text-24  transform'>
 
       </div>
 
-      <div className='p-2 grid gap-4 smdesktop:h-60 desktop:h-64'>
-        <p title={game.short_description} className='h-auto overflow-y-hidden text-ellipsis'>
+      <div className='p-2 grid  gap-4'>
+        <p title={game.short_description} className='smdesktop:h-36 desktop:h-48 overflow-y-hidden text-ellipsis'>
           {game.short_description}
         </p>
 
-        <div className='flex gap-4 items-center cursor-pointer ' onClick={handleAuthCheck}>
-          {isAuthenticated === false && <AuthMessage />}
-          <Heart gameID={game.id} />
-          <Stars gameID={game.id} />
-        </div>
+        <div className='grid gap-4 items-end'>
 
-        <div className='grid grid-cols-2 gap-2 tablet:text-14 mobile:text-14 '>
+          <div className='flex gap-4 items-center cursor-pointer ' onClick={handleAuthCheck}>
+            {isAuthenticated === false && <AuthMessage />}
+            <Heart gameID={game.id} />
+            <Stars gameID={game.id} />
+          </div>
 
-          <Link href={`/game/${game.id}`} >
-            <Button colorStyle='secondary'><span>Ver mais</span></Button >
-          </Link>
+          <div className='flex w-full gap-2 tablet:text-14 mobile:text-14 '>
+            <Link href={`/game/${game.id}`} className='w-full' >
+              <Button colorStyle='secondary'><span>Ver mais</span></Button >
+            </Link>
 
-          <Link href={game.game_url} target='_blank'>
-            <Button colorStyle='primary' ><span>Jogar agora</span></Button >
-          </Link>
+            <Link href={game.game_url} target='_blank' className='w-full'>
+              <Button colorStyle='primary' ><span>Jogar agora</span></Button >
+            </Link>
+          </div>
         </div>
       </div>
-
     </div >
   )
 }
