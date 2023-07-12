@@ -1,8 +1,11 @@
 import SignUp from '@/app/(components)/SignUp'
+import AuthPage from '../AuthPage'
 
 export default function Page() {
   return (
-    <SignUp />
+    <AuthPage>
+      <SignUp />
+    </AuthPage>
   )
 }
 
