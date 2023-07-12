@@ -76,7 +76,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   return (
 
-    <div className='grid gap-4 w-full'>
+    <div className='bg-white flex flex-col justify-center items-center w-full h-full'>
 
       <div className='grid gap-4 grid-cols-[70%,auto] tablet:flex  mobile:grid-cols-1'>
 
@@ -98,7 +98,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
               </Carousel>
               <h3 title={title}
                 className='text-black bg-white/70 truncate flex w-full font-semibold py-2 px-4 transition-all opacity-90 hover:opacity-100
-              absolute bottom-0 z-10 text-24  transform'>{title}</h3>
+              absolute bottom-0 z-10 text-24 tablet:text-20 mobile:text-18  transform'>{title}</h3>
             </div>
           </div>)
         }
@@ -122,7 +122,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
       </div>
 
       {/* Desktop */}
-      <span className='tablet:hidden mobile:hidden'>
+      <span className='tablet:hidden mobile:hidden w-full'>
         <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
           <>{description}</>
         </Accordion>
@@ -141,7 +141,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
             className='h-52 w-full mobile:hidden py-4'
           />
 
-          <span className='hidden tablet:grid mobile:grid row-start-2'>
+          <span className='hidden tablet:grid mobile:grid row-start-2 w-full'>
             <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
               <>{description}</>
             </Accordion>

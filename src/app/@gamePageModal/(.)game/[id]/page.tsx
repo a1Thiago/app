@@ -10,7 +10,9 @@ export default function GamePageModal({ params }: { params: { id: string } }) {
 
   return (
     <InterceptorModal url={`/game/${id}`}>
-      <GamePageComponent id={id} />
+      <section className='p-10 w-auto'>
+        <GamePageComponent id={id} />
+      </section>
     </InterceptorModal>
   )
 }
