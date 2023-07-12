@@ -33,12 +33,12 @@ export default function AuthModal({ url, children }: AuthModalProps) {
   return (
     <>
       {isOpen && (
-        <div className='backdrop-blur-sm fixed z-50 inset-0 flex items-center justify-center '>
-          <div className={`bg-white w-[500px] h-4/5 desktop:h-2/4 flex items-center justify-center mx-auto rounded shadow-lg relative desktop:p-12 tablet:p-6 mobile:p-0
-        transition-all duration-500 ${rendering ? 'opacity-0 left-32' : 'opacity-100 left-0'}`
-          }>
+        <div className='backdrop-blur-sm   inset-0   fixed top-0 right-0  w-full h-full flex items-center justify-center z-50'>
+          <div className={`grid gap-4  text-black p-12  relative mx-4 text-center z-20
+      border-theme-primary border-2 rounded-lg shadow-sm shadow-theme-secondary bg-white
+      transition-all duration-500 ${rendering ? 'opacity-0 left-32' : 'opacity-100 left-0'}`}>
             {children}
-            {<CloseButton className='text-black bg-white' onClick={toggleModal} />}
+            {<CloseButton className='text-black' onClick={toggleModal} />}
           </div>
         </div>
       )}
