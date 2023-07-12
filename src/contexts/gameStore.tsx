@@ -36,8 +36,6 @@ export default function GamesStoreProvider() {
 
   const { setGames, setIsLoading, setError, games, setModifiedGames } = useGameStore()
 
-  console.log('RENDERING STORE')
-
   useEffect(() => {
     if (isProduction) {
       fetchGames()
