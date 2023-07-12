@@ -6,13 +6,13 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export default function Button({ children, colorStyle = 'primary', ...props }: ButtonProps) {
 
-  const buttonStyle = colorStyle === 'primary' ? 'bg-theme-primary-dark' : 'bg-theme-secondary-dark'
+  const buttonStyle = colorStyle === 'primary' ? 'bg-theme-secondary/90 text-black ' : 'bg-theme-secondary-dark text-white'
 
   return (
     <button {...props}
-      className={`disabled:opacity-60 disabled:pointer-events-none cursor-pointer text-center truncate inline-block w-full
+      className={`disabled:opacity-60 disabled:pointer-events-none cursor-pointer text-center truncate inline-block w-full border border-black/30
     ${buttonStyle} 
-    text-white font-semibold p-2 rounded hover:opacity-90 transition-opacity mobile:text-12 tablet:text-14`} >
+     font-semibold p-2 rounded hover:opacity-90 transition-opacity mobile:text-12 tablet:text-14`} >
       {children}
     </button>
   )
