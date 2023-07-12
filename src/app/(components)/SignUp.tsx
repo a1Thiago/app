@@ -44,11 +44,11 @@ export default function SignUp() {
 
   return (
 
-    <div className=' px-4 py-6 bg-white w-full'>
+    <div className=' bg-white flex flex-col justify-center items-center w-full h-full'>
       <h2 className='my-4 text-center font-semibold text-24'>Registrar-se</h2>
 
-      <form onSubmit={handleForm}>
-        <fieldset className='grid gap-4 group' disabled={isLoading! && !error}>
+      <form onSubmit={handleForm} className='w-full'>
+        <fieldset className='grid gap-4 group w-full' disabled={isLoading! && !error}>
           {error
             ? (<div className='text-red-500'>{error}</div>)
             : (<span className='opacity-0 group-disabled:opacity-100 '>
@@ -63,7 +63,7 @@ export default function SignUp() {
               <span className='group-disabled:opacity-0'>Registrar-se</span>
             </Button >
           </span>
-          <Link href='/auth/entrar'><p className='text-center underline font-medium mobile:text-14'>Ja tem uma conta? Clique aqui para entrar.</p></Link>
+          <Link href='/auth/entrar'><p className='text-center underline font-medium mobile:text-14'>Ja tem uma conta?<br />Clique aqui para entrar.</p></Link>
         </fieldset>
       </form>
 
