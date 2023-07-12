@@ -119,35 +119,40 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
             </span>
           </div>
         </div>
-
       </div>
-      <span className='tablet:hidden'>
+
+      {/* Desktop */}
+      <span className='tablet:hidden mobile:hidden'>
         <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
           <>{description}</>
         </Accordion>
       </span>
+      {/* Desktop */}
+
       <div className='grid w-full'>
-        <span className='hidden smdesktop:flex tablet:flex tablet:my-4'>
-          {/* <ListRender list={requirements} listTitle='Requisitos mínimos' /> */}
+
+        <span className='hidden smdesktop:flex tablet:flex my-4'>
+          <ListRender list={requirements} listTitle='Requisitos mínimos' />
         </span>
+
         <span className='smdesktop:h-40 hidden tablet:grid mobile:grid row-start-1'>
-          <Image
+
+          <Image width='0' height='0' src={thumbnail} alt={title + ' thumbnail'}
             sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
-            width='0'
-            height='0'
-            src={thumbnail}
-            alt={title + ' thumbnail'}
-            className='h-52  w-full tablet:h-80 mobile:hidden'
+            className='h-52 w-full tablet:h-80 mobile:hidden'
           />
-          {/* <span className='hidden tablet:grid mobile:grid row-start-2'>
+
+          <span className='hidden tablet:grid mobile:grid row-start-2'>
             <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
               <>{description}</>
             </Accordion>
-          </span> */}
+          </span>
         </span>
+
         <span className='hidden tablet:flex tablet:my-4'>
           <ListRender listTitle='Informações' list={Information} />
         </span>
+
       </div>
     </div >
   )
