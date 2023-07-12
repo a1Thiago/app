@@ -73,8 +73,8 @@ absolute bottom-0 z-10 text-24  transform'>
         </p>
 
         <div className='grid gap-4 items-end'>
+          {isAuthenticated === false && <AuthMessage />}
           <div className='flex gap-4 items-center cursor-pointer ' onClick={handleAuthCheck}>
-            {isAuthenticated === false && <AuthMessage />}
             <Heart gameID={game.id} />
             <Stars gameID={game.id} />
           </div>
