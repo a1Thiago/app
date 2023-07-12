@@ -9,7 +9,7 @@ export default function GamePageModal({ params }: { params: { id: string } }) {
   if (!id) return
 
   return (
-    <AuthModal url={`--/game/${id}`}>
+    <AuthModal url={`/game/${id}`}>
       <GamePageComponent id={id} />
     </AuthModal>
   )
