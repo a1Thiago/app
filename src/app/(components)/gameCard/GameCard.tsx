@@ -3,7 +3,6 @@ import { Game } from '@/scripts/fetchGames'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import Accordion from '../Accordion'
 import Button from '../Button'
 import Heart from './Heart'
 import Stars from './Stars'
@@ -39,10 +38,7 @@ export default function GameCard({ game }: GameCardProps) {
   return (
     <div
       className={`grid h-full gap-4
-
-      
-
-      border-theme-secondary-dark rounded-lg shadow-sm shadow-theme-secondary bg-white rounded-b-md
+      border-theme-primary border-2 rounded-lg shadow-sm shadow-theme-secondary bg-white
       transition-opacity duration-500  ${rendering ? 'opacity-0' : 'opacity-100'}`}
     >
 
@@ -58,43 +54,40 @@ export default function GameCard({ game }: GameCardProps) {
           height='0'
           src={game.thumbnail}
           alt={game.title}
-          className='w-full h-auto tablet:w-full tablet:h-full self-center tablet:col-start-1 tablet:row-span-2 rounded-t-md'
+          className='w-full h-auto tablet:w-full tablet:h-full self-center tablet:col-start-1 tablet:row-span-2 rounded-t-lg'
         />
         <h3
 
           title={game.title}
           className='text-black bg-white/70 truncate flex w-full font-semibold py-2 px-4 transition-all opacity-90 hover:opacity-100
-  absolute bottom-0 z-10 text-24  transform'
-        >
+absolute bottom-0 z-10 text-24  transform'>
           {game.title}
         </h3>
 
 
       </div>
 
+      <div className='p-2 grid gap-4 smdesktop:h-60 desktop:h-64'>
+        <p title={game.short_description} className='h-auto overflow-y-hidden text-ellipsis'>
+          {game.short_description}
+        </p>
 
-      <p title={game.short_description} className='h-auto overflow-y-hidden text-ellipsis'>
-        {game.short_description}
-      </p>
+        <div className='flex gap-4 items-center cursor-pointer ' onClick={handleAuthCheck}>
+          {isAuthenticated === false && <AuthMessage />}
+          <Heart gameID={game.id} />
+          <Stars gameID={game.id} />
+        </div>
 
+        <div className='grid grid-cols-2 gap-2 tablet:text-14 mobile:text-14 '>
 
+          <Link href={`/game/${game.id}`} >
+            <Button colorStyle='secondary'><span>Ver mais</span></Button >
+          </Link>
 
-
-      <span className='flex gap-4 items-center cursor-pointer ' onClick={handleAuthCheck}>
-        {isAuthenticated === false && <AuthMessage />}
-        <Heart gameID={game.id} />
-        <Stars gameID={game.id} />
-      </span>
-
-      <div className='grid grid-cols-2 gap-2 tablet:text-14 mobile:text-14 '>
-
-        <Link href={`/game/${game.id}`} >
-          <Button colorStyle='secondary'><span>Ver mais</span></Button >
-        </Link>
-
-        <Link href={game.game_url} target='_blank'>
-          <Button colorStyle='primary' ><span>Jogar agora</span></Button >
-        </Link>
+          <Link href={game.game_url} target='_blank'>
+            <Button colorStyle='primary' ><span>Jogar agora</span></Button >
+          </Link>
+        </div>
       </div>
 
     </div >
