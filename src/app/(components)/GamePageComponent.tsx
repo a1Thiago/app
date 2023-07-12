@@ -122,7 +122,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
       </div>
 
       {/* Desktop */}
-      <span className='tablet:hidden mobile:hidden w-full'>
+      <span className='tablet:hidden mobile:hidden w-full mt-4'>
         <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
           <>{description}</>
         </Accordion>

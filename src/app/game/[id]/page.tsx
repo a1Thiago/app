@@ -1,4 +1,5 @@
 'use client'
+import BackButton from '@/app/(components)/BackButton'
 import GamePageComponent from '@/app/(components)/GamePageComponent'
 
 
@@ -9,7 +10,13 @@ export default function GamePage({ params }: { params: { id: string } }) {
   if (!id) return
 
   return (
-    <GamePageComponent id={id} />
+    <div className=''>
+      <span className='left-4 absolute'>
+        <BackButton className='text-black' />
+      </span>
+      <h2 className='text-32 font-semibold '>Mais Informaçoes sobre o jogo</h2>
+      <GamePageComponent id={id} />
+    </div>
   )
 }
 
