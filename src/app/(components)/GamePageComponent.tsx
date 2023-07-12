@@ -3,9 +3,10 @@ import isProduction from '@/lib/environment'
 import fetchGamesImage, { GameFromRapidApi } from '@/scripts/fetchGamesImage'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import CheckBoxButtonComponent from './CheckBoxButtonComponent'
+import Accordion from './Accordion'
 
 interface GamePageComponentProps {
   id: string
@@ -33,44 +34,98 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   if (!gameData) return
 
-  const { title, thumbnail, status, short_description, description, game_url, genre, platform,
-    publisher, developer, release_date, freetogame_profile_url, minimum_system_requirements, screenshots,
+  const { title, thumbnail, status, short_description, description, genre,
+    platform, game_url, publisher, developer, release_date, freetogame_profile_url
+    , minimum_system_requirements, screenshots,
   } = gameData
 
   const { graphics, memory, os, processor, storage } = minimum_system_requirements
+
+  const Information = [
+    { label: 'Plataforma', value: platform },
+    { label: 'Game URL', value: game_url },
+    { label: 'Publicadora', value: publisher },
+    { label: 'Desenvolvedora', value: developer },
+    { label: 'Data de lançamento', value: release_date },
+    { label: 'Free-to-Game Profile', value: freetogame_profile_url },
+  ]
+  const requirements = [
+    { label: 'Placa de video', value: graphics },
+    { label: 'Memoria', value: memory },
+    { label: 'Sistema Operacional', value: os },
+    { label: 'Processador', value: processor },
+    { label: 'Disco rigido', value: storage },
+  ]
 
   if (isLoading) return (<div>loading...</div>)
   if (error) return (<div>error...</div>)
 
   return (
-    <div className='grid gap-4 tablet:gap-2 w-full'>
-      <h3 className='text-24 tablet:text-20 mobile:text-16'>{title}</h3>
 
-      {screenshots?.length > 0 &&
-        (<div className='flex flex-col'>
-          <Carousel emulateTouch autoPlay showThumbs={false}>
-            {screenshots.map(screen => {
-              return (
-                <Image
-                  key={screen.id}
-                  src={screen.image} alt={title + ' Image'} className="w-full h-full" height={400} width={600}
-                  sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 50vw" />
-              )
-            })}
-          </Carousel>
-        </div>)
-      }
+    <div className='grid gap-4 w-full'>
 
-      <p className='mobile:text-14'>{description}</p>
+      <div className='grid gap-4 grid-cols-[3fr,1fr]'>
 
-      <p>{graphics}</p>
-      <p>{memory}</p>
-      <p>{os}</p>
-      <p>{processor}</p>
-      <p>{storage}</p>
-    </div>
+        {screenshots?.length > 0 &&
+          (<div className='flex items-center justify-center'>
+            <div className='flex flex-col relative h-fit'>
+              <CheckBoxButtonComponent item={genre} disabled className='bg-theme-secondary-dark text-white w-28 absolute left-1 top-1 transform z-10'>
+                {genre}
+              </CheckBoxButtonComponent>
+              <Carousel emulateTouch infiniteLoop autoPlay interval={5 * 1000} showThumbs={false}>
+                {screenshots.map(screen => {
+                  return (
+                    <Image
+                      key={screen.id}
+                      src={screen.image} alt={title + ' Image'} className='w-full h-full' height={400} width={600}
+                      sizes='(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 70vw' />
+                  )
+                })}
+              </Carousel>
+              <h3 title={title}
+                className='text-black bg-white/70 truncate flex w-full font-semibold py-2 px-4 transition-all opacity-90 hover:opacity-100
+              absolute bottom-0 z-10 text-24  transform'>{title}</h3>
+            </div>
+          </div>)
+        }
+
+        <div className='flex gap-4 flex-col items-center '>
+          <Image
+            src={thumbnail} alt={title + ' Image'} className='w-full' height={200} width={300}
+            sizes='(max-width: 404px) 100vw , (max-width: 768px) 30vw, (min-width: 769px) 10vw' />
+          <ListRender listTitle='Informações' list={Information} />
+        </div>
+
+      </div>
+
+      <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
+        <>{description}</>
+      </Accordion>
+
+      <ListRender list={requirements} listTitle='Requisitos mínimos' />
+
+    </div >
   )
+
+  function ListRender({ listTitle, list }: { listTitle: string, list: { label: string, value: string }[] }) {
+    return <div className='grid gap-2 '>
+      <h4 className="text-20">
+        <strong>{listTitle}</strong>:
+      </h4>
+      <ul className="list-disc pl-8">
+        {list.map((item, index) => (
+          item.value !== '?' && (
+            <li key={index} className="text-14">
+              <strong>{item.label}</strong>: {item.value}
+            </li>
+          )
+        ))}
+      </ul>
+
+    </div>
+  }
 }
+
 
 const gamesMock = [{
   'id': 521,
@@ -109,3 +164,4 @@ const gamesMock = [{
   ]
 }
 ]
+

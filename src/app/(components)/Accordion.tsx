@@ -16,21 +16,20 @@ export default function Accordion({ title, children }: AccordionProps) {
   }
 
   return (
-    <div className="border rounded mb-4 tablet:hidden">
+
+    <div className='border-theme-primary border-2 rounded-lg shadow-sm shadow-theme-secondary bg-white'>
       <div
-        className="flex items-center justify-between px-4 py-2 cursor-pointer"
+        className="flex items-center justify-between px-4 py-2 cursor-pointer bg-theme-primary"
         onClick={toggleAccordion}
       >
         <h3 className="text-16 font-medium">{isOpen ? title.opened : title.closed}</h3>
-        <span className="text-black">
+        <span >
           {isOpen ? '-' : '+'}
         </span>
       </div>
-      {isOpen && (
-        <div className="px-4 py-2">
-          {children}
-        </div>
-      )}
-    </div>
+      <div className={` transition-all duration-700  ${isOpen ? 'opacity-100 p-4 py-6' : 'opacity-0 p-0'}`}>
+        {isOpen && (children)}
+      </div>
+    </div >
   )
 }
