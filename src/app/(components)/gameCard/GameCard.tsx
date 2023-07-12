@@ -68,12 +68,11 @@ absolute bottom-0 z-10 text-24  transform'>
       </div>
 
       <div className='p-2 grid  gap-4'>
-        <p title={game.short_description} className='smdesktop:h-36 desktop:h-48 overflow-y-hidden text-ellipsis'>
+        <p title={game.short_description} className='smdesktop:h-36 desktop:h-44 overflow-y-hidden text-ellipsis'>
           {game.short_description}
         </p>
 
         <div className='grid gap-4 items-end'>
-
           <div className='flex gap-4 items-center cursor-pointer ' onClick={handleAuthCheck}>
             {isAuthenticated === false && <AuthMessage />}
             <Heart gameID={game.id} />
