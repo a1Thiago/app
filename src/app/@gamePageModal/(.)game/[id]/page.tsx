@@ -1,5 +1,5 @@
 'use client'
-import AuthModal from '@/app/(components)/AuthModal'
+import InterceptorModal from '@/app/(components)/InterceptorModal'
 import GamePageComponent from '@/app/(components)/GamePageComponent'
 
 export default function GamePageModal({ params }: { params: { id: string } }) {
@@ -9,8 +9,8 @@ export default function GamePageModal({ params }: { params: { id: string } }) {
   if (!id) return
 
   return (
-    <AuthModal url={`/game/${id}`}>
+    <InterceptorModal url={`/game/${id}`}>
       <GamePageComponent id={id} />
-    </AuthModal>
+    </InterceptorModal>
   )
 }

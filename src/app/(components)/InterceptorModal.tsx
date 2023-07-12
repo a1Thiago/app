@@ -3,12 +3,12 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import CloseButton from './CloseButton'
 
-interface AuthModalProps {
+interface InterceptorModalProps {
   url: string
   children: React.ReactNode
 }
 
-export default function AuthModal({ url, children }: AuthModalProps) {
+export default function InterceptorModal({ url, children }: InterceptorModalProps) {
 
 
   const [isOpen, setIsOpen] = useState<boolean>(true)

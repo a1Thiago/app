@@ -1,12 +1,12 @@
 'use client'
-import AuthModal from '@/app/(components)/AuthModal'
+import InterceptorModal from '@/app/(components)/InterceptorModal'
 import SignIn from '@/app/(components)/SignIn'
 
 export default function SignInModal() {
 
   return (
-    <AuthModal url='/auth/entrar'>
+    <InterceptorModal url='/auth/entrar'>
       <SignIn />
-    </AuthModal>
+    </InterceptorModal>
   )
 }
