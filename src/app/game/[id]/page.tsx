@@ -4,10 +4,12 @@ import GamePageComponent from '@/app/(components)/GamePageComponent'
 
 export default function GamePage({ params }: { params: { id: string } }) {
 
-  if (!params?.id) return
+  const { id } = params
+
+  if (!id) return
 
   return (
-    <GamePageComponent id={params?.id} />
+    <GamePageComponent id={id} />
   )
 }
 

@@ -4,11 +4,13 @@ import GamePageComponent from '@/app/(components)/GamePageComponent'
 
 export default function GamePageModal({ params }: { params: { id: string } }) {
 
-  if (!params.id) return
+  const { id } = params
+
+  if (!id) return
 
   return (
-    <AuthModal url={`--------------------/game/${params.id}`}>
-      <GamePageComponent id={params?.id} />
+    <AuthModal url={`/game/${id}`}>
+      <GamePageComponent id={id} />
     </AuthModal>
   )
 }
