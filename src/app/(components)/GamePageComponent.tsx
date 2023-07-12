@@ -110,7 +110,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
             height='0'
             src={thumbnail}
             alt={title + ' thumbnail'}
-            className='h-52 smdesktop:h-40 w-full'
+            className='h-52 smdesktop:h-40 w-full mobile:h-28'
           />
           <div className='grid gap-4'>
             <ListRender listTitle='Informações' list={Information} />
@@ -129,17 +129,16 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
       </span>
       {/* Desktop */}
 
-      <div className='grid w-full'>
+      <div className='grid w-full gap-4'>
 
-        <span className='hidden smdesktop:flex tablet:flex my-4'>
+        <span className='hidden smdesktop:flex tablet:flex '>
           <ListRender list={requirements} listTitle='Requisitos mínimos' />
         </span>
 
-        <span className='smdesktop:h-40 hidden tablet:grid mobile:grid row-start-1'>
-
+        <span className='smdesktop:h-40 hidden  tablet:grid mobile:grid row-start-1'>
           <Image width='0' height='0' src={thumbnail} alt={title + ' thumbnail'}
             sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
-            className='h-52 w-full tablet:h-80 mobile:hidden'
+            className='h-52 w-full mobile:hidden py-4'
           />
 
           <span className='hidden tablet:grid mobile:grid row-start-2'>
@@ -149,7 +148,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
           </span>
         </span>
 
-        <span className='hidden tablet:flex tablet:my-4'>
+        <span className='hidden tablet:flex'>
           <ListRender listTitle='Informações' list={Information} />
         </span>
 
@@ -158,7 +157,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
   )
 
   function ListRender({ listTitle, list }: { listTitle: string, list: { label: string, value: string }[] }) {
-    return <div className='grid gap-1'>
+    return <div className='grid gap-1 text-left'>
       <h4 className="text-16">
         <strong>{listTitle}</strong>:
       </h4>
