@@ -7,6 +7,9 @@ import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import CheckBoxButtonComponent from './CheckBoxButtonComponent'
 import Accordion from './Accordion'
+import EmptyTableMsg from './EmptyTableMsg'
+import LoadingCircle from './LoadingCircle'
+import ErrorMessage from './ErrorMessage'
 
 interface GamePageComponentProps {
   id: string
@@ -15,15 +18,21 @@ interface GamePageComponentProps {
 export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   const [gameData, setGameData] = useState<GameFromRapidApi | null>(null)
-  const [error, setError] = useState<boolean | null>(false)
+  const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean | null>(true)
 
   useEffect(() => {
+
     if (!id) return
-    if (isProduction) {
+
+    if (!isProduction) {
       fetchGamesImage(Number(id))
-        .then((game) => setGameData(game))
-        .catch(error => setError(error.message))
+        .then((response) => {
+          if (!response?.id || !response) throw new Error('Ocorreu 1 problema, confirme que o jogo que voce procura existe e tente novamente.')
+          setGameData(response)
+        }
+        )
+        .catch(error => setError(error?.message))
         .finally(() => setIsLoading(false))
 
     } else {
@@ -32,14 +41,22 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
     }
   }, [id])
 
+  if (isLoading) return (
+    <EmptyTableMsg message='Carregando Informacoes'>
+      <LoadingCircle />
+    </EmptyTableMsg>
+  )
+
+  if (error) return <ErrorMessage error={error} />
+
   if (!gameData) return
 
   const { title, thumbnail, status, short_description, description, genre,
     platform, game_url, publisher, developer, release_date, freetogame_profile_url
     , minimum_system_requirements, screenshots,
-  } = gameData
+  } = gameData && gameData
 
-  const { graphics, memory, os, processor, storage } = minimum_system_requirements
+  const { graphics, memory, os, processor, storage } = minimum_system_requirements && minimum_system_requirements
 
   const Information = [
     { label: 'Plataforma', value: platform },
@@ -57,14 +74,11 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
     { label: 'Disco rigido', value: storage },
   ]
 
-  if (isLoading) return (<div>loading...</div>)
-  if (error) return (<div>error...</div>)
-
   return (
 
     <div className='grid gap-4 w-full'>
 
-      <div className='grid gap-4 grid-cols-[3fr,1fr]'>
+      <div className='grid gap-4 grid-cols-[70%,auto]'>
 
         {screenshots?.length > 0 &&
           (<div className='flex items-center justify-center'>
@@ -77,8 +91,8 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
                   return (
                     <Image
                       key={screen.id}
-                      src={screen.image} alt={title + ' Image'} className='w-full h-full' height={400} width={600}
-                      sizes='(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 70vw' />
+                      src={screen.image} alt={title + ' Image'} className='w-full h-full' height={600} width={800}
+                      sizes='(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 50vw' />
                   )
                 })}
               </Carousel>
@@ -113,15 +127,14 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
         <strong>{listTitle}</strong>:
       </h4>
       <ul className="list-disc pl-8">
-        {list.map((item, index) => (
-          item.value !== '?' && (
+        {list?.map((item, index) => (
+          item?.value && item?.value !== '?' && (
             <li key={index} className="text-14">
-              <strong>{item.label}</strong>: {item.value}
+              <strong>{item?.label}</strong>: {item?.value}
             </li>
           )
         ))}
       </ul>
-
     </div>
   }
 }
