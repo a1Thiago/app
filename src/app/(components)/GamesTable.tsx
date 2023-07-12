@@ -75,7 +75,7 @@ export default function GamesTable() {
 
         </div>)}
 
-      <div className='grid grid-cols-3 mobile:grid-cols-1 tablet:grid-cols-1'>
+      <div className='grid grid-cols-3 smdesktop:grid-cols-2 mobile:grid-cols-1 tablet:grid-cols-1'>
         {isLoading
           ? (
             <EmptyTableMsg message='Carregando Jogos...'>

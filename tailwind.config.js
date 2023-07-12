@@ -58,6 +58,7 @@ module.exports = {
     screens: {
       'mobile': { 'max': '414px' },
       'tablet': { 'min': '415px', 'max': '767px' },
+      'smdesktop': { 'min': '769px', 'max': '1024px' },
       'desktop': { 'min': '768px', 'max': '1280px' },
     },
   },
