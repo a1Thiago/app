@@ -57,9 +57,9 @@ module.exports = {
     },
     screens: {
       'mobile': { 'max': '414px' },
-      'tablet': { 'min': '415px', 'max': '767px' },
+      'tablet': { 'min': '415px', 'max': '768px' },
       'smdesktop': { 'min': '769px', 'max': '1024px' },
-      'desktop': { 'min': '1024px' },
+      'desktop': { 'min': '1025px' },
     },
   },
   plugins: [],

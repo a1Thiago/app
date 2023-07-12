@@ -25,7 +25,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
     if (!id) return
 
-    if (!isProduction) {
+    if (isProduction) {
       fetchGamesImage(Number(id))
         .then((response) => {
           if (!response?.id || !response) throw new Error('Ocorreu 1 problema, confirme que o jogo que voce procura existe e tente novamente.')
@@ -60,11 +60,11 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   const Information = [
     { label: 'Plataforma', value: platform },
-    { label: 'Game URL', value: game_url },
+    // { label: 'Game URL', value: game_url },
     { label: 'Publicadora', value: publisher },
     { label: 'Desenvolvedora', value: developer },
     { label: 'Data de lançamento', value: release_date },
-    { label: 'Free-to-Game Profile', value: freetogame_profile_url },
+    // { label: 'Free-to-Game Profile', value: freetogame_profile_url },
   ]
   const requirements = [
     { label: 'Placa de video', value: graphics },
@@ -78,7 +78,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
     <div className='grid gap-4 w-full'>
 
-      <div className='grid gap-4 grid-cols-[70%,auto]'>
+      <div className='grid gap-4 grid-cols-[70%,auto] tablet:flex  mobile:grid-cols-1'>
 
         {screenshots?.length > 0 &&
           (<div className='flex items-center justify-center'>
@@ -91,8 +91,8 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
                   return (
                     <Image
                       key={screen.id}
-                      src={screen.image} alt={title + ' Image'} className='w-full h-full' height={600} width={800}
-                      sizes='(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 50vw' />
+                      src={screen.image} alt={title + ' Image'} height={600} width={800}
+                      sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw, 33vw" />
                   )
                 })}
               </Carousel>
@@ -103,30 +103,61 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
           </div>)
         }
 
-        <div className='flex gap-4 flex-col items-center '>
+        <div className='grid gap-4 tablet:hidden'>
           <Image
-            src={thumbnail} alt={title + ' Image'} className='w-full' height={200} width={300}
-            sizes='(max-width: 404px) 100vw , (max-width: 768px) 30vw, (min-width: 769px) 10vw' />
-          <ListRender listTitle='Informações' list={Information} />
+            sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
+            width='0'
+            height='0'
+            src={thumbnail}
+            alt={title + ' thumbnail'}
+            className='h-52 smdesktop:h-40 w-full'
+          />
+          <div className='grid gap-4'>
+            <ListRender listTitle='Informações' list={Information} />
+            <span className='smdesktop:hidden'>
+              <ListRender list={requirements} listTitle='Requisitos mínimos' />
+            </span>
+          </div>
         </div>
 
       </div>
-
-      <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
-        <>{description}</>
-      </Accordion>
-
-      <ListRender list={requirements} listTitle='Requisitos mínimos' />
-
+      <span className='tablet:hidden'>
+        <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
+          <>{description}</>
+        </Accordion>
+      </span>
+      <div className='grid w-full'>
+        <span className='hidden smdesktop:flex tablet:flex tablet:my-4'>
+          {/* <ListRender list={requirements} listTitle='Requisitos mínimos' /> */}
+        </span>
+        <span className='smdesktop:h-40 hidden tablet:grid mobile:grid row-start-1'>
+          <Image
+            sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
+            width='0'
+            height='0'
+            src={thumbnail}
+            alt={title + ' thumbnail'}
+            className='h-52  w-full tablet:h-80 mobile:hidden'
+          />
+          {/* <span className='hidden tablet:grid mobile:grid row-start-2'>
+            <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
+              <>{description}</>
+            </Accordion>
+          </span> */}
+        </span>
+        <span className='hidden tablet:flex tablet:my-4'>
+          <ListRender listTitle='Informações' list={Information} />
+        </span>
+      </div>
     </div >
   )
 
   function ListRender({ listTitle, list }: { listTitle: string, list: { label: string, value: string }[] }) {
-    return <div className='grid gap-2 '>
-      <h4 className="text-20">
+    return <div className='grid gap-1'>
+      <h4 className="text-16">
         <strong>{listTitle}</strong>:
       </h4>
-      <ul className="list-disc pl-8">
+      <ul className="px-4">
         {list?.map((item, index) => (
           item?.value && item?.value !== '?' && (
             <li key={index} className="text-14">
