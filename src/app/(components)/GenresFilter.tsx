@@ -37,14 +37,11 @@ export default function GenresFilter({ selectedGenres, ...props }: GenresFilterP
                 : modifiedGames.filter((game) => game?.genre?.toLowerCase() === genre.toLowerCase()).length
 
             return (
-
               <div key={genre} {...props} className='grid group'>
                 <CheckBoxButtonComponent
                   item={genre}
-                  className={`
-                            ${checked(genre) ? 'bg-theme-secondary-dark text-white' : 'bg-theme-primary'}
-                            ${genre === 'Favoritos' && 'bg-red-500/50'}
-                            // fix ${checked(genre) && genre === 'Favoritos' && 'bg-red-500/70'}`}>
+                  className={`${checked(genre) ? 'bg-theme-secondary-dark text-white' : 'bg-theme-secondary/90 text-black'}
+                  ${genre === 'Favoritos' && '!bg-red-500/50'} ${checked(genre) && genre === 'Favoritos' && '!bg-red-500/70'}`}>
                   {genre}<span className='font-normal'>({countOfGames})</span>
                 </CheckBoxButtonComponent>
               </div>

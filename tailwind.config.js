@@ -10,7 +10,7 @@ module.exports = {
       animation: {
         'pulse-Xslow': 'pulse 5s linear infinite',
         'pulse-slow': 'pulse 3s linear infinite',
-        'bounce-slow': 'bounce 10s ease-out infinite',
+        'bounce-slow': 'bounce 7s ease-out infinite',
       },
     }
     ,
