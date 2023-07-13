@@ -11,12 +11,13 @@ import { Game } from '@/scripts/fetchGames'
 import CheckBoxButtonComponent from './CheckBoxButtonComponent'
 import EmptyTableMessage from './EmptyTableMessage'
 import Image from 'next/image'
+import { SortStars } from './gameCard/Stars'
 
 export default function GamesTable() {
 
   const { modifiedGames, isLoading, error } = useGameStore()
 
-  const [sortOrderOfRatings, setSortOrderOfRatings] = useState<'asc' | 'desc'>('desc')
+  const [sortOrderOfRatings, setSortOrderOfRatings] = useState<'asc' | 'desc' | 'fromZeroAsc'>('desc')
 
   const [pageSize, setPageSize] = useState<number>(15)
 
@@ -44,7 +45,18 @@ export default function GamesTable() {
   }
 
   const handleSortOrderOfRatings = () => {
-    setSortOrderOfRatings(oldValue => oldValue === 'asc' ? 'desc' : 'asc')
+    setSortOrderOfRatings((oldValue) => {
+      switch (oldValue) {
+        case 'asc':
+          return 'desc'
+        case 'desc':
+          return 'fromZeroAsc'
+        case 'fromZeroAsc':
+          return 'asc'
+        default:
+          return 'desc'
+      }
+    })
   }
 
   const loadMoreItems = () => {
@@ -68,9 +80,11 @@ export default function GamesTable() {
           <SearchInput onChange={(e) => setSearchValue(e.target.value)} />
           <GenresFilter selectedGenres={selectedGenres} onChange={handleGenreChange} />
 
-          <CheckBoxButtonComponent className={`bg-theme-primary w-full transition-all duration-700 
+          <CheckBoxButtonComponent className={`bg-theme-secondary-dark w-full transition-all duration-700 
            ${ratedGames.length === 0 && 'translate-y-28 opacity-50 scale-y-0 skew-y-12 -m-8 mobile:-m-4'}`} item='sortOrder'>
-            <span className='flex w-full justify-center scale-x-105' onClick={handleSortOrderOfRatings}>Ordenar por estrelas: {sortOrderOfRatings === 'desc' ? 'Da menor para maior' : 'Da maior para menor'}</span>
+            <span className='flex w-full justify-center scale-x-105' onClick={handleSortOrderOfRatings}>
+              <SortStars sortOrderOfRatings={sortOrderOfRatings} />
+            </span>
           </CheckBoxButtonComponent>
 
         </div>)}
@@ -126,7 +140,9 @@ const filterGamesBySearchValue = (games: Game[], searchValue: string) => {
   })
 }
 
-const sortByRating = (sortOrder: 'asc' | 'desc', games: Game[]): Game[] => {
+const sortByRating = (sortOrder: 'asc' | 'desc' | 'fromZeroAsc', games: Game[]): Game[] => {
+
+  const fromZero = sortOrder === 'fromZeroAsc'
 
   return games.sort((a, b) => {
     if (!games || !a || !b) return -1
@@ -146,10 +162,26 @@ const sortByRating = (sortOrder: 'asc' | 'desc', games: Game[]): Game[] => {
       return -1
     }
 
-    if (sortOrder === 'asc') {
-      return aDiff - bDiff
+    if (fromZero) {
+      if (sortOrder === 'fromZeroAsc') {
+        if (aDiff === bDiff) {
+          return 0
+        } else if (aDiff === 0) {
+          return 1
+        } else if (bDiff === 0) {
+          return -1
+        } else {
+          return aDiff - bDiff
+        }
+      } else {
+        return bDiff - aDiff
+      }
     } else {
-      return bDiff - aDiff
+      if (sortOrder === 'asc') {
+        return aDiff - bDiff
+      } else {
+        return bDiff - aDiff
+      }
     }
   })
 }
