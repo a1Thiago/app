@@ -1,5 +1,5 @@
-import BackButton from "../(components)/BackButton"
-import AuthWrapper from "../@authModal/(.)auth/AuthWrapper"
+import BackButton from '../(components)/BackButton'
+import AuthWrapper from '../@authModal/(.)auth/AuthWrapper'
 
 export default function DashboardLayout({
   children,

@@ -8,9 +8,9 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'pulse-Xslow': 'pulse 5s linear infinite', // Example of a slow pulse animation
-        'pulse-slow': 'pulse 3s linear infinite', // Example of a slow pulse animation
-        'bounce-slow': 'bounce 2s linear infinite', // Example of a slow pulse animation
+        'pulse-Xslow': 'pulse 5s linear infinite',
+        'pulse-slow': 'pulse 3s linear infinite',
+        'bounce-slow': 'bounce 10s ease-out infinite',
       },
     }
     ,
