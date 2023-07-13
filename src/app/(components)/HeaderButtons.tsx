@@ -12,7 +12,7 @@ export default function HeaderButtons() {
   const { user, loading, logOut } = useFirebaseAuthContext()
 
   if (loading) return (
-    <div className='grid grid-cols-2 gap-2 tablet:text-14 mobile:text-14 animate-pulse'>
+    <div className='grid grid-cols-2 gap-2 animate-pulse pointer-events-none'>
       <Button colorStyle='secondary' > </Button >
       <Button > </Button >
     </div>
@@ -30,7 +30,7 @@ export default function HeaderButtons() {
           </div>
         )
         : (
-          <div className='grid grid-cols-2 gap-2 tablet:text-14 mobile:text-14'>
+          <div className='grid grid-cols-2 gap-2'>
             <Button colorStyle='secondary' onClick={() => router.push('/auth/registrar')} ><span>Registrar</span></Button >
             <Button onClick={() => router.push('/auth/entrar')} ><span>Entrar</span></Button >
           </div>
