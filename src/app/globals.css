@@ -16,3 +16,26 @@
 body{
   background-color:var(--light)
 }
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background:theme('colors.theme.primary.DEFAULT') ;
+  border-radius:3px;
+  border: 2px solid white; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: theme('colors.theme.secondary.DEFAULT');
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.theme.secondary.dark');
+}

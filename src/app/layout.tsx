@@ -69,7 +69,7 @@ export default function RootLayout({
   return (
     <html lang='pt'>
       <body className={`${inter.className} flex flex-col min-h-screen `}>
-        <NextTopLoader color='var(--secondary-dark)' height={5} />
+        <NextTopLoader color='#284F80' height={5} />
         <FirebaseAuthContextProvider >
           <FirebaseDataContextProvider >
             <LayoutHeader />
