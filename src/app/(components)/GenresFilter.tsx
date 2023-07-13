@@ -45,7 +45,7 @@ export default function GenresFilter({ selectedGenres, ...props }: GenresFilterP
                             ${checked(genre) ? 'bg-theme-secondary-dark text-white' : 'bg-theme-primary'}
                             ${genre === 'Favoritos' && 'bg-red-500/50'}
                             // fix ${checked(genre) && genre === 'Favoritos' && 'bg-red-500/70'}`}>
-                  {genre} (<span className='font-normal'>{countOfGames}</span>)
+                  {genre}<span className='font-normal'>({countOfGames})</span>
                 </CheckBoxButtonComponent>
               </div>
             )
