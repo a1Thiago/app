@@ -60,7 +60,7 @@ export default function GameCard({ game }: GameCardProps) {
 
           title={game.title}
           className='text-black bg-white/70 truncate flex w-full font-semibold py-2 px-4 transition-all opacity-90 hover:opacity-100
-absolute bottom-0 z-10 text-24  transform'>
+absolute bottom-0 z-10 text-24 tablet:text-20 mobile:text-18  transform'>
           {game.title}
         </h3>
 
