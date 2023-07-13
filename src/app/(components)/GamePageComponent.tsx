@@ -7,7 +7,7 @@ import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import CheckBoxButtonComponent from './CheckBoxButtonComponent'
 import Accordion from './Accordion'
-import EmptyTableMsg from './EmptyTableMsg'
+import EmptyTableMessage from './EmptyTableMessage'
 import LoadingCircle from './LoadingCircle'
 import ErrorMessage from './ErrorMessage'
 
@@ -43,9 +43,9 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   if (isLoading) return (
 
-    <EmptyTableMsg message='Carregando Informacoes'>
+    <EmptyTableMessage message='Carregando Informacoes'>
       <LoadingCircle />
-    </EmptyTableMsg>
+    </EmptyTableMessage>
 
   )
 

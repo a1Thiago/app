@@ -9,7 +9,7 @@ import SearchInput from './SearchInput'
 import { useGameStore } from '@/contexts/gameStore'
 import { Game } from '@/scripts/fetchGames'
 import CheckBoxButtonComponent from './CheckBoxButtonComponent'
-import EmptyTableMsg from './EmptyTableMsg'
+import EmptyTableMessage from './EmptyTableMessage'
 import Image from 'next/image'
 
 export default function GamesTable() {
@@ -78,18 +78,18 @@ export default function GamesTable() {
       <div className='grid grid-cols-3 smdesktop:grid-cols-2 mobile:grid-cols-1 tablet:grid-cols-1'>
         {isLoading
           ? (
-            <EmptyTableMsg message='Carregando Jogos...'>
+            <EmptyTableMessage message='Carregando Jogos...'>
               <LoadingCircle />
-            </EmptyTableMsg>
+            </EmptyTableMessage>
           )
           : gamesToShow.length > 0
             ? (<RenderGameCards games={gamesToShow.slice(0, pageSize)} />)
             : (
-              <EmptyTableMsg message='Não tem nada aqui.'>
+              <EmptyTableMessage message='Não tem nada aqui.'>
                 <span className='grid justify-center w-full'>
                   <Image className='animate-bounce-slow' src={'/empty.png'} height={200} width={200} alt='Não encontramos nada que satisfaça seus filtros' />
                 </span>
-              </EmptyTableMsg>
+              </EmptyTableMessage>
             )
         }
       </div>
