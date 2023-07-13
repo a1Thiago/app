@@ -42,11 +42,11 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
   }, [id])
 
   if (isLoading) return (
-    <div className='w-[80vw] h-[70vh] mx-12 smdesktop:mx-10 tablet:mx-8 mobile:mx-4'>
-      <EmptyTableMsg message='Carregando Informacoes'>
-        <LoadingCircle />
-      </EmptyTableMsg>
-    </div>
+
+    <EmptyTableMsg message='Carregando Informacoes'>
+      <LoadingCircle />
+    </EmptyTableMsg>
+
   )
 
   if (error) return <ErrorMessage error={error} />
@@ -84,7 +84,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
         {screenshots?.length > 0 &&
           (<div className='flex items-center justify-center'>
-            <div className='flex flex-col relative h-fit'>
+            <div className='flex flex-col relative h-fit group'>
               <CheckBoxButtonComponent item={genre} disabled className='bg-theme-secondary-dark text-white w-28 absolute left-1 top-1 transform z-10'>
                 {genre}
               </CheckBoxButtonComponent>
@@ -99,8 +99,8 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
                 })}
               </Carousel>
               <h3 title={title}
-                className='text-black bg-white/70 truncate flex w-full font-semibold py-2 px-4 transition-all opacity-90 hover:opacity-100
-              absolute bottom-0 z-10 text-24 tablet:text-20 mobile:text-18  transform'>{title}</h3>
+                className='text-black bg-white/70 truncate flex w-full font-semibold py-2 px-4  opacity-90 
+              absolute bottom-0 z-10 text-24 tablet:text-20 mobile:text-18 transform transition-all duration-400 group-hover:opacity-0'>{title}</h3>
             </div>
           </div>)
         }
