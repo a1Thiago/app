@@ -6,25 +6,25 @@ import { useEffect } from 'react'
 import { create } from 'zustand'
 import { useFirebaseDataContext } from './FirebaseDataContext'
 
-type Store = {
+type GameStorePros = {
   games: Game[]
   modifiedGames: Game[]
   isLoading: boolean
   error: string | null
   setGames: (games: Game[]) => void,
   setModifiedGames: (games: Game[]) => void
-  setIsLoading: () => void,
-  setError: (error: string) => void,
+  setIsLoading: (isLoading: boolean) => void,
+  setError: (error: string | null) => void,
 }
 
-export const useGameStore = create<Store>()((set) => ({
+export const useGameStore = create<GameStorePros>()((set) => ({
   games: [],
   modifiedGames: [],
   isLoading: true,
   error: null,
   setGames: (games) => set((state) => ({ games: [...games] })),
   setModifiedGames: (games) => set((state) => ({ modifiedGames: [...games] })),
-  setIsLoading: () => set((state) => ({ isLoading: false })),
+  setIsLoading: (isLoading) => set((state) => ({ isLoading: isLoading })),
   setError: (error) => set((state) => ({ error: error })),
 }
 )
@@ -41,11 +41,11 @@ export default function GamesStoreProvider() {
       fetchGames()
         .then((games: Game[]) => setGames(games))
         .catch(error => setError(error.message))
-        .finally(() => setIsLoading())
+        .finally(() => setIsLoading(false))
 
     } else {
       setGames(gamesMock)
-      setIsLoading()
+      setIsLoading(false)
     }
   }, [setGames, setError, setIsLoading])
 
