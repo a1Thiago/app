@@ -23,9 +23,7 @@ export default function HeaderButtons() {
       {user
         ? (
           <div className='grid grid-cols-2 gap-2 tablet:text-14 mobile:text-14'>
-            <Button colorStyle='secondary' onClick={() => router.push('/meus-jogos')} >
-              <span>Meus jogos</span>
-            </Button>
+            <span></span>
             <Button onClick={logOut} ><span>Sair</span></Button >
           </div>
         )
