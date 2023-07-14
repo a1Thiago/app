@@ -93,13 +93,17 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
                 {screenshots.map(screen => {
                   return (
                     <Image
+                      src={screen.image}
+                      alt={title + ' Image'} height={600} width={800}
+                      sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw, 33vw"
                       priority
-                      blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/J/HwAHYQL0xs6VQgAAAABJRU5ErkJggg=='
-                      placeholder='blur'
-                      className='w-full h-full  self-center'
                       key={screen.id}
-                      src={screen.image} alt={title + ' Image'} height={600} width={800}
-                      sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw, 33vw" />
+                      blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/J/HwAHYQL0xs6VQgAAAABJRU5ErkJggg=='
+                      className='w-full h-full  self-center'
+                      placeholder='blur'
+                    />
+
+
                   )
                 })}
               </Carousel>

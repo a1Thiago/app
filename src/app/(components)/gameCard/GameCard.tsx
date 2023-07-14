@@ -9,6 +9,7 @@ import Stars from './Stars'
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 import AuthMessage from './AuthMessage'
 import CheckBoxButtonComponent from '../CheckBoxButtonComponent'
+import CustomImage from '../CustomImage'
 interface GameCardProps {
   game: Game
 }
@@ -48,13 +49,13 @@ export default function GameCard({ game }: GameCardProps) {
           {game.genre}
         </CheckBoxButtonComponent>
 
-        <Image
-          // blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/L/fwAH0gNlHyeiMAAAAABJRU5ErkJggg=='
-          blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/J/HwAHYQL0xs6VQgAAAABJRU5ErkJggg=='
-          placeholder='blur'
-          height={100} width={200}
+        <CustomImage
+          src={game.thumbnail}
+          alt={game.title} height={100} width={200}
           sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 50vw"
-          className='w-full h-full  self-center  rounded-t-lg' src={game.thumbnail} alt={game.title} />
+          className='rounded-t-lg'
+          quality={100}
+        />
 
         <h3
           title={game.title}
