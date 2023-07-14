@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 import RenderGameCards from './gameCard/RenderGameCards'
 import LoadingCircle from './LoadingCircle'
 import Button from './Button'
@@ -63,10 +63,17 @@ export default function GamesTable() {
     setPageSize(oldValue => oldValue + 15)
   }
 
-  const gamesToShow =
-    sortByRating(sortOrderOfRatings,
-      filterGamesByGenre(selectedGenres,
-        filterGamesBySearchValue(modifiedGames, searchValue)))//😳
+  const filteredGamesBySearchValue = useMemo(() => {
+    return filterGamesBySearchValue(modifiedGames, searchValue)
+  }, [modifiedGames, searchValue])
+
+  const filteredGamesByGenre = useMemo(() => {
+    return filterGamesByGenre(selectedGenres, filteredGamesBySearchValue)
+  }, [selectedGenres, filteredGamesBySearchValue])
+
+
+
+  const gamesToShow = sortByRating(sortOrderOfRatings, filteredGamesByGenre)
 
   if (error) return (
     <div className='flex flex-col items-center justify-center'>
