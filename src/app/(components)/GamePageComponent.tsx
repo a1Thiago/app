@@ -80,11 +80,12 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
     <div className='bg-white flex flex-col justify-center items-center w-full h-full'>
 
-      <div className='grid gap-4 grid-cols-[70%,auto] tablet:flex  mobile:grid-cols-1'>
+      <div className='grid gap-4 w-full grid-cols-[70%,auto] tablet:flex  mobile:grid-cols-1'>
 
         {screenshots?.length > 0 &&
-          (<div className='flex items-center justify-center'>
-            <div className='flex flex-col relative h-fit group'>
+          (<div className='grid items-center'>
+            <div className='flex flex-col relative h-fit group 
+            min-h-[340px] smdesktop:min-h-[275px] tablet:min-h-[200px] mobile:min-h-[175px]'>
               <CheckBoxButtonComponent item={genre} disabled className='bg-theme-secondary-dark text-white w-28 absolute left-1 top-1 transform z-10'>
                 {genre}
               </CheckBoxButtonComponent>
@@ -92,6 +93,10 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
                 {screenshots.map(screen => {
                   return (
                     <Image
+                      priority
+                      blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/J/HwAHYQL0xs6VQgAAAABJRU5ErkJggg=='
+                      placeholder='blur'
+                      className='w-full h-full  self-center'
                       key={screen.id}
                       src={screen.image} alt={title + ' Image'} height={600} width={800}
                       sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw, 33vw" />
@@ -107,6 +112,8 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
         <div className='grid gap-4 tablet:hidden'>
           <Image
+            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/J/HwAHYQL0xs6VQgAAAABJRU5ErkJggg=='
+            placeholder='blur'
             sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
             width='0'
             height='0'
