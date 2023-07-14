@@ -11,10 +11,10 @@ export default function ErrorMessage({ error }: ErrorProps) {
   const errorStatus = error?.match(errorStatusRegex)
 
   return (
-    <div className='mt-32 grid gap-2 place-items-center text-center p-4'>
-      <p className='text-24 tablet:text-20 mobile:text-16'>{error}</p>
-      <Image className='animate-bounce-slow my-8' src={'/error.png'} alt='error image' width={100} height={100} />
-      {errorStatus && (<h3 className='text-32 tablet:text-24 mobile:text-20 font-bold text-red-500'>{errorStatus}</h3>)}
+    <div className='grid col-span-full text-center space-y-28 mobile:space-y-16  place-items-center p-4'>
+      <p className='text-24 tablet:text-20 mobile:text-16 font-semibold'>{error}</p>
+      <Image className='animate-bounce-slow my-12' src={'/error.png'} alt='error image' width={200} height={200} />
+      {errorStatus && (<h3 className='text-32  mobile:text-24 font-bold text-red-500'>{errorStatus}</h3>)}
     </div>
   )
 }
