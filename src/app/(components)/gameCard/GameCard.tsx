@@ -37,20 +37,24 @@ export default function GameCard({ game }: GameCardProps) {
 
   return (
     <div
-      className={`grid h-full gap-4
+      className={`grid h-full gap-4 
       border-theme-primary border-2 rounded-lg shadow-sm shadow-theme-secondary bg-white
       transition-opacity duration-500  ${rendering ? 'opacity-0' : 'opacity-100'}`}
     >
 
-      <div className='relative'>
+      <div className='relative w-full h-fit min-h-[180px] tablet:min-h-[220px] mobile:min-h-[120px]'>
 
         <CheckBoxButtonComponent item={game.genre} className='bg-theme-secondary-dark text-white w-28 absolute left-1 top-1'>
           {game.genre}
         </CheckBoxButtonComponent>
 
         <Image
+          // blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/L/fwAH0gNlHyeiMAAAAABJRU5ErkJggg=='
+          blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/J/HwAHYQL0xs6VQgAAAABJRU5ErkJggg=='
+          placeholder='blur'
+          height={100} width={200}
           sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 50vw"
-          className='w-full h-auto  self-center  rounded-t-lg' width='0' height='0' src={game.thumbnail} alt={game.title} />
+          className='w-full h-full  self-center  rounded-t-lg' src={game.thumbnail} alt={game.title} />
 
         <h3
           title={game.title}
@@ -61,7 +65,7 @@ absolute bottom-0 z-10 text-24 tablet:text-20 mobile:text-18  transform'>
       </div>
 
       <div className='p-2 grid  gap-4'>
-        <p title={game.short_description} className='smdesktop:h-36 desktop:h-44 overflow-y-hidden text-ellipsis'>
+        <p title={game.short_description} className=' overflow-y-hidden text-ellipsis'>
           {game.short_description}
         </p>
 
