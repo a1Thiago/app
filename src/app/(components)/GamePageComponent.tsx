@@ -166,7 +166,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
       <ul className="px-4">
         {list?.map((item, index) => (
           item?.value && item?.value !== '?' && (
-            <li key={index} className="text-14">
+            <li key={item.label + index} className="text-14">
               <strong>{item?.label}</strong>: {item?.value}
             </li>
           )
