@@ -50,21 +50,14 @@ export default function GameCard({ game }: GameCardProps) {
 
         <Image
           sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 50vw"
-          width='0'
-          height='0'
-          src={game.thumbnail}
-          alt={game.title}
-          className='w-full h-auto  self-center  rounded-t-lg'
-        />
-        <h3
+          className='w-full h-auto  self-center  rounded-t-lg' width='0' height='0' src={game.thumbnail} alt={game.title} />
 
+        <h3
           title={game.title}
           className='text-black bg-white/70 truncate flex w-full font-semibold py-2 px-4 transition-all opacity-90 hover:opacity-100
 absolute bottom-0 z-10 text-24 tablet:text-20 mobile:text-18  transform'>
           {game.title}
         </h3>
-
-
       </div>
 
       <div className='p-2 grid  gap-4'>
@@ -79,15 +72,10 @@ absolute bottom-0 z-10 text-24 tablet:text-20 mobile:text-18  transform'>
             <Stars gameID={game.id} />
           </div>
 
-          <div className='flex w-full gap-2 tablet:text-14 mobile:text-14 '>
-            <Link href={`/game/${game.id}`} className='w-full' >
-              <Button colorStyle='secondary'><span>Ver mais</span></Button >
-            </Link>
+          <Link href={`/game/${game.id}`} className='w-full' >
+            <Button colorStyle='secondary'><span>Ver mais</span></Button >
+          </Link>
 
-            <Link href={game.game_url} target='_blank' className='w-full'>
-              <Button colorStyle='primary' ><span>Jogar agora</span></Button >
-            </Link>
-          </div>
         </div>
       </div>
     </div >
