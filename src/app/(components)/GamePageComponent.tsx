@@ -1,22 +1,26 @@
 'use client'
 import isProduction from '@/lib/environment'
 import fetchGamesImage, { GameFromRapidApi } from '@/scripts/fetchGamesImage'
-import Image from 'next/image'
+
 import { useEffect, useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import CheckBoxButtonComponent from './CheckBoxButtonComponent'
-import Accordion from './Accordion'
+
 import EmptyTableMessage from './EmptyTableMessage'
 import LoadingCircle from './LoadingCircle'
 import ErrorMessage from './ErrorMessage'
 import CustomImage from './CustomImage'
+import Accordion from './Accordion'
+import { useGameStore } from '@/contexts/gameStore'
 
 interface GamePageComponentProps {
   id: string
 }
 
 export default function GamePageComponent({ id }: GamePageComponentProps) {
+
+  const { games } = useGameStore()
 
   const [gameData, setGameData] = useState<GameFromRapidApi | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -54,6 +58,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   if (!gameData) return
 
+
   const { title, thumbnail, status, short_description, description, genre,
     platform, game_url, publisher, developer, release_date, freetogame_profile_url
     , minimum_system_requirements, screenshots,
@@ -63,11 +68,11 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   const Information = [
     { label: 'Plataforma', value: platform },
-    // { label: 'Game URL', value: game_url },
+    { label: 'Game URL', value: game_url },
     { label: 'Publicadora', value: publisher },
     { label: 'Desenvolvedora', value: developer },
     { label: 'Data de lançamento', value: release_date },
-    // { label: 'Free-to-Game Profile', value: freetogame_profile_url },
+    { label: 'Free-to-Game Profile', value: freetogame_profile_url },
   ]
   const requirements = [
     { label: 'Placa de video', value: graphics },
@@ -79,22 +84,29 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   return (
 
-    <div className='bg-white flex flex-col justify-center items-center w-full h-full'>
 
-      <div className='grid gap-4 w-full grid-cols-[70%,auto] tablet:flex  mobile:grid-cols-1'>
+    <div className='py-6'>
+
+      <div className='desktop:hidden smdesktop:hidden grid gap-4'>
+        {/* 1-COL     */}
+        <CustomImage
+          width='0' height='0'
+          src={thumbnail} alt={title + ' thumbnail'}
+          sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
+          className='w-full justify-self-center max-w-[350px]'
+        />
+        <ListRender listTitle='Informações' list={Information} />
 
         {screenshots?.length > 0 &&
-          (<div className='grid items-center'>
+          (<div className='grid items-center w-full'>
             <div className='flex flex-col relative h-fit group 
-            min-h-[340px] smdesktop:min-h-[275px] tablet:min-h-[200px] mobile:min-h-[175px]'>
+            tablet:min-h-[200px] mobile:min-h-[175px]'>
               <CheckBoxButtonComponent item={genre} disabled className='bg-theme-secondary-dark text-white w-28 absolute left-1 top-1 transform z-10'>
                 {genre}
               </CheckBoxButtonComponent>
               <Carousel emulateTouch infiniteLoop autoPlay interval={5 * 1000} showThumbs={false}>
                 {screenshots.map(screen => {
                   return (
-
-
                     <CustomImage
                       src={screen.image}
                       alt={title + ' Image'} height={600} width={800}
@@ -109,12 +121,25 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
               </Carousel>
               <h3 title={title}
                 className='text-black bg-white/70 truncate flex w-full font-semibold py-2 px-4  opacity-90 
-              absolute bottom-0 z-10 text-24 tablet:text-20 mobile:text-18 transform transition-all duration-400 group-hover:opacity-0'>{title}</h3>
+              absolute bottom-0 z-10 tablet:text-20 mobile:text-18 transform transition-all duration-400 group-hover:opacity-0'>{title}</h3>
             </div>
           </div>)
         }
 
-        <div className='grid gap-4 tablet:hidden'>
+        <ListRender list={requirements} listTitle='Requisitos mínimos' />
+
+        <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
+          <>{description}</>
+        </Accordion>
+        {/* 1-COL     */}
+      </div>
+
+      {/* ------------------------------------------------------------------------------------------- */}
+
+      <div className='mobile:hidden tablet:hidden grid gap-6'>
+        {/* 2-COL */}
+
+        <div className="grid gap-6 grid-cols-3 smdesktop:grid-cols-2">
 
           <CustomImage
             sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
@@ -122,55 +147,56 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
             height='0'
             src={thumbnail}
             alt={title + ' thumbnail'}
-            className='h-52 smdesktop:h-40 w-full mobile:h-28'
+            className=' max-w-[350px]'
           />
 
-          <div className='grid gap-4'>
-            <ListRender listTitle='Informações' list={Information} />
-            <span className='smdesktop:hidden'>
-              <ListRender list={requirements} listTitle='Requisitos mínimos' />
-            </span>
-          </div>
-        </div>
-      </div>
+          <ListRender listTitle='Informações' list={Information} />
 
-      {/* Desktop */}
-      <span className='tablet:hidden mobile:hidden w-full mt-4'>
+          <span className='smdesktop:hidden'> <ListRender list={requirements} listTitle='Requisitos mínimos' /></span>
+
+        </div>
+
+        {screenshots?.length > 0 &&
+          (<div className='grid items-center'>
+            <div className='flex flex-col relative h-fit group 
+            min-h-[340px] smdesktop:min-h-[275px]'>
+              <CheckBoxButtonComponent item={genre} disabled className='bg-theme-secondary-dark text-white w-28 absolute left-1 top-1 transform z-10'>
+                {genre}
+              </CheckBoxButtonComponent>
+              <Carousel emulateTouch infiniteLoop autoPlay interval={5 * 1000} showThumbs={false}>
+                {screenshots.map(screen => {
+                  return (
+                    <CustomImage
+                      src={screen.image}
+                      alt={title + ' Image'} height={600} width={800}
+                      sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw, 33vw"
+                      priority
+                      className='w-full h-full self-center'
+                      key={screen.id}
+                    />
+
+                  )
+                })}
+              </Carousel>
+              <h3 title={title}
+                className='text-black bg-white/70 truncate flex w-full font-semibold py-2 px-4  opacity-90 
+              absolute bottom-0 z-10 text-24 transform transition-all duration-400 group-hover:opacity-0'>{title}</h3>
+            </div>
+          </div>)
+        }
+
+        <span className='desktop:hidden'> <ListRender list={requirements} listTitle='Requisitos mínimos' /> </span>
+
         <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
           <>{description}</>
         </Accordion>
-      </span>
-      {/* Desktop */}
 
-      <div className='grid w-full gap-4'>
-
-        <span className='hidden smdesktop:flex tablet:flex '>
-          <ListRender list={requirements} listTitle='Requisitos mínimos' />
-        </span>
-
-        <span className='smdesktop:h-40 hidden  tablet:grid mobile:grid row-start-1'>
-
-
-          <CustomImage
-            width='0' height='0'
-            src={thumbnail} alt={title + ' thumbnail'}
-            sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
-            className='h-52 w-full mobile:hidden py-4'
-          />
-
-          <span className='hidden tablet:grid mobile:grid row-start-2 w-full'>
-            <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
-              <>{description}</>
-            </Accordion>
-          </span>
-        </span>
-
-        <span className='hidden tablet:flex'>
-          <ListRender listTitle='Informações' list={Information} />
-        </span>
-
+        {/* 2-COL */}
       </div>
-    </div >
+
+
+    </div>
+
   )
 
   function ListRender({ listTitle, list }: { listTitle: string, list: { label: string, value: string }[] }) {
@@ -178,7 +204,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
       <h4 className="text-16">
         <strong>{listTitle}</strong>:
       </h4>
-      <ul className="px-4">
+      <ul className="px-2">
         {list?.map((item, index) => (
           item?.value && item?.value !== '?' && (
             <li key={item.label + index} className="text-14">
@@ -190,6 +216,8 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
     </div>
   }
 }
+
+
 
 
 const gamesMock = [{
