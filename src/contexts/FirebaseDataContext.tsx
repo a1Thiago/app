@@ -66,6 +66,7 @@ export default function FirebaseDataContextProvider({ children }: FirebaseDataCo
       checkUserData()
     }
     setLoading(false)
+    // eslint-disable-next-line
   }, [user])
 
   async function setDataOnDatabase(collectionName: string, data: any): Promise<setDataOnDatabaseResult> {
