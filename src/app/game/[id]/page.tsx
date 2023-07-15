@@ -1,4 +1,4 @@
-'use client'
+
 import BackButton from '@/app/(components)/BackButton'
 import GamePageComponent from '@/app/(components)/GamePageComponent'
 
