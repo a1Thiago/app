@@ -4,9 +4,9 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "App Masters",
-  "short_name": "a1Th",
-  "description": "Projeto de Estágio Frontend React",
+  "name": "GameList",
+  "short_name": "GameList",
+  "description": "Projeto criado para o processo seletivo Estágio Frontend React da App Masters",
   "icons": [
     {
       "src": "/pwa-icons/icon-192x192.png",
