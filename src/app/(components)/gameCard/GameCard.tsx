@@ -53,7 +53,7 @@ export default function GameCard({ game }: GameCardProps) {
           src={game.thumbnail}
           alt={game.title} height={100} width={200}
           sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 50vw"
-          className='rounded-t-lg'
+          className='w-full h-full rounded-t-lg'
           quality={100}
         />
 

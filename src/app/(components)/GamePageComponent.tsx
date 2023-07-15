@@ -10,6 +10,7 @@ import Accordion from './Accordion'
 import EmptyTableMessage from './EmptyTableMessage'
 import LoadingCircle from './LoadingCircle'
 import ErrorMessage from './ErrorMessage'
+import CustomImage from './CustomImage'
 
 interface GamePageComponentProps {
   id: string
@@ -92,17 +93,16 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
               <Carousel emulateTouch infiniteLoop autoPlay interval={5 * 1000} showThumbs={false}>
                 {screenshots.map(screen => {
                   return (
-                    <Image
+
+
+                    <CustomImage
                       src={screen.image}
                       alt={title + ' Image'} height={600} width={800}
                       sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw, 33vw"
                       priority
-                      key={screen.id}
-                      blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/J/HwAHYQL0xs6VQgAAAABJRU5ErkJggg=='
                       className='w-full h-full  self-center'
-                      placeholder='blur'
+                      key={screen.id}
                     />
-
 
                   )
                 })}
@@ -115,9 +115,8 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
         }
 
         <div className='grid gap-4 tablet:hidden'>
-          <Image
-            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/J/HwAHYQL0xs6VQgAAAABJRU5ErkJggg=='
-            placeholder='blur'
+
+          <CustomImage
             sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
             width='0'
             height='0'
@@ -125,6 +124,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
             alt={title + ' thumbnail'}
             className='h-52 smdesktop:h-40 w-full mobile:h-28'
           />
+
           <div className='grid gap-4'>
             <ListRender listTitle='Informações' list={Information} />
             <span className='smdesktop:hidden'>
@@ -149,7 +149,11 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
         </span>
 
         <span className='smdesktop:h-40 hidden  tablet:grid mobile:grid row-start-1'>
-          <Image width='0' height='0' src={thumbnail} alt={title + ' thumbnail'}
+
+
+          <CustomImage
+            width='0' height='0'
+            src={thumbnail} alt={title + ' thumbnail'}
             sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
             className='h-52 w-full mobile:hidden py-4'
           />
