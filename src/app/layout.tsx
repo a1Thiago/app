@@ -12,20 +12,22 @@ import GamesStoreProvider from '@/contexts/gameStore'
 const inter = Inter({ subsets: ['latin'] })
 
 const APP_URL = new URL('https://app-masters-a1th.vercel.app/')
-const TITLE = 'a1Th App-Masters'
-const DESCRIPTION = 'Projeto de Estágio Frontend React'
+const DEFAULT_TITLE = 'GameList'
+const TEMPLATE_TITLE = '%s | GameList'
+const DESCRIPTION = 'Projeto criado para o processo seletivo Estágio Frontend React da App Masters'
 
 export const metadata: Metadata = {
 
   metadataBase: APP_URL,
-  title: TITLE,
+  title: { default: DEFAULT_TITLE, template: TEMPLATE_TITLE },
+
   description: DESCRIPTION,
   ...(isProduction ? { manifest: '/manifest.json' } : {}),
   themeColor: '#9CC9FF',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: TITLE,
+    title: DEFAULT_TITLE,
     startupImage: ['/og.png']
   },
   formatDetection: {
@@ -33,10 +35,10 @@ export const metadata: Metadata = {
   },
   category: 'games',
   openGraph: {
-    title: TITLE,
+    title: DEFAULT_TITLE,
     description: DESCRIPTION,
     url: APP_URL,
-    siteName: TITLE,
+    siteName: DEFAULT_TITLE,
     images: [
       {
         url: '/og.png',
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: TITLE,
+    title: DEFAULT_TITLE,
     description: DESCRIPTION,
     creator: 'a1Th',
     images: ['/og.png'],
