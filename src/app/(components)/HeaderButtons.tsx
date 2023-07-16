@@ -58,7 +58,7 @@ ${isOpen && 'scale-75 opacity-30'}`}
         </button>
         <div className={`fixed inset-0 flex justify-end z-40 transition-all duration-500 origin-right transform h-full top-0 right-0 bottom-0
 ${isOpen ? 'scale-x-100 opacity-100' : 'opacity-70 -scale-x-50'} overflow-x-hidden`}>
-          <Image src={'/mlogo.png'} alt='a1Th logo' quality={100} width={112} height={32} className='absolute right-4 top-4' />
+          <Image src={'/mlogo.png'} alt='a1Th logo' quality={100} width={112} height={32} className='absolute right-4 top-4' sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw" />
           <div className="w-[60vw] bg-theme-secondary-dark text-white flex flex-row-reverse">
 
             <ul className="p-4 mt-16 text-24 font-medium flex flex-col gap-8 pr-6">
