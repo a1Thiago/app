@@ -17,9 +17,9 @@ export default function GamesTable() {
 
   const { modifiedGames, setGames, isLoading, setIsLoading, error, setError } = useGameStore()
 
-  const [sortOrderOfRatings, setSortOrderOfRatings] = useState<'asc' | 'desc' | 'fromZeroAsc'>('desc')
+  const [sortOrderOfRatings, setSortOrderOfRatings] = useState<'asc' | 'desc' | 'fromZeroAsc'>('asc')
 
-  const [pageSize, setPageSize] = useState<number>(15)
+  const [pageSize, setPageSize] = useState<number>(18)
 
   const [searchValue, setSearchValue] = useState<string>('')
 
@@ -71,9 +71,9 @@ export default function GamesTable() {
     return filterGamesByGenre(selectedGenres, filteredGamesBySearchValue)
   }, [selectedGenres, filteredGamesBySearchValue])
 
-
-
   const gamesToShow = sortByRating(sortOrderOfRatings, filteredGamesByGenre)
+
+  if (isLoading) return (<LoadingControls />)
 
   if (error) return (
     <div className='flex flex-col items-center justify-center'>
@@ -97,29 +97,24 @@ export default function GamesTable() {
 
     <section className={`py-4 grid gap-4 ${isLoading && 'cursor-wait'}`}>
 
-      {!isLoading && !error &&
 
-        (<div className='flex flex-col items-center justify-self-center text-center max-w-4xl'>
-          <SearchInput onChange={(e) => setSearchValue(e.target.value)} />
-          <GenresFilter selectedGenres={selectedGenres} onChange={handleGenreChange} />
 
-          <CheckBoxButtonComponent className={`bg-theme-secondary-dark w-full transition-all duration-700 mt-4
+      <div className='flex flex-col gap-4 items-center justify-self-center text-center max-w-4xl'>
+        <SearchInput onChange={(e) => setSearchValue(e.target.value)} />
+        <GenresFilter selectedGenres={selectedGenres} onChange={handleGenreChange} />
+
+        <CheckBoxButtonComponent className={`bg-theme-secondary-dark w-full transition-all duration-700 mt-4
            ${ratedGames.length === 0 && 'translate-y-28 opacity-50 scale-y-0 skew-y-12 -m-8 mobile:-m-4'}`} item='sortOrder'>
-            <span className='flex w-full justify-center items-center scale-x-105' onClick={handleSortOrderOfRatings}>
-              <SortStars sortOrderOfRatings={sortOrderOfRatings} />
-            </span>
-          </CheckBoxButtonComponent>
+          <span className='flex w-full justify-center items-center scale-x-105' onClick={handleSortOrderOfRatings}>
+            <SortStars sortOrderOfRatings={sortOrderOfRatings} />
+          </span>
+        </CheckBoxButtonComponent>
 
-        </div>)}
+      </div>
 
 
-      {isLoading
-        ? (
-          <EmptyTableMessage message='Carregando Jogos...'>
-            <LoadingCircle />
-          </EmptyTableMessage>
-        )
-        : gamesToShow.length > 0
+      {
+        gamesToShow.length > 0
           ? (<div className='grid gap-4 grid-cols-3 smdesktop:grid-cols-2 mobile:grid-cols-1 tablet:grid-cols-1'><RenderGameCards games={gamesToShow.slice(0, pageSize)} /></div>)
           : (
             <EmptyTableMessage message='Não tem nada aqui.'>
@@ -129,7 +124,6 @@ export default function GamesTable() {
             </EmptyTableMessage>
           )
       }
-
 
       {gamesToShow.length > 0 && (
         <div className='mx-2'>
@@ -207,4 +201,34 @@ const sortByRating = (sortOrder: 'asc' | 'desc' | 'fromZeroAsc', games: Game[]):
       }
     }
   })
+}
+
+function LoadingControls() {
+  return (
+    <div className='flex gap-4 flex-col items-center justify-self-center text-center py-4'>
+      <div className='grid w-full gap-2 text-center max-w-4xl '>
+        <div className='font-medium'>Procurar pelo titulo</div>
+        <span className='bg-theme-primary/50 h-10 rounded animate-pulse'> </span>
+      </div>
+      <div className='grid gap-2 w-full text-center'>
+        <div className='font-medium'>Filtrar pelo gênero</div>
+        <div className='flex flex-col items-center justify-self-center text-center max-w-4xl'>
+          <span className="grid grid-rows-2 smdesktop:grid-rows-3 gap-2 items-center truncate text-start
+        grid-flow-col mobile:grid-flow-row mobile:grid-cols-2 tablet:grid-cols-3 tablet:grid-flow-row ">
+            {Array.from({ length: 12 }).map((_, index) => {
+              return (
+                <span key={index} className='h-[29px] rounded-lg animate-pulse  bg-theme-secondary/90  w-[116px] '></span>
+              )
+            })}
+          </span>
+        </div>
+      </div>
+
+      <span className='py-32'>
+        <EmptyTableMessage message='Carregando Jogos...'>
+          <LoadingCircle />
+        </EmptyTableMessage>
+      </span>
+    </div>
+  )
 }
