@@ -60,7 +60,7 @@ export default function GamesTable() {
   }
 
   const loadMoreItems = () => {
-    setPageSize(oldValue => oldValue + 15)
+    setPageSize(oldValue => oldValue + 16)
   }
 
   const filteredGamesBySearchValue = useMemo(() => {
@@ -96,8 +96,6 @@ export default function GamesTable() {
   return (
 
     <section className={`py-4 grid gap-4 ${isLoading && 'cursor-wait'}`}>
-
-
 
       <div className='flex flex-col gap-4 items-center justify-self-center text-center max-w-4xl'>
         <SearchInput onChange={(e) => setSearchValue(e.target.value)} />
@@ -212,12 +210,12 @@ function LoadingControls() {
       </div>
       <div className='grid gap-2 w-full text-center'>
         <div className='font-medium'>Filtrar pelo gênero</div>
-        <div className='flex flex-col items-center justify-self-center text-center max-w-4xl'>
+        <div className='flex flex-col items-center justify-self-center text-center max-w-4xl w-full'>
           <span className="grid grid-rows-2 smdesktop:grid-rows-3 gap-2 items-center truncate text-start
-        grid-flow-col mobile:grid-flow-row mobile:grid-cols-2 tablet:grid-cols-3 tablet:grid-flow-row ">
+        grid-flow-col mobile:grid-flow-row mobile:grid-cols-2 tablet:grid-cols-3 tablet:grid-flow-row w-full">
             {Array.from({ length: 12 }).map((_, index) => {
               return (
-                <span key={index} className='h-[29px] rounded-lg animate-pulse  bg-theme-secondary/90  w-[116px] '></span>
+                <span key={index} className='h-[29px] rounded-lg animate-pulse  bg-theme-secondary/90  min-w-[116px] w-auto'></span>
               )
             })}
           </span>
