@@ -10,7 +10,7 @@ export default function GamePageModal({ params }: { params: { id: string } }) {
 
   return (
     <InterceptorModal url={`/game/${id}`}>
-      <div className='h-auto px-8 py-12 mobile:px-4 w-[90vw] mobile:w-[95vw]'>
+      <div className='h-auto px-8 py-12 mobile:px-4 w-[85vw] mobile:w-[90vw]'>
         <GamePageComponent id={id} />
       </div>
     </InterceptorModal>
