@@ -10,12 +10,14 @@ export default function GamePage({ params }: { params: { id: string } }) {
   if (!id) return
 
   return (
-    <div className='mx-4 flex flex-col'>
-      <span className='left-4 absolute '>
-        <BackButton className='text-black' />
+    <div className='flex flex-col'>
+      <span className='left-4 mt-2 absolute '>
+        <BackButton className='text-black h-10 w-10' />
       </span>
-      <h2 className='text-32 font-semibold tablet:text-24 mobile:text-18 mt-8'>Mais Informaçoes sobre o jogo</h2>
-      <GamePageComponent id={id} />
+      <div className='w-[100vw] mt-16'>
+        <h2 className='text-32 font-semibold tablet:text-24 mobile:text-18'>Mais Informaçoes sobre o jogo</h2>
+        <GamePageComponent id={id} />
+      </div>
     </div>
   )
 }

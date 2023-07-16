@@ -13,7 +13,7 @@ export default function CloseButton({ className, ...props }: CloseButtonProps) {
       className={`absolute top-2 right-2  ${className} `}
     >
       <svg
-        className="w-[inherit] h-[inherit] transition-all p-0.5 focus:bg-black/10 active:bg-black/10 rounded-xl hover:scale-95"
+        className="w-[inherit] h-[inherit] "
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
