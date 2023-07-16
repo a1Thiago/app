@@ -6,9 +6,6 @@ import { useEffect, useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import CheckBoxButtonComponent from './CheckBoxButtonComponent'
-
-import EmptyTableMessage from './EmptyTableMessage'
-import LoadingCircle from './LoadingCircle'
 import ErrorMessage from './ErrorMessage'
 import CustomImage from './CustomImage'
 import Accordion from './Accordion'
@@ -103,7 +100,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
         <CustomImage
           width='0' height='0'
-          src={gameOfThePage?.thumbnail || thumbnail} alt={title + ' thumbnail'}
+          src={gameOfThePage?.thumbnail ?? thumbnail} alt={title + ' thumbnail'}
           sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
           className='justify-self-center max-w-[350px] min-h-[190px]'
         />
@@ -163,7 +160,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
               sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
               width='0'
               height='0'
-              src={gameOfThePage?.thumbnail || thumbnail}
+              src={gameOfThePage?.thumbnail ?? thumbnail}
               alt={title + ' thumbnail'}
               className='min-h-[190px]'
             />
@@ -222,10 +219,10 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
       <h4 className="text-16">
         <strong>{listTitle}</strong>:
       </h4>
-      <ul className="px-2">
+      <ul className="px-2  overflow-x-hidden">
         {list?.map((item, index) => (
           item?.value && item?.value !== '?' && (
-            <li key={item.label + index} className="text-14 truncate">
+            <li key={item.label + index} className="text-14">
               <strong>{item?.label}</strong>: {item?.value}
             </li>
           )
@@ -268,7 +265,7 @@ function GamePageSkeleton({ game }: { game: Game }) {
           <span className='relative flex w-full justify-self-center max-w-[350px] h-fit bg-theme-primary animate-pulse rounded-xl'> </span>
           {game
             ? (<  CustomImage className='justify-self-center max-w-[350px] min-h-[190px]' src={game?.thumbnail} width={100} height={100} alt={game?.title + 'Thumbnail'} />)
-            : (<span className='flex w-[350px] h-[190px] bg-theme-primary animate-pulse rounded-xl'> </span>)
+            : (<span className='flex w-[330px] h-[190px] bg-theme-primary animate-pulse rounded-xl'> </span>)
           }
         </div>
         <ListRenderSkeleton listTitle='Informações' itemCount={4} />
