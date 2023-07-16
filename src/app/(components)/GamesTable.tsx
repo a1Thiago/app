@@ -213,7 +213,7 @@ function LoadingControls() {
         <div className='flex flex-col items-center justify-self-center text-center max-w-4xl w-full'>
           <span className="grid grid-rows-2 smdesktop:grid-rows-3 gap-2 items-center truncate text-start
         grid-flow-col mobile:grid-flow-row mobile:grid-cols-2 tablet:grid-cols-3 tablet:grid-flow-row w-full">
-            {Array.from({ length: 12 }).map((_, index) => {
+            {Array.from({ length: 14 }).map((_, index) => {
               return (
                 <span key={index} className='h-[29px] rounded-lg animate-pulse  bg-theme-secondary/90  min-w-[116px] w-auto'></span>
               )
