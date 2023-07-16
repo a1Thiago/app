@@ -114,7 +114,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
           (<div className='grid items-center w-full'>
             <div className='flex flex-col relative h-fit group 
             tablet:min-h-[200px] mobile:min-h-[175px]'>
-              <CheckBoxButtonComponent item={genre} disabled className='bg-theme-secondary-dark text-white w-28 absolute left-1 top-1 transform z-10'>
+              <CheckBoxButtonComponent aria-label={genre + 'button'} item={genre} disabled className='bg-theme-secondary-dark text-white w-28 absolute left-1 top-1 transform z-10'>
                 {genre}
               </CheckBoxButtonComponent>
               <Carousel emulateTouch infiniteLoop autoPlay interval={5 * 1000} showThumbs={false}>

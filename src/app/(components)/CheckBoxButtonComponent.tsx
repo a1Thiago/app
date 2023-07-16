@@ -9,7 +9,6 @@ export default function CheckBoxButtonComponent({ item, children, className, ...
     <button
       type="button"
       tabIndex={0}
-      aria-label="CheckBox"
       {...props}
       className={`group transition-all duration-500 rounded-lg font-semibold cursor-pointer disabled:pointer-events-none hover:shadow-md '} ${className}`}>
       <label htmlFor={item} className='group flex text-14 mobile:text-12 group-hover:cursor-pointer items-center justify-center py-1 px-2'>

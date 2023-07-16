@@ -39,6 +39,7 @@ export default function GenresFilter({ selectedGenres, ...props }: GenresFilterP
             return (
               <div key={genre} {...props} className='grid group'>
                 <CheckBoxButtonComponent
+                  aria-label={genre + 'button' + 'filter'}
                   item={genre}
                   className={`${checked(genre) ? 'bg-theme-secondary-dark text-white' : 'bg-theme-secondary/90 text-black'}
                   ${genre === 'Favoritos' && '!bg-red-500/50'} ${checked(genre) && genre === 'Favoritos' && '!bg-red-500/70'}`}>

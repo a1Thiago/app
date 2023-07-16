@@ -32,7 +32,7 @@ export default function GameCard({ game }: GameCardProps) {
 
       <div className='relative w-full h-fit min-h-[180px] tablet:min-h-[220px] mobile:min-h-[120px]'>
 
-        <CheckBoxButtonComponent item={game.genre} className='bg-theme-secondary-dark text-white w-28 absolute left-1 top-1'>
+        <CheckBoxButtonComponent aria-label={game.genre + ' ' + game.title} item={game.genre} className='bg-theme-secondary-dark text-white w-28 absolute left-1 top-1'>
           {game.genre}
         </CheckBoxButtonComponent>
 
