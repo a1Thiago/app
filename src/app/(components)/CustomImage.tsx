@@ -11,7 +11,7 @@ interface CustomImageProps extends ImageProps {
 
 export default function CustomImage({ alt, src, className, ...props }: CustomImageProps) {
 
-  const fallbackImage = '/error.png'
+  const fallbackImage = '/mlogo.png'
 
   const [error, setError] = useState(false)
 

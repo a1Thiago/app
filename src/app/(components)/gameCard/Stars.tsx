@@ -1,6 +1,6 @@
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
-import { useState } from 'react'
-interface StarProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+import { HTMLAttributes, useState } from 'react'
+interface StarProps extends HTMLAttributes<HTMLSpanElement> {
   filled: boolean
 }
 interface StarsProps {
@@ -92,13 +92,13 @@ export function SortStars({ sortOrderOfRatings }: SortStarsProps) {
 function Star({ filled, ...props }: StarProps) {
   const fillClass = filled ? 'fill-amber-400' : 'fill-amber-400/60'
   return (
-    <button className='group' {...props}>
+    <span className='group' {...props}>
       <svg className="h-7 w-7 shrink-0 cursor-pointer" viewBox="0 0 256 256">
         <path
           className={`duration-500 transition-all ${fillClass} hover:-translate-y-3`}
           d="M239.2 97.4A16.4 16.4.0 00224.6 86l-59.4-4.1-22-55.5A16.4 16.4.0 00128 16h0a16.4 16.4.0 00-15.2 10.4L90.4 82.2 31.4 86A16.5 16.5.0 0016.8 97.4 16.8 16.8.0 0022 115.5l45.4 38.4L53.9 207a18.5 18.5.0 007 19.6 18 18 0 0020.1.6l46.9-29.7h.2l50.5 31.9a16.1 16.1.0 008.7 2.6 16.5 16.5.0 0015.8-20.8l-14.3-58.1L234 115.5A16.8 16.8.0 00239.2 97.4z"
         />
       </svg>
-    </button>
+    </span>
   )
 }
