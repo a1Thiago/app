@@ -1,15 +1,12 @@
 'use client'
 import { Game } from '@/scripts/fetchGames'
-import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Button from '../Button'
-import Heart from './Heart'
-import Stars from './Stars'
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
-import AuthMessage from './AuthMessage'
 import CheckBoxButtonComponent from '../CheckBoxButtonComponent'
 import CustomImage from '../CustomImage'
+import UserDataControl from './UserDataControl'
 interface GameCardProps {
   game: Game
 }
@@ -20,19 +17,9 @@ export default function GameCard({ game }: GameCardProps) {
 
   const { userData } = useFirebaseDataContext()
 
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | undefined>(undefined)
-
   useEffect(() => {
     setRendering(false)
   }, [])
-
-  const handleAuthCheck = () => {
-    setIsAuthenticated(undefined)
-
-    if (userData) return setIsAuthenticated(true)
-
-    setIsAuthenticated(false)
-  }
 
   if (!game) return <></>
 
@@ -71,12 +58,9 @@ absolute bottom-0 z-10 text-24 tablet:text-20 mobile:text-18  transform'>
         </p>
 
         <div className='grid gap-4 items-end'>
-          {isAuthenticated === false && <AuthMessage />}
-          <div className='flex gap-4 items-center cursor-pointer ' onClick={handleAuthCheck}>
-            <Heart gameID={game.id} />
-            <Stars gameID={game.id} />
-          </div>
-
+          <span className='relative flex'>
+            <UserDataControl id={Number(game.id)} userData={userData} />
+          </span>
           <Link href={`/game/${game.id}`} className='w-full' >
             <Button colorStyle='secondary'><span>Ver mais</span></Button >
           </Link>

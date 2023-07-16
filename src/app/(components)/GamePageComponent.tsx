@@ -13,6 +13,8 @@ import ErrorMessage from './ErrorMessage'
 import CustomImage from './CustomImage'
 import Accordion from './Accordion'
 import { useGameStore } from '@/contexts/gameStore'
+import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
+import UserDataControl from './gameCard/UserDataControl'
 
 interface GamePageComponentProps {
   id: string
@@ -21,6 +23,11 @@ interface GamePageComponentProps {
 export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   const { games } = useGameStore()
+  const { userData } = useFirebaseDataContext()
+
+  const gameFromContext = games?.filter(game => game?.id === Number(id))?.[0]
+  const gameIsFavorite = userData?.favorites?.includes(Number(id))
+  const userRating = userData?.ratings?.[Number(id)]
 
   const [gameData, setGameData] = useState<GameFromRapidApi | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -58,7 +65,6 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   if (!gameData) return
 
-
   const { title, thumbnail, status, short_description, description, genre,
     platform, game_url, publisher, developer, release_date, freetogame_profile_url
     , minimum_system_requirements, screenshots,
@@ -89,12 +95,18 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
       <div className='desktop:hidden smdesktop:hidden grid gap-4'>
         {/* 1-COL     */}
+
+        <span className='relative flex w-full justify-self-center max-w-[350px]'>
+          <UserDataControl id={Number(id)} userData={userData} />
+        </span>
+
         <CustomImage
           width='0' height='0'
           src={thumbnail} alt={title + ' thumbnail'}
           sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
-          className='w-full justify-self-center max-w-[350px]'
+          className='justify-self-center max-w-[350px] min-h-[190px]'
         />
+
         <ListRender listTitle='Informações' list={Information} />
 
         {screenshots?.length > 0 &&
@@ -135,20 +147,26 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
       </div>
 
       {/* ------------------------------------------------------------------------------------------- */}
-
       <div className='mobile:hidden tablet:hidden grid gap-6'>
         {/* 2-COL */}
 
         <div className="grid gap-6 grid-cols-3 smdesktop:grid-cols-2">
 
-          <CustomImage
-            sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
-            width='0'
-            height='0'
-            src={thumbnail}
-            alt={title + ' thumbnail'}
-            className=' max-w-[350px]'
-          />
+          <div className='grid gap-4 max-w-[350px]'>
+
+            <span className='relative flex w-full'>
+              <UserDataControl id={Number(id)} userData={userData} />
+            </span>
+
+            <CustomImage
+              sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
+              width='0'
+              height='0'
+              src={thumbnail}
+              alt={title + ' thumbnail'}
+              className='min-h-[190px]'
+            />
+          </div>
 
           <ListRender listTitle='Informações' list={Information} />
 
