@@ -26,7 +26,7 @@ export default function AuthMessage() {
       transition-opacity duration-500  ${rendering ? 'opacity-0' : 'opacity-100'}`}>
 
         <span onClick={handleCloseModal}>
-          <CloseButton className=' text-black' />
+          <CloseButton className=' text-black h-10 w-10' />
         </span>
         <h2 className='text-32 font-bold mb-4'>Ola</h2>
 

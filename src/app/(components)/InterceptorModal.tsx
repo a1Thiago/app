@@ -37,7 +37,7 @@ export default function InterceptorModal({ url, children }: InterceptorModalProp
           <div className={`grid relative z-20 border-theme-primary border-2 rounded-lg shadow-sm shadow-theme-secondary bg-white w-auto h-auto
       transition-all duration-500 ${rendering ? 'opacity-0 left-32' : 'opacity-100 left-0'}`}>
             {children}
-            {<CloseButton className='text-black' onClick={toggleModal} />}
+            {<CloseButton className='text-black h-10 w-10' onClick={toggleModal} />}
           </div>
         </section>
       )}
