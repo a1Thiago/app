@@ -17,7 +17,9 @@ export default function GamesTable() {
 
   const { modifiedGames, setGames, isLoading, setIsLoading, error, setError } = useGameStore()
 
-  const [sortOrderOfRatings, setSortOrderOfRatings] = useState<'asc' | 'desc' | 'fromZeroAsc'>('asc')
+  const [sortOrderOfRatings, setSortOrderOfRatings] = useState<'ascIgnoreZero' | 'desc' | 'asc'>('ascIgnoreZero')
+
+  console.log(sortOrderOfRatings)
 
   const [pageSize, setPageSize] = useState<number>(18)
 
@@ -50,8 +52,8 @@ export default function GamesTable() {
         case 'asc':
           return 'desc'
         case 'desc':
-          return 'fromZeroAsc'
-        case 'fromZeroAsc':
+          return 'ascIgnoreZero'
+        case 'ascIgnoreZero':
           return 'asc'
         default:
           return 'desc'
@@ -157,9 +159,9 @@ const filterGamesBySearchValue = (games: Game[], searchValue: string) => {
   })
 }
 
-const sortByRating = (sortOrder: 'asc' | 'desc' | 'fromZeroAsc', games: Game[]): Game[] => {
+const sortByRating = (sortOrder: 'asc' | 'desc' | 'ascIgnoreZero', games: Game[]): Game[] => {
 
-  const fromZero = sortOrder === 'fromZeroAsc'
+  const ascIgnoreZero = sortOrder === 'ascIgnoreZero'
 
   return games.sort((a, b) => {
     if (!games || !a || !b) return -1
@@ -179,8 +181,8 @@ const sortByRating = (sortOrder: 'asc' | 'desc' | 'fromZeroAsc', games: Game[]):
       return -1
     }
 
-    if (fromZero) {
-      if (sortOrder === 'fromZeroAsc') {
+    if (ascIgnoreZero) {
+      if (sortOrder === 'ascIgnoreZero') {
         if (aDiff === bDiff) {
           return 0
         } else if (aDiff === 0) {

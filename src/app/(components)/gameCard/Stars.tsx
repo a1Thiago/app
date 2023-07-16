@@ -8,7 +8,7 @@ interface StarsProps {
 }
 
 interface SortStarsProps {
-  sortOrderOfRatings: 'asc' | 'desc' | 'fromZeroAsc'
+  sortOrderOfRatings: 'asc' | 'desc' | 'ascIgnoreZero'
 }
 
 export default function Stars({ gameID }: StarsProps) {
@@ -71,7 +71,7 @@ export default function Stars({ gameID }: StarsProps) {
 export function SortStars({ sortOrderOfRatings }: SortStarsProps) {
   return (
     <div className={`flex  justify-center items-center gap-2 transition-all duration-500 
-    ${sortOrderOfRatings === 'asc' && 'scale-x-[-1]'} ${sortOrderOfRatings === 'fromZeroAsc' && 'scale-x-[-1]'}`}>
+    ${sortOrderOfRatings === 'asc' && 'scale-x-[-1]'} ${sortOrderOfRatings === 'ascIgnoreZero' && 'scale-x-[-1]'}`}>
       <div className='flex'>
         {Array.from({ length: 5 }, (_, index) => {
           return (
@@ -82,9 +82,9 @@ export function SortStars({ sortOrderOfRatings }: SortStarsProps) {
         })}
       </div>
       <svg className={`h-6 text-white transition-all duration-1000 transform 
-      ${sortOrderOfRatings === 'asc' && ' -rotate-[540deg] '} ${sortOrderOfRatings === 'fromZeroAsc' && ' rotate-[540deg] '}`}
+      ${sortOrderOfRatings === 'asc' && ' -rotate-[540deg] '} ${sortOrderOfRatings === 'ascIgnoreZero' && ' rotate-[540deg] '}`}
         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><g  > <polyline fill="none" points="16.4 7 21.5 12 16.4 17" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4"></polyline> <line fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" x1="2.5" x2="19.2" y1="12" y2="12"></line>  </g></svg>
-      <Star filled={sortOrderOfRatings === 'fromZeroAsc'} />
+      <Star filled={sortOrderOfRatings === 'ascIgnoreZero'} />
     </div>
   )
 }
