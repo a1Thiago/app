@@ -25,7 +25,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   const { games } = useGameStore()
 
-  const thisGame = games.filter(game => game.id === Number(id))?.[0]
+  const gameOfThePage = games.filter(game => game.id === Number(id))?.[0]
 
   const { userData } = useFirebaseDataContext()
 
@@ -54,10 +54,10 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
   }, [id])
 
 
-  if (!isLoading) return (
+  if (isLoading) return (
 
     <div className='py-4'>
-      <GamePageSkeleton game={null as any} />
+      <GamePageSkeleton game={gameOfThePage} />
     </div>
 
   )
