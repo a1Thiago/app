@@ -21,11 +21,11 @@ export default function CustomImage({ alt, src, className, ...props }: CustomIma
 
   return <Image {...props}
     onError={handleImageError} src={error ? fallbackImage : src}
-    // blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/L/fwAH0gNlHyeiMAAAAABJRU5ErkJggg=='
-    blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/J/HwAHYQL0xs6VQgAAAABJRU5ErkJggg=='
+    blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/L/fwAH0gNlHyeiMAAAAABJRU5ErkJggg=='
+    // blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcc/J/HwAHYQL0xs6VQgAAAABJRU5ErkJggg=='
     placeholder='blur'
-    className={`w-full h-full self-center transition-opacity opacity-70 duration-1000 ${className}`}
-    onLoadingComplete={(img) => img.classList.remove('opacity-70')}
+    className={`w-full h-full self-center transition-opacity opacity-30 duration-1000 ${className}`}
+    onLoadingComplete={(img) => img.classList.remove('opacity-30')}
     alt={alt}
   />
 }
