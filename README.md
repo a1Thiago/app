@@ -1,7 +1,6 @@
 # Projeto de Estágio Frontend React
 ## Descrição
-
-Este projeto é um projeto de estágio frontend que utiliza o Firebase para autenticação por email/senha. Permite que os usuários favoritem jogos e salvem essas informações no Firebase. Além disso, possui recursos de busca, filtro e avaliação dos jogos.
+Este projeto utiliza o Firebase para autenticação por email/senha. Permite que os usuários favoritem jogos e salvem essas informações no Firebase. Além disso, possui recursos de busca, filtro e avaliação dos jogos.
 ## Funcionalidades
 
 - Autenticação de usuários por email/senha usando Firebase
