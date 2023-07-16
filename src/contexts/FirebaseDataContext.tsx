@@ -8,7 +8,7 @@ type Rating = {
   gameId: { value: number }
 }
 
-type UserData = {
+export type UserData = {
   favorites: Array<number>
   ratings: Rating[]
 }
