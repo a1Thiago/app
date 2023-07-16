@@ -103,7 +103,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
         <CustomImage
           width='0' height='0'
-          src={thumbnail} alt={title + ' thumbnail'}
+          src={gameOfThePage?.thumbnail || thumbnail} alt={title + ' thumbnail'}
           sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
           className='justify-self-center max-w-[350px] min-h-[190px]'
         />
@@ -163,7 +163,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
               sizes="(max-width: 404px) 100vw , (max-width: 768px) 60vw, (min-width: 769px) 30vw"
               width='0'
               height='0'
-              src={thumbnail}
+              src={gameOfThePage?.thumbnail || thumbnail}
               alt={title + ' thumbnail'}
               className='min-h-[190px]'
             />
@@ -299,7 +299,7 @@ function GamePageSkeleton({ game }: { game: Game }) {
           <ListRenderSkeleton listTitle='Requisitos mínimos' itemCount={4} className='smdesktop:hidden' />
         </div>
 
-        <div className='desktop:h-[600px] smdesktop:h-[460px] bg-theme-primary w-full relative rounded-lg animate-pulse'>
+        <div className='desktop:h-[900px] smdesktop:h-[460px] bg-theme-primary w-full relative rounded-lg animate-pulse'>
           <h3 title={game?.title}
             className='text-black bg-white/70 truncate flex w-full font-semibold py-2 px-4  opacity-90 
               absolute bottom-0 z-10 text-24 transform transition-all duration-400 group-hover:opacity-0'>{game?.title}</h3>
