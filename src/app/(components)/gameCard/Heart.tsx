@@ -32,6 +32,7 @@ export default function Heart({ gameID }: HeartProps) {
   return (
     <>
       <button
+        aria-label='Like Button'
         type='button'
         className='group h-6 w-6'
         onClick={handleClick}

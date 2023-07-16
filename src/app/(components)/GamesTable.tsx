@@ -19,8 +19,6 @@ export default function GamesTable() {
 
   const [sortOrderOfRatings, setSortOrderOfRatings] = useState<'ascIgnoreZero' | 'desc' | 'asc'>('ascIgnoreZero')
 
-  console.log(sortOrderOfRatings)
-
   const [pageSize, setPageSize] = useState<number>(18)
 
   const [searchValue, setSearchValue] = useState<string>('')
@@ -105,7 +103,7 @@ export default function GamesTable() {
         <SearchInput onChange={(e) => setSearchValue(e.target.value)} />
         <GenresFilter selectedGenres={selectedGenres} onChange={handleGenreChange} />
 
-        <CheckBoxButtonComponent className={`bg-theme-secondary-dark w-full transition-all duration-700 mt-4
+        <CheckBoxButtonComponent aria-label='Sort Order button' className={`bg-theme-secondary-dark w-full transition-all duration-700 mt-4
            ${ratedGames.length === 0 && 'translate-y-28 opacity-50 scale-y-0 skew-y-12 -m-8 mobile:-m-4'}`} item='sortOrder'>
           <span className='flex w-full justify-center items-center scale-x-105' onClick={handleSortOrderOfRatings}>
             <SortStars sortOrderOfRatings={sortOrderOfRatings} />

@@ -19,6 +19,7 @@ export default function BackButton({ className, ...props }: BackButtonProps) {
       type='button'
       className={`transition-all p-0.5 rounded hover:scale-95 ${className} `}
       onClick={handleClick}
+      aria-label="Back button"
     >
 
       <svg fill="currentColor" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52.502 52.502" className="w-[inherit] h-[inherit] transition-all p-0.5 focus:bg-black/10 active:bg-black/10 rounded-xl hover:scale-95">

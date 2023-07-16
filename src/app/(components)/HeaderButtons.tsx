@@ -38,6 +38,7 @@ export default function HeaderButtons() {
       {/* mobile*/}
       <div className="hidden mobile:flex flex-row-reverse items-center justify-between  text-white">
         <button
+          aria-label="Mobile Menu"
           className={`focus:outline-none transition-all duration-700
 ${isOpen && 'scale-75 opacity-30'}`}
           onClick={toggleMenu}
@@ -67,17 +68,17 @@ ${isOpen ? 'scale-x-100 opacity-100' : 'opacity-70 -scale-x-50'} overflow-x-hidd
               </li>
               {user ? (
                 <li>
-                  <button className='flex w-full' onClick={() => { logOut(); setIsOpen(false) }}>Sair</button>
+                  <button aria-label='LogOut button' className='flex w-full' onClick={() => { logOut(); setIsOpen(false) }}>Sair</button>
                 </li>
               ) : (
                 <>
                   <li>
-                    <button className='flex w-full' onClick={() => setIsOpen(false)}>
+                    <button className='flex w-full' onClick={() => setIsOpen(false)} aria-label='Login Button'>
                       <Link className='flex w-full' href='/auth/entrar'>Entrar</Link>
                     </button>
                   </li>
                   <li>
-                    <button className='flex w-full' onClick={() => setIsOpen(false)}>
+                    <button className='flex w-full' onClick={() => setIsOpen(false)} aria-label='SignIn Button'>
                       <Link className='flex w-full' href='/auth/registrar'>Registrar-se</Link>
                     </button>
                   </li>

@@ -10,6 +10,7 @@ export default function CloseButton({ className, ...props }: CloseButtonProps) {
     <button
       {...props}
       type='button'
+      aria-label="Close button"
       className={`absolute top-2 right-2  ${className} `}
     >
       <svg

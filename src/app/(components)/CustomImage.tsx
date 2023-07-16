@@ -26,6 +26,7 @@ export default function CustomImage({ alt, src, className, ...props }: CustomIma
     placeholder='blur'
     className={`w-full h-full self-center transition-opacity opacity-30 duration-1000 ${className}`}
     onLoadingComplete={(img) => img.classList.remove('opacity-30')}
+    loading='eager'
     alt={alt}
   />
 }

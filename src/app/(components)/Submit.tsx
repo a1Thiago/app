@@ -9,6 +9,6 @@ export default function Submit({ children }: SubmitProps) {
   const { pending } = useFormStatus()
 
   return (
-    <button type='submit' disabled={pending}>{children}{pending && 'Carregando...'}</button>
+    <button aria-label='...' type='submit' disabled={pending}>{children}{pending && 'Carregando...'}</button>
   )
 }
