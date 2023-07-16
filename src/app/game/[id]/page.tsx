@@ -11,13 +11,11 @@ export default function GamePage({ params }: { params: { id: string } }) {
 
   return (
     <div className='flex flex-col'>
-      <span className='left-4 mt-2 absolute '>
-        <BackButton className='text-black h-10 w-10' />
+      <span className='left-4 absolute'>
+        <BackButton className='text-black h-8 w-8' />
       </span>
-      <div className='w-[100vw] mt-16'>
-        <h2 className='text-32 font-semibold tablet:text-24 mobile:text-18'>Mais Informaçoes sobre o jogo</h2>
-        <GamePageComponent id={id} />
-      </div>
+      <h2 className='text-32 font-semibold tablet:text-24 mobile:text-18 mt-12 mb-4'>Mais Informaçoes sobre o jogo</h2>
+      <GamePageComponent id={id} />
     </div>
   )
 }

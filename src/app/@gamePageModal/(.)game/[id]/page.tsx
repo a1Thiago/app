@@ -1,4 +1,4 @@
-'use client'
+
 import InterceptorModal from '@/app/(components)/InterceptorModal'
 import GamePageComponent from '@/app/(components)/GamePageComponent'
 
