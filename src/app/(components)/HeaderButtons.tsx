@@ -85,7 +85,7 @@ ${isOpen ? 'scale-x-100 opacity-100' : 'opacity-70 -scale-x-50'} overflow-x-hidd
               )}
             </ul>
 
-            <CloseButton onClick={toggleMenu} className='w-10 h-10 fixed left-[35vw]  bg-theme-primary/10 ' />
+            <CloseButton onClick={toggleMenu} className='w-10 h-10 fixed left-[35vw]' />
           </div>
         </div>
       </div>
