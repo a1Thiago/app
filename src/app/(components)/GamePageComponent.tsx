@@ -15,6 +15,7 @@ import Accordion from './Accordion'
 import { useGameStore } from '@/contexts/gameStore'
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 import UserDataControl from './gameCard/UserDataControl'
+import { Game } from '@/scripts/fetchGames'
 
 interface GamePageComponentProps {
   id: string
@@ -23,11 +24,10 @@ interface GamePageComponentProps {
 export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   const { games } = useGameStore()
-  const { userData } = useFirebaseDataContext()
 
-  const gameFromContext = games?.filter(game => game?.id === Number(id))?.[0]
-  const gameIsFavorite = userData?.favorites?.includes(Number(id))
-  const userRating = userData?.ratings?.[Number(id)]
+  const thisGame = games.filter(game => game.id === Number(id))?.[0]
+
+  const { userData } = useFirebaseDataContext()
 
   const [gameData, setGameData] = useState<GameFromRapidApi | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -53,11 +53,12 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
     }
   }, [id])
 
-  if (isLoading) return (
 
-    <EmptyTableMessage message='Carregando Informacoes'>
-      <LoadingCircle />
-    </EmptyTableMessage>
+  if (!isLoading) return (
+
+    <div className='py-4'>
+      <GamePageSkeleton game={null as any} />
+    </div>
 
   )
 
@@ -93,8 +94,8 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
     <div className='py-6'>
 
+      {/* 1-COL     */}
       <div className='desktop:hidden smdesktop:hidden grid gap-4'>
-        {/* 1-COL     */}
 
         <span className='relative flex w-full justify-self-center max-w-[350px]'>
           <UserDataControl id={Number(id)} userData={userData} />
@@ -143,12 +144,12 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
         <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
           <>{description}</>
         </Accordion>
-        {/* 1-COL     */}
       </div>
+      {/* 1-COL     */}
 
       {/* ------------------------------------------------------------------------------------------- */}
+      {/* 2-COL */}
       <div className='mobile:hidden tablet:hidden grid gap-6'>
-        {/* 2-COL */}
 
         <div className="grid gap-6 grid-cols-3 smdesktop:grid-cols-2">
 
@@ -208,9 +209,8 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
         <Accordion title={{ closed: 'Ver descrição completa', opened: 'Fechar descrição completa' }}>
           <>{description}</>
         </Accordion>
-
-        {/* 2-COL */}
       </div>
+      {/* 2-COL */}
 
 
     </div>
@@ -235,7 +235,85 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
   }
 }
 
+const ListRenderSkeleton = ({ listTitle, itemCount, className }: { listTitle: string, itemCount: number, className?: string }) => {
+  const renderLoadingSkeletons = () => {
+    const skeletons = []
 
+    for (let i = 0; i < itemCount; i++) {
+      skeletons.push(<div className="bg-theme-primary animate-pulse rounded-lg" key={i}> </div>)
+    }
+
+    return skeletons
+  }
+
+  return (
+    <div className={`grid gap-1 text-left ${className}`}>
+      <h4 className="text-16">
+        <strong>{listTitle}</strong>:
+      </h4>
+      <ul className="pl-2 grid gap-1">
+        {renderLoadingSkeletons()}
+      </ul>
+    </div>
+  )
+}
+
+function GamePageSkeleton({ game }: { game: Game }) {
+  return (
+    <>
+
+      {/* 1COL */}
+      <div className='smdesktop:hidden desktop:hidden grid gap-4'>
+        <div className='grid gap-4 justify-center'>
+          <span className='relative flex w-full justify-self-center max-w-[350px] h-fit bg-theme-primary animate-pulse rounded-xl'> </span>
+          {game
+            ? (<  CustomImage className='justify-self-center max-w-[350px] min-h-[190px]' src={game?.thumbnail} width={100} height={100} alt={game?.title + 'Thumbnail'} />)
+            : (<span className='flex w-[350px] h-[190px] bg-theme-primary animate-pulse rounded-xl'> </span>)
+          }
+        </div>
+        <ListRenderSkeleton listTitle='Informações' itemCount={4} />
+        <div className='tablet:h-[330px] mobile:h-[200px] bg-theme-primary w-full animate-pulse relative rounded-lg'>
+          <h3 title={game?.title}
+            className='text-black bg-white/70 truncate flex w-full font-semibold py-2 px-4  opacity-90 
+              absolute bottom-0 z-10 tablet:text-20 mobile:text-18 transform transition-all duration-400 group-hover:opacity-0'>{game?.title}</h3>
+        </div>
+
+        <ListRenderSkeleton listTitle='Requisitos mínimos' itemCount={4} />
+        <span className='flex w-full h-11 bg-theme-primary animate-pulse rounded-xl'> </span>
+
+      </div>
+      {/* 1COL */}
+
+      {/* 2COL */}
+      <div className='tablet:hidden mobile:hidden grid gap-6'>
+        <div className='grid gap-6 grid-cols-3 smdesktop:grid-cols-2'>
+          <span className='grid gap-4'>
+            <span className='relative flex w-full max-w-[350px] h-fit bg-theme-primary animate-pulse rounded-xl'> </span>
+            {game
+              ? (<  CustomImage className='justify-self-center max-w-[350px] min-h-[190px]' src={game?.thumbnail} width={100} height={100} alt={game?.title + 'Thumbnail'} />)
+              : (<span className='flex w-full max-w-[350px] h-[190px] bg-theme-primary animate-pulse rounded-xl'> </span>)
+            }
+          </span>
+
+          <ListRenderSkeleton listTitle='Informações' itemCount={4} />
+          <ListRenderSkeleton listTitle='Requisitos mínimos' itemCount={4} className='smdesktop:hidden' />
+        </div>
+
+        <div className='desktop:h-[600px] smdesktop:h-[460px] bg-theme-primary w-full relative rounded-lg animate-pulse'>
+          <h3 title={game?.title}
+            className='text-black bg-white/70 truncate flex w-full font-semibold py-2 px-4  opacity-90 
+              absolute bottom-0 z-10 text-24 transform transition-all duration-400 group-hover:opacity-0'>{game?.title}</h3>
+        </div>
+
+        <ListRenderSkeleton listTitle='Requisitos mínimos' itemCount={4} className='desktop:hidden' />
+        <span className='flex w-full h-11 bg-theme-primary animate-pulse rounded-xl'> </span>
+
+      </div>
+      {/* 2COL */}
+
+    </>
+  )
+}
 
 
 const gamesMock = [{
