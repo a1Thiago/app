@@ -109,7 +109,7 @@ export default function GamesTable() {
             <SortStars sortOrderOfRatings={sortOrderOfRatings} />
           </span>
         </CheckBoxButtonComponent>
-
+        <p className='font-semibold text-18'>Para ver as informações completas de um jogo, clique no botão Ver Mais...</p>
       </div>
 
 
