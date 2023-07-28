@@ -2,10 +2,10 @@
 import { Game } from '@/scripts/fetchGames'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import Button from '../Button'
+import Button from '@/app/(components)/ui/Button'
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 import CheckBoxButtonComponent from '../CheckBoxButtonComponent'
-import CustomImage from '../CustomImage'
+import CustomImage from '@/app/(components)/ui/CustomImage'
 import UserDataControl from './UserDataControl'
 interface GameCardProps {
   game: Game

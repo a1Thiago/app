@@ -2,10 +2,10 @@
 import { SignInResult, useFirebaseAuthContext } from '@/contexts/FirebaseAuthContext'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useEffect, useRef, useState } from 'react'
-import InputWithLabel from './InputWithLabel'
-import Button from './Button'
+import InputWithLabel from '@/app/(components)/ui/InputWithLabel'
+import Button from '@/app/(components)/ui/Button'
 import Link from 'next/link'
-import { SmallLoadingCircle } from './LoadingCircle'
+import { SmallLoadingCircle } from '@/app/(components)/ui/LoadingCircle'
 
 export default function SignIn() {
 

@@ -1,14 +1,13 @@
 'use client'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import isProduction from '@/lib/environment'
 import fetchGamesImage, { GameFromRapidApi } from '@/scripts/fetchGamesImage'
-
 import { useEffect, useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import CheckBoxButtonComponent from './CheckBoxButtonComponent'
 import ErrorMessage from './ErrorMessage'
-import CustomImage from './CustomImage'
-import Accordion from './Accordion'
+import CustomImage from '@/app/(components)/ui/CustomImage'
+import Accordion from './ui/Accordion'
 import { useGameStore } from '@/contexts/gameStore'
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 import UserDataControl from './gameCard/UserDataControl'
@@ -87,7 +86,6 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
   ]
 
   return (
-
 
     <div className='py-6'>
 
@@ -208,7 +206,6 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
         </Accordion>
       </div>
       {/* 2-COL */}
-
 
     </div>
 

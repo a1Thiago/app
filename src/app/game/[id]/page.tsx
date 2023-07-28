@@ -1,5 +1,5 @@
 
-import BackButton from '@/app/(components)/BackButton'
+import BackButton from '@/app/(components)/ui/BackButton'
 import GamePageComponent from '@/app/(components)/GamePageComponent'
 
 

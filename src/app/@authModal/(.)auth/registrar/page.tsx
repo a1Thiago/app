@@ -1,5 +1,5 @@
 'use client'
-import InterceptorModal from '@/app/(components)/InterceptorModal'
+import InterceptorModal from '@/app/(components)/ui/InterceptorModal'
 import SignUp from '@/app/(components)/SignUp'
 import AuthWrapper from '../AuthWrapper'
 

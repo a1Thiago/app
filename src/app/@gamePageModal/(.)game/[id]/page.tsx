@@ -1,5 +1,5 @@
 
-import InterceptorModal from '@/app/(components)/InterceptorModal'
+import InterceptorModal from '@/app/(components)/ui/InterceptorModal'
 import GamePageComponent from '@/app/(components)/GamePageComponent'
 
 export default function GamePageModal({ params }: { params: { id: string } }) {

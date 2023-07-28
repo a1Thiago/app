@@ -1,9 +1,9 @@
 'use client'
 import React, { useState } from 'react'
-import Button from './Button'
+import Button from '@/app/(components)/ui/Button'
 import { useFirebaseAuthContext } from '@/contexts/FirebaseAuthContext'
 import { useRouter } from 'next/navigation'
-import CloseButton from './CloseButton'
+import CloseButton from '@/app/(components)/ui/CloseButton'
 import Link from 'next/link'
 import Image from 'next/image'
 

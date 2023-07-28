@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import BackButton from '../(components)/BackButton'
+import BackButton from '@/app/(components)/ui/BackButton'
 import AuthWrapper from '../@authModal/(.)auth/AuthWrapper'
 
 

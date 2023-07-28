@@ -1,6 +1,6 @@
 import { useGameStore } from '@/contexts/gameStore'
 import { Game } from '../../scripts/fetchGames'
-import InputWithLabel from './InputWithLabel'
+import InputWithLabel from '@/app/(components)/ui/InputWithLabel'
 
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
