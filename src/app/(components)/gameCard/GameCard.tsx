@@ -63,9 +63,9 @@ absolute bottom-0 z-10 text-24 tablet:text-20 mobile:text-18  transform'>
 
         <div className='grid gap-4 items-end'>
           <span className='relative flex'>
-            <UserDataControl id={Number(game.id)} userData={userData} />
+            <UserDataControl id={Number(game?.id)} userData={userData} />
           </span>
-          <Link href={`/game/${game.id}`} className='w-full' >
+          <Link href={`/game/${game?.id}`} className='w-full' >
             <Button colorStyle='secondary'><span>Ver mais</span></Button >
           </Link>
 

@@ -10,7 +10,7 @@ export default function RenderGameCards({ games }: RenderGameCardsProps) {
   return (
     <>
       {games.map((game) => (
-        <span key={game.id} >
+        <span key={game?.id} >
           <GameCard game={game} />
         </span>
       ))}
