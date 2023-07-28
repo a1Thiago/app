@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "eslint --fix src"
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^9.0.1",
