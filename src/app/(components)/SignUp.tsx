@@ -1,10 +1,11 @@
 'use client'
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+
 import { SignUpResult, useFirebaseAuthContext } from '@/contexts/FirebaseAuthContext'
 import InputWithLabel from '@/app/(components)/ui/InputWithLabel'
 import Button from '@/app/(components)/ui/Button'
-import Link from 'next/link'
 import { SmallLoadingCircle } from '@/app/(components)/ui/LoadingCircle'
 
 export default function SignUp() {
@@ -30,7 +31,7 @@ export default function SignUp() {
     setIsLoading(true)
     const email = emailRef.current?.value || ''
     const password = passwordRef.current?.value || ''
-
+    // eslint-disable-next-line
     const { result, error }: SignUpResult = await signUp(email, password)
 
     if (error) {

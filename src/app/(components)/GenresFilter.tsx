@@ -1,6 +1,7 @@
+import CheckBoxButtonComponent from './CheckBoxButtonComponent'
+
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 import { useGameStore } from '@/contexts/gameStore'
-import CheckBoxButtonComponent from './CheckBoxButtonComponent'
 
 interface GenresFilterProps extends React.HTMLProps<HTMLDivElement> {
   selectedGenres: string[]

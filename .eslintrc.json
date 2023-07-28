@@ -5,6 +5,7 @@
     "jsx-a11y"
   ],
   "rules": {
+    "no-unused-vars": "warn",
     "semi": [
       "warn",
       "never"

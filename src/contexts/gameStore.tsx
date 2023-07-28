@@ -1,11 +1,14 @@
 'use client'
+import { useEffect } from 'react'
+import { create } from 'zustand'
+
+import { useFirebaseDataContext } from './FirebaseDataContext'
+
 import isProduction from '@/lib/environment'
 import gamesMock from '@/lib/gamesMock'
 import fetchGames, { Game } from '@/scripts/fetchGames'
-import { useEffect } from 'react'
-import { create } from 'zustand'
-import { useFirebaseDataContext } from './FirebaseDataContext'
 
+/* eslint-disable */
 type GameStorePros = {
   games: Game[]
   modifiedGames: Game[]
@@ -26,9 +29,8 @@ export const useGameStore = create<GameStorePros>()((set) => ({
   setModifiedGames: (games) => set((state) => ({ modifiedGames: [...games] })),
   setIsLoading: (isLoading) => set((state) => ({ isLoading: isLoading })),
   setError: (error) => set((state) => ({ error: error })),
-}
-)
-)
+}))
+/* eslint-enable */
 
 export default function GamesStoreProvider() {
 

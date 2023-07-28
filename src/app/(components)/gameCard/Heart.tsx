@@ -1,5 +1,6 @@
-import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 import { arrayUnion } from 'firebase/firestore'
+
+import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 
 interface HeartProps {
   gameID: number

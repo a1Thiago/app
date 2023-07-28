@@ -1,17 +1,19 @@
 'use client'
 import { useMemo, useState } from 'react'
+import Image from 'next/image'
+
 import RenderGameCards from './gameCard/RenderGameCards'
-import LoadingCircle from '@/app/(components)/ui/LoadingCircle'
-import Button from '@/app/(components)/ui/Button'
 import GenresFilter from './GenresFilter'
 import ErrorMessage from './ErrorMessage'
 import SearchInput from './SearchInput'
-import { useGameStore } from '@/contexts/gameStore'
-import fetchGames, { Game } from '@/scripts/fetchGames'
 import CheckBoxButtonComponent from './CheckBoxButtonComponent'
 import EmptyTableMessage from './EmptyTableMessage'
-import Image from 'next/image'
 import { SortStars } from './gameCard/Stars'
+
+import fetchGames, { Game } from '@/scripts/fetchGames'
+import { useGameStore } from '@/contexts/gameStore'
+import Button from '@/app/(components)/ui/Button'
+import LoadingCircle from '@/app/(components)/ui/LoadingCircle'
 
 export default function GamesTable() {
 

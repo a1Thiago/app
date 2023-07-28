@@ -1,9 +1,12 @@
 'use client'
 import { useState } from 'react'
+
 import AuthMessage from '../AuthMessage'
-import { UserData } from '@/contexts/FirebaseDataContext'
+
 import Heart from './Heart'
 import Stars from './Stars'
+
+import { UserData } from '@/contexts/FirebaseDataContext'
 
 
 interface UserDataControlProps {

@@ -1,10 +1,11 @@
 'use client'
-import { SignInResult, useFirebaseAuthContext } from '@/contexts/FirebaseAuthContext'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
+
+import { SignInResult, useFirebaseAuthContext } from '@/contexts/FirebaseAuthContext'
 import InputWithLabel from '@/app/(components)/ui/InputWithLabel'
 import Button from '@/app/(components)/ui/Button'
-import Link from 'next/link'
 import { SmallLoadingCircle } from '@/app/(components)/ui/LoadingCircle'
 
 export default function SignIn() {
@@ -31,7 +32,7 @@ export default function SignIn() {
     setIsLoading(true)
     const email = emailRef.current?.value || ''
     const password = passwordRef.current?.value || ''
-
+    // eslint-disable-next-line
     const { result, error }: SignInResult = await signIn(email, password)
 
     if (error) {

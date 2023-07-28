@@ -1,5 +1,6 @@
-import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 import { HTMLAttributes, useState } from 'react'
+
+import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
 interface StarProps extends HTMLAttributes<HTMLSpanElement> {
   filled: boolean
 }

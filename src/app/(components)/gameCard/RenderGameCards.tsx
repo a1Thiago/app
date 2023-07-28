@@ -1,5 +1,6 @@
-import { Game } from '@/scripts/fetchGames'
 import GameCard from './GameCard'
+
+import { Game } from '@/scripts/fetchGames'
 
 interface RenderGameCardsProps {
   games: Game[]

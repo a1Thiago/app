@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
-import CloseButton from '@/app/(components)/ui/CloseButton'
 import Link from 'next/link'
-import Button from '@/app/(components)/ui/Button'
 import Image from 'next/image'
+
+import CloseButton from '@/app/(components)/ui/CloseButton'
+import Button from '@/app/(components)/ui/Button'
+
 
 export default function AuthMessage() {
 

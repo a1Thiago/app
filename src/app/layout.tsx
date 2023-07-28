@@ -2,9 +2,11 @@ import './globals.css'
 import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import NextTopLoader from 'nextjs-toploader'
-import isProduction from '@/lib/environment'
+
 import LayoutHeader from './(components)/LayoutHeader'
 import LayoutFooter from './(components)/LayoutFooter'
+
+import isProduction from '@/lib/environment'
 import FirebaseAuthContextProvider from '@/contexts/FirebaseAuthContext'
 import FirebaseDataContextProvider from '@/contexts/FirebaseDataContext'
 import GamesStoreProvider from '@/contexts/gameStore'

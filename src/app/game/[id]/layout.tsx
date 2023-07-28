@@ -1,6 +1,7 @@
 
+import { Metadata } from 'next'
+
 import fetchGamesImage from '@/scripts/fetchGamesImage'
-import { Metadata, ResolvingMetadata } from 'next'
 
 type Props = {
   params: { id: string }
@@ -8,7 +9,6 @@ type Props = {
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
 ): Promise<Metadata> {
 
   try {

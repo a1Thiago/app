@@ -1,16 +1,11 @@
 import { useGameStore } from '@/contexts/gameStore'
-import { Game } from '../../scripts/fetchGames'
 import InputWithLabel from '@/app/(components)/ui/InputWithLabel'
 
 
-interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  // games: Game[]
-}
+interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> { }
 
 
-export default function SearchInput({
-  // games,
-  ...props }: SearchInputProps) {
+export default function SearchInput({ ...props }: SearchInputProps) {
 
   const { modifiedGames } = useGameStore()
 

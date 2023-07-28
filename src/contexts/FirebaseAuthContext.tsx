@@ -1,9 +1,10 @@
 'use client'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, User, UserCredential } from 'firebase/auth'
+import { useRouter } from 'next/navigation'
+
 import { auth } from '@/lib/firebase.config'
 import localStorageUtil from '@/lib/localStorage'
-import { useRouter } from 'next/navigation'
 export interface SignInResult {
   result: UserCredential | null
   error: any
@@ -15,6 +16,7 @@ export interface SignUpResult {
 interface FirebaseAuthContextProviderProps {
   children: React.ReactNode
 }
+/* eslint-disable */
 interface FirebaseAuthContextProps {
   user: User | null
   loading: boolean
@@ -22,6 +24,7 @@ interface FirebaseAuthContextProps {
   signUp: (email: string, password: string) => Promise<SignUpResult>
   logOut: () => void
 }
+/* eslint-enable */
 
 export const FirebaseAuthContext = createContext<FirebaseAuthContextProps>(
   {

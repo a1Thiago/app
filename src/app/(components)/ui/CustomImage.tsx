@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/dist/client/image'
 import { ImageProps } from 'next/image'
 

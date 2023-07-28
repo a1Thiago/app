@@ -1,12 +1,16 @@
 'use client'
-import { Game } from '@/scripts/fetchGames'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+
+import CheckBoxButtonComponent from '../CheckBoxButtonComponent'
+
+import UserDataControl from './UserDataControl'
+
+import { Game } from '@/scripts/fetchGames'
 import Button from '@/app/(components)/ui/Button'
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
-import CheckBoxButtonComponent from '../CheckBoxButtonComponent'
 import CustomImage from '@/app/(components)/ui/CustomImage'
-import UserDataControl from './UserDataControl'
+
 interface GameCardProps {
   game: Game
 }

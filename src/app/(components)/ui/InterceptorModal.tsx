@@ -1,6 +1,7 @@
 'use client'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+
 import CloseButton from './CloseButton'
 
 interface InterceptorModalProps {

@@ -1,7 +1,8 @@
 'use client'
+import AuthWrapper from '../AuthWrapper'
+
 import InterceptorModal from '@/app/(components)/ui/InterceptorModal'
 import SignIn from '@/app/(components)/SignIn'
-import AuthWrapper from '../AuthWrapper'
 
 export default function SignInModal() {
 

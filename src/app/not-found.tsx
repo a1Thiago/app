@@ -1,7 +1,8 @@
 
 import Image from 'next/image'
-import EmptyTableMessage from './(components)/EmptyTableMessage'
 import { headers } from 'next/headers'
+
+import EmptyTableMessage from './(components)/EmptyTableMessage'
 
 export default function page() {
 

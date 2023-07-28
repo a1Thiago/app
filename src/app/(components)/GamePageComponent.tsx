@@ -1,16 +1,18 @@
 'use client'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import isProduction from '@/lib/environment'
-import fetchGamesImage, { GameFromRapidApi } from '@/scripts/fetchGamesImage'
 import { useEffect, useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
+
 import CheckBoxButtonComponent from './CheckBoxButtonComponent'
 import ErrorMessage from './ErrorMessage'
-import CustomImage from '@/app/(components)/ui/CustomImage'
 import Accordion from './ui/Accordion'
+import UserDataControl from './gameCard/UserDataControl'
+
+import CustomImage from '@/app/(components)/ui/CustomImage'
 import { useGameStore } from '@/contexts/gameStore'
 import { useFirebaseDataContext } from '@/contexts/FirebaseDataContext'
-import UserDataControl from './gameCard/UserDataControl'
+import fetchGamesImage, { GameFromRapidApi } from '@/scripts/fetchGamesImage'
+import isProduction from '@/lib/environment'
 import { Game } from '@/scripts/fetchGames'
 
 interface GamePageComponentProps {
@@ -62,7 +64,7 @@ export default function GamePageComponent({ id }: GamePageComponentProps) {
 
   if (!gameData) return
 
-  const { title, thumbnail, status, short_description, description, genre,
+  const { title, thumbnail, description, genre,
     platform, game_url, publisher, developer, release_date, freetogame_profile_url
     , minimum_system_requirements, screenshots,
   } = gameData && gameData

@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 interface BackButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string

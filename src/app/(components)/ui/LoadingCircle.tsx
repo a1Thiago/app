@@ -1,5 +1,4 @@
 
-
 export default function LoadingCircle() {
   return (
     <div className="flex justify-center items-center  col-span-full row-span-full">
@@ -8,11 +7,7 @@ export default function LoadingCircle() {
   )
 }
 
-interface SmallLoadingCircle {
-  className: string
-}
-
-export function SmallLoadingCircle({ className }: SmallLoadingCircle) {
+export function SmallLoadingCircle({ className }: { className: string }) {
 
   return (
     <div className="flex justify-center items-center  col-span-full row-span-full">

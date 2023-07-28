@@ -1,7 +1,9 @@
 'use client'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { DocumentSnapshot, arrayRemove, doc, getDoc, setDoc } from 'firebase/firestore'
+
 import { useFirebaseAuthContext } from './FirebaseAuthContext'
+
 import { db } from '@/lib/firebase.config'
 
 type Rating = {
@@ -13,6 +15,7 @@ export type UserData = {
   ratings: Rating[]
 }
 
+/* eslint-disable */
 interface FirebaseDataContextProps {
   userData: UserData | null
   setUserData: (data: UserData | null) => void
@@ -20,7 +23,7 @@ interface FirebaseDataContextProps {
   getDataFromDatabase: (collectionName: string) => Promise<getDataFromDatabaseResult>
   removeItemFromDatabaseCollection: (collectionName: string, field: string, item: any) => Promise<setDataOnDatabaseResult>
 }
-
+/* eslint-enable */
 interface FirebaseDataContextProviderProps {
   children: React.ReactNode
 }
@@ -49,7 +52,8 @@ export default function FirebaseDataContextProvider({ children }: FirebaseDataCo
   const { user } = useFirebaseAuthContext()
 
   const [userData, setUserData] = useState<UserData | null>(null)
-  const [loading, setLoading] = useState(true)
+  // eslint-disable-next-line
+  const [_loading, setLoading] = useState(true)
 
   useEffect(() => {
 
