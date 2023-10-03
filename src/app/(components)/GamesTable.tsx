@@ -119,7 +119,7 @@ export default function GamesTable() {
           : (
             <EmptyTableMessage message='Não tem nada aqui.'>
               <span className='grid justify-center w-full'>
-                <Image className='animate-bounce-slow' src={'/empty.png'} height={200} width={200} alt='Não encontramos nada que satisfaça seus filtros' />
+                <Image unoptimized className='animate-bounce-slow' src={'/empty.png'} height={200} width={200} alt='Não encontramos nada que satisfaça seus filtros' />
               </span>
             </EmptyTableMessage>
           )

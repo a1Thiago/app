@@ -13,7 +13,7 @@ export default function page() {
     <div className='flex flex-col items-center justify-center h-screen'>
       <EmptyTableMessage message={`A pagina ${path} não existe.`}>
         <span className='grid justify-center w-full'>
-          <Image className='animate-bounce-slow' src={'/empty.png'} height={200} width={200} alt='Esta pagina não existe' />
+          <Image unoptimized className='animate-bounce-slow' src={'/empty.png'} height={200} width={200} alt='Esta pagina não existe' />
         </span>
       </EmptyTableMessage>
 

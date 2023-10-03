@@ -33,7 +33,7 @@ export default function AuthMessage() {
         <h2 className='text-32 font-bold mb-4'>Ola</h2>
 
         <span className='grid justify-center w-full'>
-          <Image className='animate-bounce-slow' src={'/auth.png'} height={100} width={100} alt='Não encontramos nada que satisfaça seus filtros' />
+          <Image unoptimized className='animate-bounce-slow' src={'/auth.png'} height={100} width={100} alt='Não encontramos nada que satisfaça seus filtros' />
         </span>
 
         <p className='mobile:text-14'>Para fazer isto voce precisa de uma conta</p>
